@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNOR MEDTECH | The Future of At-Home Dialysis</title>
+    <title>RYNOR | Advanced Peritoneal Dialysis System (APDS)</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -54,33 +54,57 @@
             color: var(--clinical-blue);
         }
 
-        /* Hero Section with Logo */
+        /* Hero Section */
         header { 
-            padding: 160px 20px 40px; /* Extra top padding for fixed nav and logo */
+            padding: 140px 20px 40px; /* Extra top padding for fixed nav */
             text-align: center; 
             max-width: 900px;
             margin: 0 auto;
         }
-
-        /* Logo Container */
-        .logo-container {
-            display: inline-block;
-            margin-bottom: 30px; /* Space between logo and header text */
+        
+        /* High-End Text Branding for Rynor */
+        header h1 { 
+            margin: 0; 
+            font-size: 3.5em; /* Large, standout font size */
+            font-weight: 600; /* Medium-bold */
+            letter-spacing: -0.05em; /* Sleek, tight letter spacing */
+            line-height: 1;
+            color: var(--text-main);
+            text-transform: lowercase; /* Matches user request for 'rynor' style */
         }
-        .logo-container img {
-            max-width: 100%;
-            height: auto;
-            width: 250px; /* Adjust size as needed */
+        
+        /* Styling for apds */
+        header h2 {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase; /* APDS usually looks best in caps as acronym */
         }
 
         header p { 
             font-size: 1.1em; 
-            margin-top: 15px; 
+            margin-top: 25px; 
             color: var(--text-secondary);
             font-weight: 400;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+        }
+
+        /* Image Placeholder - RESTORED */
+        .hero-image-container {
+            text-align: center;
+            padding: 0 20px 60px;
+        }
+        .hero-image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+            width: 700px; /* Standard size */
+            object-fit: cover;
         }
         
         /* Main Container */
@@ -185,6 +209,7 @@
             font-size: 1.1em;
             margin-top: 20px;
             color: var(--text-main);
+            line-height: 1.4;
         }
         
         /* Footer */
@@ -207,18 +232,21 @@
     </nav>
 
     <header id="home">
-        <div class="logo-container">
-            <img src="rynor-logo.png" alt="RYNOR MEDTECH">
-        </div>
-        <p>Redefining life on dialysis. The Rynor Pleasant is coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
+        <h1>rynor</h1>
+        <h2>Advanced Peritoneal Dialysis System (APDS)</h2>
+        <p>Redefining life on dialysis. We are coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
     </header>
+
+    <div class="hero-image-container">
+        <img src="rynor-machine.jpg.png" alt="Rynor APDS Machine">
+    </div>
     
     <div class="container">
         
         <div id="about" class="about-section">
             <div class="section-title">Who We Are</div>
             <div class="section-subtitle">Democratizing Healthcare</div>
-            <p>At Rynor Medtech, our team is driven by a singular mission to make life-sustaining therapy accessible to all. We are dedicated to reducing the heavy healthcare burden on Indian dialysis patients, and we will slowly expand our reach to alleviate this burden in each and every state. By breaking the barrier of prohibitively expensive imported machines, we are delivering world-class, indigenous engineering designed specifically for the modern patient.</p>
+            <p>Our team is driven by a singular mission to make life-sustaining therapy accessible to all. We are dedicated to reducing the heavy healthcare burden on Indian dialysis patients, and we will slowly expand our reach to alleviate this burden in each and every state. By breaking the barrier of prohibitively expensive imported machines, we are delivering world-class, indigenous engineering designed specifically for the modern patient.</p>
         </div>
 
         <div class="section-title" id="machine">The Transformation</div>
@@ -248,27 +276,27 @@
 
         <div class="pricing-banner">
             <h3>Healthcare, Democratized.</h3>
-            <p>We are committed to delivering a fiercely affordable machine and supply ecosystem. Our highly energy-efficient engineering keeps electric bills low, while our cassette-free system allows patients to easily source standard fluid bags from any authorized Rynor seller.</p>
+            <p>We are committed to delivering a fiercely affordable machine and supply ecosystem. Our highly energy-efficient engineering keeps electric bills low, while our cassette-free system allows patients to easily source standard fluid bags from any authorized seller.</p>
         </div>
 
         <div class="clinical-banner">
             <h3>Clinical Excellence</h3>
-            <p>The Rynor Pleasant machine and our medical-grade consumables are currently undergoing rigorous preparation for human clinical trials in strict accordance with CDSCO Class C and MD-13 regulatory standards.</p>
+            <p>Our Advanced Peritoneal Dialysis System and medical-grade consumables are currently undergoing rigorous preparation for human clinical trials in strict accordance with CDSCO Class C and MD-13 regulatory standards.</p>
         </div>
 
         <div id="contact" class="contact-section">
             <div class="section-title">Connect With Us</div>
             <p style="color: var(--text-secondary);">For investment inquiries, regulatory documentation, or supplier communications.</p>
             <div class="contact-details">
-                <strong>Operations Center</strong><br>
-                Hyderabad, Telangana, India
+                <strong>Operations Centre</strong><br>
+                Hyderabad | India
             </div>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2026 Rynor Medtech Private Limited. All rights reserved.</p>
+        <p>&copy; 2026 Rynor Private Limited. All rights reserved.</p>
     </footer>
 
 </body>

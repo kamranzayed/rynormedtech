@@ -3,36 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rynor Medtech | Automated Peritoneal Dialysis</title>
+    <title>Rynor Medtech | Premium Automated Peritoneal Dialysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 0; background-color: #f8f9fa; color: #333; }
-        header { background-color: #004080; color: white; padding: 30px 20px; text-align: center; }
-        header h1 { margin: 0; font-size: 2.5em; }
-        .container { max-width: 800px; margin: 40px auto; padding: 30px; background: white; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        h2 { color: #004080; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        ul { padding-left: 20px; line-height: 1.8; }
-        .footer { text-align: center; margin-top: 40px; font-size: 0.9em; color: #777; }
+        :root {
+            --bg-dark: #070b14; /* Deep midnight slate */
+            --gold-accent: #c5a059; /* Metallic champagne gold */
+            --text-light: #e0e5ec;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(197, 160, 89, 0.2);
+        }
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* Elegant Typography */
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            color: var(--gold-accent);
+        }
+
+        /* Hero Section */
+        header { 
+            padding: 100px 20px 60px; 
+            text-align: center; 
+            background: radial-gradient(circle at center, #111a2e 0%, var(--bg-dark) 100%);
+            border-bottom: 1px solid var(--glass-border);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 3.5em; 
+            letter-spacing: 3px; 
+            text-transform: uppercase;
+        }
+        header p { 
+            font-size: 1.2em; 
+            margin-top: 15px; 
+            letter-spacing: 1px;
+            color: #a0abbc;
+        }
+        
+        /* Main Container */
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        
+        h2 { 
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 50px;
+            letter-spacing: 1px;
+        }
+        
+        /* Luxury Glassmorphism Cards */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 20px;
+        }
+        .card {
+            background: var(--glass-bg);
+            padding: 40px;
+            border-radius: 2px;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+            animation: fadeInUp 1s ease forwards;
+            opacity: 0;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-accent);
+        }
+        .card h3 { 
+            margin-top: 0; 
+            font-size: 1.6em; 
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 15px;
+        }
+        .card ul { padding-left: 20px; color: #a0abbc; }
+        .card li { margin-bottom: 10px; }
+        .card strong { color: var(--text-light); font-weight: 600; }
+
+        /* Clinical Trials Banner - Minimalist Luxury */
+        .clinical-banner {
+            background: linear-gradient(90deg, rgba(197, 160, 89, 0.05) 0%, rgba(197, 160, 89, 0.15) 50%, rgba(197, 160, 89, 0.05) 100%);
+            padding: 40px;
+            text-align: center;
+            margin: 80px 0;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            animation: fadeInUp 1.2s ease forwards;
+            opacity: 0;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding: 40px;
+            animation: fadeInUp 1.4s ease forwards;
+            opacity: 0;
+        }
+        .contact-details {
+            font-size: 1.1em;
+            margin-top: 30px;
+            color: #a0abbc;
+            line-height: 2.2;
+        }
+        .contact-details strong { color: var(--gold-accent); letter-spacing: 1px; text-transform: uppercase;}
+        
+        /* Footer */
+        footer { 
+            text-align: center; 
+            padding: 30px; 
+            font-size: 0.85em;
+            color: #556070;
+            border-top: 1px solid var(--glass-border);
+            letter-spacing: 1px;
+        }
+
+        /* Subtle Load-in Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Staggered animation delays for elements */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
+
     <header>
         <h1>Rynor Medtech</h1>
-        <p>Innovating Patient Care</p>
+        <p>Precision Engineering. Redefining Peritoneal Dialysis.</p>
     </header>
     
     <div class="container">
-        <h2>The Rynor Pleasant</h2>
-        <p>Our flagship Automated Peritoneal Dialysis (APD) machine, engineered for precision, reliability, and patient comfort.</p>
         
-        <ul>
-            <li><strong>Optimized Fluid Dynamics:</strong> Heating trays structurally engineered with a precise seven-degree static slant toward the tube side.</li>
-            <li><strong>Streamlined Setup:</strong> Cassette-free system designed with a singular patient line for intuitive, ease-of-use operation.</li>
-            <li><strong>Advanced Drainage:</strong> Features a specialized drain line with a dual-port bypass structure.</li>
-        </ul>
+        <h2>The Dialysis Ecosystem</h2>
+        
+        <div class="product-grid">
+            <div class="card delay-1">
+                <h3>The Rynor Pleasant</h3>
+                <p style="color: #a0abbc;">Our flagship cassette-free cycler, masterfully engineered for optimized fluid dynamics and operational simplicity.</p>
+                <ul>
+                    <li><strong>Heating Trays:</strong> Engineered with a precise seven-degree static slant toward the tube side for superior gravity-assisted fluid routing.</li>
+                    <li><strong>Patient Line:</strong> Singular line architecture for highly intuitive, user-friendly operation.</li>
+                    <li><strong>Drainage:</strong> Advanced specialized drain line featuring a proprietary dual-port bypass structure.</li>
+                </ul>
+            </div>
+            
+            <div class="card delay-2">
+                <h3>Medical-Grade Consumables</h3>
+                <p style="color: #a0abbc;">High-fidelity, rigorously tested components designed for secure and seamless fluid transfer.</p>
+                <ul>
+                    <li>Denko-Type Catheters</li>
+                    <li>Mini Caps</li>
+                    <li>PD Connector Sets</li>
+                    <li>Specialized Tubing Sets</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="clinical-banner">
+            <h3>Regulatory & Clinical Excellence</h3>
+            <p style="color: #a0abbc; max-width: 800px; margin: 0 auto;">The Rynor Pleasant machine and our proprietary consumable sets are currently undergoing rigorous preparation for human clinical trials in accordance with strictly governed CDSCO Class C and MD-13 regulatory standards.</p>
+        </div>
+
+        <div class="contact-section">
+            <h2>Global Operations</h2>
+            <p style="color: #a0abbc;">For investment inquiries, regulatory information, or supplier communications, please contact our manufacturing center.</p>
+            <div class="contact-details">
+                <strong>Hyderabad Operations Center</strong><br>
+                Hyderabad, Telangana, India<br>
+                <span style="color: var(--text-light);">T:</span> +91 [Insert Phone Number Here]<br>
+                <span style="color: var(--text-light);">E:</span> contact@rynormedtech.com
+            </div>
+        </div>
+
     </div>
 
-    <div class="footer">
+    <footer>
         <p>&copy; 2026 Rynor Medtech Private Limited. All rights reserved.</p>
-    </div>
+    </footer>
+
 </body>
 </html>

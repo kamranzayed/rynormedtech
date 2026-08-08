@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rynor Medtech | The Future of At-Home Dialysis</title>
+    <title>RYNOR MEDTECH | The Future of At-Home Dialysis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -54,42 +54,33 @@
             color: var(--clinical-blue);
         }
 
-        /* Hero Section */
+        /* Hero Section with Logo */
         header { 
-            padding: 140px 20px 40px; /* Extra top padding for fixed nav */
+            padding: 160px 20px 40px; /* Extra top padding for fixed nav and logo */
             text-align: center; 
             max-width: 900px;
             margin: 0 auto;
         }
-        header h1 { 
-            margin: 0; 
-            font-size: 3em; /* Slightly smaller font */
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
+
+        /* Logo Container */
+        .logo-container {
+            display: inline-block;
+            margin-bottom: 30px; /* Space between logo and header text */
         }
+        .logo-container img {
+            max-width: 100%;
+            height: auto;
+            width: 250px; /* Adjust size as needed */
+        }
+
         header p { 
-            font-size: 1.1em; /* Smaller subtitle */
+            font-size: 1.1em; 
             margin-top: 15px; 
             color: var(--text-secondary);
             font-weight: 400;
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        /* Image Placeholder */
-        .hero-image-container {
-            text-align: center;
-            padding: 0 20px 60px;
-        }
-        .hero-image-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-            width: 700px; /* Slightly smaller image */
-            object-fit: cover;
         }
         
         /* Main Container */
@@ -195,11 +186,6 @@
             margin-top: 20px;
             color: var(--text-main);
         }
-        .contact-details a {
-            color: var(--clinical-blue);
-            text-decoration: none;
-            font-weight: 500;
-        }
         
         /* Footer */
         footer { 
@@ -221,20 +207,18 @@
     </nav>
 
     <header id="home">
-        <h1>Rynor Medtech</h1>
+        <div class="logo-container">
+            <img src="rynor-logo.png" alt="RYNOR MEDTECH">
+        </div>
         <p>Redefining life on dialysis. The Rynor Pleasant is coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
     </header>
-
-    <div class="hero-image-container">
-        <img src="rynor-machine.jpg.png" alt="The Rynor Pleasant Dialysis Machine">
-    </div>
     
     <div class="container">
         
         <div id="about" class="about-section">
             <div class="section-title">Who We Are</div>
             <div class="section-subtitle">Democratizing Healthcare</div>
-            <p>At Rynor Medtech, our leadership team is driven by a singular mission to make life-sustaining therapy accessible to all. Spearheaded by founders Abdul Kareem Kamran Syed and Syed Abdul Hakeem, alongside our corporate director, our board is committed to delivering world-class, indigenous engineering from our manufacturing operations to the global market. We are breaking the barrier of prohibitively expensive imported machines to offer solutions designed specifically for the modern patient.</p>
+            <p>At Rynor Medtech, our team is driven by a singular mission to make life-sustaining therapy accessible to all. We are dedicated to reducing the heavy healthcare burden on Indian dialysis patients, and we will slowly expand our reach to alleviate this burden in each and every state. By breaking the barrier of prohibitively expensive imported machines, we are delivering world-class, indigenous engineering designed specifically for the modern patient.</p>
         </div>
 
         <div class="section-title" id="machine">The Transformation</div>
@@ -262,16 +246,6 @@
             </div>
         </div>
 
-        <div class="card" style="margin-bottom: 60px;">
-            <h3>Intelligent Architecture</h3>
-            <p>Our flagship cassette-free cycler is masterfully engineered for optimized fluid dynamics and operational simplicity.</p>
-            <ul>
-                <li><strong>Optimized Heating:</strong> Trays structurally engineered with a precise seven-degree static slant toward the tube side for superior fluid routing.</li>
-                <li><strong>Streamlined Setup:</strong> Singular patient line architecture for highly intuitive operation by clinical staff and patients.</li>
-                <li><strong>Advanced Drainage:</strong> Specialized drain line featuring a proprietary dual-port bypass structure.</li>
-            </ul>
-        </div>
-
         <div class="pricing-banner">
             <h3>Healthcare, Democratized.</h3>
             <p>We are committed to delivering a fiercely affordable machine and supply ecosystem. Our highly energy-efficient engineering keeps electric bills low, while our cassette-free system allows patients to easily source standard fluid bags from any authorized Rynor seller.</p>
@@ -286,9 +260,8 @@
             <div class="section-title">Connect With Us</div>
             <p style="color: var(--text-secondary);">For investment inquiries, regulatory documentation, or supplier communications.</p>
             <div class="contact-details">
-                <strong>Hyderabad Operations Center</strong><br>
-                Hyderabad, Telangana, India<br><br>
-                <a href="mailto:kamranzayed@gmail.com">kamranzayed@gmail.com</a>
+                <strong>Operations Center</strong><br>
+                Hyderabad, Telangana, India
             </div>
         </div>
 

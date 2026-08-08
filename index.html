@@ -3,173 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rynor Medtech | Premium Automated Peritoneal Dialysis</title>
+    <title>Rynor Medtech | Advanced Peritoneal Dialysis</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #070b14; /* Deep midnight slate */
-            --gold-accent: #c5a059; /* Metallic champagne gold */
-            --text-light: #e0e5ec;
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(197, 160, 89, 0.2);
+            --bg-pure: #ffffff;
+            --bg-offwhite: #f5f5f7;
+            --text-main: #1d1d1f;
+            --text-secondary: #86868b;
+            --clinical-blue: #0066cc;
+            --border-light: #e5e5ea;
         }
         
         body { 
-            font-family: 'Montserrat', sans-serif; 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; 
             margin: 0; 
             padding: 0; 
-            background-color: var(--bg-dark); 
-            color: var(--text-light); 
-            line-height: 1.8;
-            font-weight: 300;
-        }
-
-        /* Elegant Typography */
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            font-weight: 400;
-            color: var(--gold-accent);
+            background-color: var(--bg-pure); 
+            color: var(--text-main); 
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Hero Section */
         header { 
-            padding: 100px 20px 60px; 
+            padding: 120px 20px 80px; 
             text-align: center; 
-            background: radial-gradient(circle at center, #111a2e 0%, var(--bg-dark) 100%);
-            border-bottom: 1px solid var(--glass-border);
+            background-color: var(--bg-pure);
         }
         header h1 { 
             margin: 0; 
-            font-size: 3.5em; 
-            letter-spacing: 3px; 
-            text-transform: uppercase;
+            font-size: 4em; 
+            font-weight: 600;
+            letter-spacing: -0.03em;
         }
         header p { 
-            font-size: 1.2em; 
+            font-size: 1.4em; 
             margin-top: 15px; 
-            letter-spacing: 1px;
-            color: #a0abbc;
+            color: var(--text-secondary);
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Main Container */
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
         
-        h2 { 
-            font-size: 2.2em;
+        .section-title { 
+            font-size: 1.2em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--clinical-blue);
             text-align: center;
             margin-bottom: 50px;
-            letter-spacing: 1px;
         }
         
-        /* Luxury Glassmorphism Cards */
+        /* Clean Cards */
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
             margin-top: 20px;
         }
         .card {
-            background: var(--glass-bg);
-            padding: 40px;
-            border-radius: 2px;
-            border: 1px solid var(--glass-border);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            transition: transform 0.4s ease, border-color 0.4s ease;
-            animation: fadeInUp 1s ease forwards;
-            opacity: 0;
+            background: var(--bg-offwhite);
+            padding: 50px;
+            border-radius: 18px;
+            transition: transform 0.3s ease;
         }
         .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--gold-accent);
+            transform: scale(1.02);
         }
         .card h3 { 
             margin-top: 0; 
-            font-size: 1.6em; 
-            border-bottom: 1px solid var(--glass-border);
-            padding-bottom: 15px;
+            font-size: 1.8em; 
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 15px;
         }
-        .card ul { padding-left: 20px; color: #a0abbc; }
-        .card li { margin-bottom: 10px; }
-        .card strong { color: var(--text-light); font-weight: 600; }
+        .card p { color: var(--text-secondary); margin-bottom: 30px; }
+        .card ul { padding-left: 20px; color: var(--text-main); }
+        .card li { margin-bottom: 15px; font-weight: 400; }
 
-        /* Clinical Trials Banner - Minimalist Luxury */
+        /* Clinical Trials Banner */
         .clinical-banner {
-            background: linear-gradient(90deg, rgba(197, 160, 89, 0.05) 0%, rgba(197, 160, 89, 0.15) 50%, rgba(197, 160, 89, 0.05) 100%);
-            padding: 40px;
+            background-color: var(--bg-pure);
+            padding: 60px 40px;
             text-align: center;
             margin: 80px 0;
-            border-top: 1px solid var(--glass-border);
-            border-bottom: 1px solid var(--glass-border);
-            animation: fadeInUp 1.2s ease forwards;
-            opacity: 0;
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+        .clinical-banner h3 { 
+            font-size: 2em; 
+            font-weight: 500; 
+            margin-top: 0; 
+            letter-spacing: -0.02em;
+        }
+        .clinical-banner p { 
+            color: var(--text-secondary); 
+            max-width: 700px; 
+            margin: 0 auto;
+            font-size: 1.1em;
         }
         
         /* Contact Section */
         .contact-section {
             text-align: center;
-            padding: 40px;
-            animation: fadeInUp 1.4s ease forwards;
-            opacity: 0;
+            padding: 60px 20px;
+            background-color: var(--bg-offwhite);
+            border-radius: 18px;
+            margin-bottom: 60px;
+        }
+        .contact-section h2 {
+            font-size: 2em;
+            font-weight: 500;
+            margin-top: 0;
+            letter-spacing: -0.02em;
         }
         .contact-details {
             font-size: 1.1em;
             margin-top: 30px;
-            color: #a0abbc;
-            line-height: 2.2;
+            color: var(--text-main);
+            line-height: 2;
         }
-        .contact-details strong { color: var(--gold-accent); letter-spacing: 1px; text-transform: uppercase;}
+        .contact-details a {
+            color: var(--clinical-blue);
+            text-decoration: none;
+        }
         
         /* Footer */
         footer { 
             text-align: center; 
-            padding: 30px; 
-            font-size: 0.85em;
-            color: #556070;
-            border-top: 1px solid var(--glass-border);
-            letter-spacing: 1px;
+            padding: 40px; 
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            background-color: var(--bg-pure);
         }
-
-        /* Subtle Load-in Animations */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Staggered animation delays for elements */
-        .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Rynor Medtech</h1>
-        <p>Precision Engineering. Redefining Peritoneal Dialysis.</p>
+        <p>Intelligent architecture for automated peritoneal dialysis.</p>
     </header>
     
     <div class="container">
         
-        <h2>The Dialysis Ecosystem</h2>
+        <div class="section-title">The Rynor Ecosystem</div>
         
         <div class="product-grid">
-            <div class="card delay-1">
+            <div class="card">
                 <h3>The Rynor Pleasant</h3>
-                <p style="color: #a0abbc;">Our flagship cassette-free cycler, masterfully engineered for optimized fluid dynamics and operational simplicity.</p>
+                <p>A cassette-free cycler engineered from the ground up for optimized fluid dynamics, clinical safety, and absolute operational simplicity.</p>
                 <ul>
-                    <li><strong>Heating Trays:</strong> Engineered with a precise seven-degree static slant toward the tube side for superior gravity-assisted fluid routing.</li>
-                    <li><strong>Patient Line:</strong> Singular line architecture for highly intuitive, user-friendly operation.</li>
-                    <li><strong>Drainage:</strong> Advanced specialized drain line featuring a proprietary dual-port bypass structure.</li>
+                    <li><strong>Heating Trays:</strong> Engineered with a precise seven-degree static slant toward the tube side to optimize gravity-assisted fluid routing.</li>
+                    <li><strong>Patient Line:</strong> Singular line architecture designed for highly intuitive, user-friendly operation by clinical staff and patients.</li>
+                    <li><strong>Drainage:</strong> Advanced specialized drain line featuring a dual-port bypass structure.</li>
                 </ul>
             </div>
             
-            <div class="card delay-2">
-                <h3>Medical-Grade Consumables</h3>
-                <p style="color: #a0abbc;">High-fidelity, rigorously tested components designed for secure and seamless fluid transfer.</p>
+            <div class="card">
+                <h3>Medical Consumables</h3>
+                <p>High-fidelity, strictly regulated components manufactured to ensure secure, seamless, and sterile fluid transfer.</p>
                 <ul>
-                    <li>Denko-Type Catheters</li>
+                    <li>Tenckhoff Catheters</li>
                     <li>Mini Caps</li>
                     <li>PD Connector Sets</li>
                     <li>Specialized Tubing Sets</li>
@@ -178,18 +182,18 @@
         </div>
 
         <div class="clinical-banner">
-            <h3>Regulatory & Clinical Excellence</h3>
-            <p style="color: #a0abbc; max-width: 800px; margin: 0 auto;">The Rynor Pleasant machine and our proprietary consumable sets are currently undergoing rigorous preparation for human clinical trials in accordance with strictly governed CDSCO Class C and MD-13 regulatory standards.</p>
+            <h3>Clinical Excellence</h3>
+            <p>The Rynor Pleasant machine and our proprietary consumable sets are currently undergoing rigorous preparation for human clinical trials in strict accordance with CDSCO Class C and MD-13 regulatory standards.</p>
         </div>
 
         <div class="contact-section">
-            <h2>Global Operations</h2>
-            <p style="color: #a0abbc;">For investment inquiries, regulatory information, or supplier communications, please contact our manufacturing center.</p>
+            <h2>Global Manufacturing</h2>
+            <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">For investment inquiries, regulatory documentation, or supplier communications.</p>
             <div class="contact-details">
                 <strong>Hyderabad Operations Center</strong><br>
-                Hyderabad, Telangana, India<br>
-                <span style="color: var(--text-light);">T:</span> +91 [Insert Phone Number Here]<br>
-                <span style="color: var(--text-light);">E:</span> contact@rynormedtech.com
+                Hyderabad, Telangana, India<br><br>
+                T: +91 [Insert Phone Number Here]<br>
+                E: <a href="mailto:contact@rynormedtech.com">contact@rynormedtech.com</a>
             </div>
         </div>
 

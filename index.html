@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNOR | Advanced Peritoneal Dialysis System (APDS)</title>
+    <title>RYNOR MEDTECH | Advanced Peritoneal Dialysis System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -56,36 +56,29 @@
 
         /* Hero Section */
         header { 
-            padding: 140px 20px 40px; /* Extra top padding for fixed nav */
+            padding: 140px 20px 30px; 
             text-align: center; 
             max-width: 900px;
             margin: 0 auto;
         }
         
-        /* High-End Text Branding for Rynor */
-        header h1 { 
+        /* High-End Text Logo for RYNOR MEDTECH */
+        .text-logo { 
             margin: 0; 
-            font-size: 3.5em; /* Large, standout font size */
-            font-weight: 600; /* Medium-bold */
-            letter-spacing: -0.05em; /* Sleek, tight letter spacing */
-            line-height: 1;
+            font-size: 3.2em; 
+            font-weight: 700; 
+            letter-spacing: 0.08em; 
+            line-height: 1.1;
             color: var(--text-main);
-            text-transform: lowercase; /* Matches user request for 'rynor' style */
+            text-transform: uppercase;
         }
-        
-        /* Styling for apds */
-        header h2 {
-            margin: 10px 0 0 0;
-            font-size: 1.2em;
-            font-weight: 400;
-            color: var(--text-secondary);
-            letter-spacing: 0.05em;
-            text-transform: uppercase; /* APDS usually looks best in caps as acronym */
+        .text-logo span {
+            color: var(--clinical-blue);
         }
 
         header p { 
             font-size: 1.1em; 
-            margin-top: 25px; 
+            margin-top: 20px; 
             color: var(--text-secondary);
             font-weight: 400;
             max-width: 700px;
@@ -93,7 +86,7 @@
             margin-right: auto;
         }
 
-        /* Image Placeholder - RESTORED */
+        /* Image Display Section */
         .hero-image-container {
             text-align: center;
             padding: 0 20px 60px;
@@ -103,7 +96,7 @@
             height: auto;
             border-radius: 12px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.06);
-            width: 700px; /* Standard size */
+            width: 700px; 
             object-fit: cover;
         }
         
@@ -209,7 +202,7 @@
             font-size: 1.1em;
             margin-top: 20px;
             color: var(--text-main);
-            line-height: 1.4;
+            line-height: 1.5;
         }
         
         /* Footer */
@@ -232,13 +225,12 @@
     </nav>
 
     <header id="home">
-        <h1>rynor</h1>
-        <h2>Advanced Peritoneal Dialysis System (APDS)</h2>
+        <h1 class="text-logo">RYNOR <span>MEDTECH</span></h1>
         <p>Redefining life on dialysis. We are coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
     </header>
 
     <div class="hero-image-container">
-        <img src="rynor-machine.jpg.png" alt="Rynor APDS Machine">
+        <img src="rynor-machine.jpg" alt="Rynor Dialysis Machine">
     </div>
     
     <div class="container">

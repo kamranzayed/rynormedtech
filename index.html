@@ -28,25 +28,54 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Navigation Bar */
+        nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 0.9em;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--clinical-blue);
+        }
+
         /* Hero Section */
         header { 
-            padding: 100px 20px 60px; 
+            padding: 140px 20px 40px; /* Extra top padding for fixed nav */
             text-align: center; 
             max-width: 900px;
             margin: 0 auto;
         }
         header h1 { 
             margin: 0; 
-            font-size: 3.5em; 
+            font-size: 3em; /* Slightly smaller font */
             font-weight: 600;
-            letter-spacing: -0.04em;
+            letter-spacing: -0.03em;
             line-height: 1.1;
         }
         header p { 
-            font-size: 1.3em; 
-            margin-top: 20px; 
+            font-size: 1.1em; /* Smaller subtitle */
+            margin-top: 15px; 
             color: var(--text-secondary);
             font-weight: 400;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Image Placeholder */
@@ -58,76 +87,88 @@
             max-width: 100%;
             height: auto;
             border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-            /* This gives a nice gray box if the image hasn't loaded yet */
-            background-color: var(--bg-offwhite);
-            min-height: 300px;
-            width: 800px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.06);
+            width: 700px; /* Slightly smaller image */
             object-fit: cover;
         }
         
         /* Main Container */
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 40px 20px; }
         
         .section-title { 
-            font-size: 1.1em;
+            font-size: 0.95em;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--clinical-blue);
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         
         .section-subtitle {
             text-align: center;
-            font-size: 2.2em;
+            font-size: 1.8em;
             font-weight: 500;
             letter-spacing: -0.02em;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             color: var(--text-main);
         }
         
+        /* About Us Section */
+        .about-section {
+            background-color: var(--bg-offwhite);
+            padding: 50px;
+            border-radius: 16px;
+            margin-bottom: 80px;
+            text-align: center;
+        }
+        .about-section p {
+            color: var(--text-secondary);
+            font-size: 1.05em;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
         /* Grid Layouts */
         .grid-2 {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
         
         .card {
             background: var(--bg-offwhite);
-            padding: 50px;
-            border-radius: 20px;
+            padding: 40px;
+            border-radius: 16px;
         }
         .card h3 { 
             margin-top: 0; 
-            font-size: 1.6em; 
+            font-size: 1.4em; 
             font-weight: 500;
-            letter-spacing: -0.02em;
+            letter-spacing: -0.01em;
         }
-        .card p { color: var(--text-secondary); }
-        .card ul { padding-left: 20px; color: var(--text-main); }
-        .card li { margin-bottom: 12px; font-weight: 400; }
+        .card p { color: var(--text-secondary); font-size: 0.95em; }
+        .card ul { padding-left: 20px; color: var(--text-main); font-size: 0.95em; }
+        .card li { margin-bottom: 10px; font-weight: 400; }
 
-        /* Pricing Section */
+        /* Affordability Section */
         .pricing-banner {
             background-color: var(--text-main);
             color: white;
-            padding: 60px 40px;
+            padding: 50px 40px;
             text-align: center;
-            border-radius: 20px;
+            border-radius: 16px;
             margin: 60px 0;
         }
         .pricing-banner h3 {
-            font-size: 2.5em;
+            font-size: 2em;
             font-weight: 500;
-            margin: 0 0 20px 0;
+            margin: 0 0 15px 0;
             letter-spacing: -0.02em;
         }
         .pricing-banner p {
-            font-size: 1.2em;
+            font-size: 1.05em;
             color: #a1a1a6;
             max-width: 600px;
             margin: 0 auto;
@@ -137,12 +178,12 @@
         .clinical-banner {
             border-top: 1px solid var(--border-light);
             border-bottom: 1px solid var(--border-light);
-            padding: 60px 20px;
+            padding: 50px 20px;
             text-align: center;
-            margin: 80px 0;
+            margin: 60px 0;
         }
-        .clinical-banner h3 { font-size: 1.8em; font-weight: 500; margin-top: 0; }
-        .clinical-banner p { color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        .clinical-banner h3 { font-size: 1.5em; font-weight: 500; margin-top: 0; }
+        .clinical-banner p { color: var(--text-secondary); font-size: 0.95em; max-width: 700px; margin: 0 auto; }
         
         /* Contact Section */
         .contact-section {
@@ -150,7 +191,7 @@
             padding: 60px 20px;
         }
         .contact-details {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-top: 20px;
             color: var(--text-main);
         }
@@ -163,8 +204,8 @@
         /* Footer */
         footer { 
             text-align: center; 
-            padding: 40px; 
-            font-size: 0.9em;
+            padding: 30px; 
+            font-size: 0.85em;
             color: var(--text-secondary);
             background-color: var(--bg-offwhite);
         }
@@ -172,9 +213,16 @@
 </head>
 <body>
 
-    <header>
-        <h1>Redefining life on dialysis.</h1>
-        <p>The Rynor Pleasant is coming to ease the burden of end-stage renal disease, bringing safe, affordable, and seamless therapy directly to your home.</p>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#machine">The Machine</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <header id="home">
+        <h1>Rynor Medtech</h1>
+        <p>Redefining life on dialysis. The Rynor Pleasant is coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
     </header>
 
     <div class="hero-image-container">
@@ -183,21 +231,23 @@
     
     <div class="container">
         
-        <div class="section-title">The Market Gap</div>
-        <div class="section-subtitle">Why is PD rare in India?</div>
-        <p style="text-align: center; max-width: 800px; margin: 0 auto 80px; font-size: 1.2em; color: var(--text-secondary);">
-            Historically, Peritoneal Dialysis (PD) has been a luxury reserved for the few due to prohibitively expensive imported machines and monopolized supplies. Rynor Medtech is breaking this barrier by manufacturing a world-class, indigenous solution designed specifically for the modern Indian patient.
-        </p>
+        <div id="about" class="about-section">
+            <div class="section-title">Who We Are</div>
+            <div class="section-subtitle">Democratizing Healthcare</div>
+            <p>At Rynor Medtech, our leadership team is driven by a singular mission to make life-sustaining therapy accessible to all. Spearheaded by founders Abdul Kareem Kamran Syed and Syed Abdul Hakeem, alongside our corporate director, our board is committed to delivering world-class, indigenous engineering from our manufacturing operations to the global market. We are breaking the barrier of prohibitively expensive imported machines to offer solutions designed specifically for the modern patient.</p>
+        </div>
+
+        <div class="section-title" id="machine">The Transformation</div>
+        <div class="section-subtitle">Designed for Life Outside the Hospital</div>
         
         <div class="grid-2">
             <div class="card">
                 <h3>Absolute Freedom</h3>
-                <p>Designed for life outside the hospital.</p>
+                <p>Engineered for portability and peace of mind.</p>
                 <ul>
                     <li><strong>Therapy While You Sleep:</strong> The machine quietly performs dialysis over 8 hours at night, leaving your days completely free.</li>
-                    <li><strong>Travel Anywhere:</strong> A lightweight, highly portable design. Take your treatment with you to visit family or go on vacation.</li>
-                    <li><strong>Uninterrupted Care:</strong> Built-in battery operation ensures life-sustaining therapy never stops, even during a power outage.</li>
-                    <li><strong>Ease of Use:</strong> A cassette-free system that operates on standard fluid bags available from any authorized Rynor distributor.</li>
+                    <li><strong>Travel Anywhere:</strong> A lightweight, highly portable design. Take your treatment with you seamlessly.</li>
+                    <li><strong>Uninterrupted Care:</strong> Built-in battery operation ensures therapy never stops during a power outage.</li>
                 </ul>
             </div>
             
@@ -206,15 +256,25 @@
                 <p>A gentler, more natural approach to care.</p>
                 <ul>
                     <li><strong>Needle-Free Comfort:</strong> Escape the pain, anxiety, and vascular access issues of traditional in-center hemodialysis.</li>
-                    <li><strong>Gentle on the Heart:</strong> Slower, daily dialysis mimics natural kidney function, resulting in significantly less stress on the cardiovascular system.</li>
-                    <li><strong>Dietary Independence:</strong> Continuous cleaning often allows patients to enjoy a less restrictive diet and greater fluid intake.</li>
+                    <li><strong>Gentle on the Heart:</strong> Slower, daily dialysis mimics natural kidney function, reducing stress on the cardiovascular system.</li>
+                    <li><strong>Dietary Independence:</strong> Continuous cleaning often allows patients to enjoy a less restrictive diet.</li>
                 </ul>
             </div>
         </div>
 
+        <div class="card" style="margin-bottom: 60px;">
+            <h3>Intelligent Architecture</h3>
+            <p>Our flagship cassette-free cycler is masterfully engineered for optimized fluid dynamics and operational simplicity.</p>
+            <ul>
+                <li><strong>Optimized Heating:</strong> Trays structurally engineered with a precise seven-degree static slant toward the tube side for superior fluid routing.</li>
+                <li><strong>Streamlined Setup:</strong> Singular patient line architecture for highly intuitive operation by clinical staff and patients.</li>
+                <li><strong>Advanced Drainage:</strong> Specialized drain line featuring a proprietary dual-port bypass structure.</li>
+            </ul>
+        </div>
+
         <div class="pricing-banner">
             <h3>Healthcare, Democratized.</h3>
-            <p>Our proprietary engineering achieves high energy efficiency to keep electric bills low. The Rynor Pleasant will be priced under <strong>₹1,00,000</strong>, with a monthly at-home therapy cost of approximately <strong>₹24,000</strong>.</p>
+            <p>We are committed to delivering a fiercely affordable machine and supply ecosystem. Our highly energy-efficient engineering keeps electric bills low, while our cassette-free system allows patients to easily source standard fluid bags from any authorized Rynor seller.</p>
         </div>
 
         <div class="clinical-banner">
@@ -222,9 +282,21 @@
             <p>The Rynor Pleasant machine and our medical-grade consumables are currently undergoing rigorous preparation for human clinical trials in strict accordance with CDSCO Class C and MD-13 regulatory standards.</p>
         </div>
 
-        <div class="contact-section">
+        <div id="contact" class="contact-section">
             <div class="section-title">Connect With Us</div>
             <p style="color: var(--text-secondary);">For investment inquiries, regulatory documentation, or supplier communications.</p>
             <div class="contact-details">
                 <strong>Hyderabad Operations Center</strong><br>
-                Hyderabad, Telangana, India<br
+                Hyderabad, Telangana, India<br><br>
+                <a href="mailto:kamranzayed@gmail.com">kamranzayed@gmail.com</a>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Rynor Medtech Private Limited. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

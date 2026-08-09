@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RYNOR MEDTECH | Advanced Peritoneal Dialysis System</title>
+    <title>RYNOR | Advanced Peritoneal Dialysis System</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -62,23 +62,27 @@
             margin: 0 auto;
         }
         
-        /* High-End Text Logo for RYNOR MEDTECH */
-        .text-logo { 
+        /* High-End Text Logo */
+        header h1 { 
             margin: 0; 
-            font-size: 3.2em; 
-            font-weight: 700; 
-            letter-spacing: 0.08em; 
-            line-height: 1.1;
+            font-size: 3.5em; 
+            font-weight: 600; 
+            letter-spacing: -0.05em; 
+            line-height: 1;
             color: var(--text-main);
-            text-transform: uppercase;
+            text-transform: lowercase; 
         }
-        .text-logo span {
-            color: var(--clinical-blue);
+        header h2 {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            font-weight: 400;
+            color: var(--text-secondary);
+            letter-spacing: 0.05em;
+            text-transform: uppercase; 
         }
-
         header p { 
             font-size: 1.1em; 
-            margin-top: 20px; 
+            margin-top: 25px; 
             color: var(--text-secondary);
             font-weight: 400;
             max-width: 700px;
@@ -202,7 +206,7 @@
             font-size: 1.1em;
             margin-top: 20px;
             color: var(--text-main);
-            line-height: 1.5;
+            line-height: 1.4;
         }
         
         /* Footer */
@@ -213,24 +217,53 @@
             color: var(--text-secondary);
             background-color: var(--bg-offwhite);
         }
+
+        /* FLOATING CHAT ICON CSS */
+        .floating-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--clinical-blue);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 10px 20px rgba(0,102,204,0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .floating-chat:hover {
+            transform: scale(1.05);
+            background-color: #004c99;
+        }
+        .floating-chat svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="#home">Home</a>
-        <a href="#about">About Us</a>
-        <a href="#machine">The Machine</a>
-        <a href="#contact">Contact</a>
+        <a href="index.html#home">Home</a>
+        <a href="index.html#about">About Us</a>
+        <a href="index.html#machine">The Machine</a>
+        <a href="catalog.html">Our Catalog</a>
+        <a href="index.html#contact">Contact</a>
     </nav>
 
     <header id="home">
-        <h1 class="text-logo">RYNOR <span>MEDTECH</span></h1>
+        <h1>rynor</h1>
+        <h2>Advanced Peritoneal Dialysis System (APDS)</h2>
         <p>Redefining life on dialysis. We are coming to ease the burden of end-stage renal disease, bringing safe, highly intuitive therapy directly to your home.</p>
     </header>
 
     <div class="hero-image-container">
-        <img src="rynor-machine.jpg.png" alt="Rynor Dialysis Machine">
+        <img src="ynor-machine.jpg.png" alt="Rynor Dialysis Machine">
     </div>
     
     <div class="container">
@@ -290,6 +323,12 @@
     <footer>
         <p>&copy; 2026 Rynor Private Limited. All rights reserved.</p>
     </footer>
+
+    <a href="mailto:inquiries@rynormedtech.com" class="floating-chat" title="Send us a message">
+        <svg viewBox="0 0 24 24">
+            <path d="M20 2H4C2.9 2 2 2.9 2 4V22L6 18H20C21.1 18 22 17.1 22 16V4C22 2.9 21.1 2 20 2ZM20 16H5.17L4 17.17V4H20V16ZM18 9H6V11H18V9ZM15 12H6V14H15V12ZM18 6H6V8H18V6Z"></path>
+        </svg>
+    </a>
 
 </body>
 </html>

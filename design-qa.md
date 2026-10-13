@@ -1,0 +1,44 @@
+# RYNOR Medtech design QA
+
+final result: passed
+
+Reviewed 13 October 2026 in Chromium using the served website, not static HTML alone.
+
+## Design reference and implementation
+
+The selected direction is **Clinical Precision**: white and ice-blue surfaces, navy typography, teal accents, a closed-exterior machine hero, three product groups and a navy contact strip. The supplied SVG logos are preserved.
+
+The selected reference is `/workspace/generated_images/exec-e2cd771b-2294-4b23-a3c9-1767f8609973.png`. A browser capture at its 1190 × 1322 viewport is `/workspace/rynor-design/qa/home-reference-viewport.png`. Visual comparison confirms the same content hierarchy, palette, two-column desktop hero, product sequence and contact treatment. The implementation is an adaptation rather than a pixel-identical rendering: it uses independently generated concept assets, factual development-stage copy, more spacious sections and an additional navigation/disclosure footer. On mobile the hero and product groups stack, and navigation collapses into a menu.
+
+Reviewed desktop captures for all five pages and phone captures of the homepage, contact page and enquiry dialog. Supply imagery fits its containers without the oversized blank areas found during the first review. The machine image shows only the exterior. All concept imagery is labelled; none of the machine or supplies are represented as currently available for sale.
+
+## Interaction and responsive verification
+
+`scripts/check_site.py` completed **15 functional check groups** covering:
+
+- All five pages, their metadata, active navigation, loaded images and local links.
+- Every supply filter, text search, empty results and reset.
+- Category deep links and the matching product enquiry topic.
+- Dialog keyboard focus cycling, Escape dismissal and focus restoration.
+- Required message validation and correctly encoded email draft contents.
+- FAQ disclosure, mobile navigation and the legacy catalog redirect.
+- All five pages at 320, 390 and 768 CSS pixels without horizontal overflow.
+- No JavaScript runtime errors or failed HTTP responses.
+
+Desktop screenshots were captured at 1440 × 1100 and full-page phone screenshots at 390 × 844. Evidence is in `/workspace/rynor-design/qa/`, including `checks.json`, each page's desktop/mobile screenshots and `enquiry-mobile.png`. The README gives the commands to reproduce the checks.
+
+Axe-core 4.14.0 reported **zero WCAG 2 A/AA and WCAG 2.1 AA rule violations across the five desktop pages**. After adding an email-address wrap opportunity, the contact page was checked again at 320, 390 and 1440 pixels: the address and mailto target remained correct, with no horizontal overflow and no axe violations. JavaScript syntax checking also passed.
+
+## Resolved findings
+
+- Product image sizing no longer inherits an excessive intrinsic height.
+- Teal labels and development-status text meet the checked contrast rules.
+- Keyboard focus cycles within the enquiry dialog and returns to its trigger.
+- Opening an email draft preserves the website and exposes a direct draft/address fallback.
+- The contact email wraps at the address/domain boundary when necessary on phones.
+
+No remaining blocking visual or interaction findings were identified in the reviewed states.
+
+## Verification limits
+
+Email draft creation was checked; no email was sent and mailbox delivery was not tested. Automated accessibility checks supplement the visual and keyboard checks, and are not an accessibility certification. Safari, Firefox and physical devices were not tested. Public GitHub Pages deployment is a separate publishing check; this result covers the built website served in the development environment.

@@ -69,8 +69,14 @@
   });
 
   document.querySelectorAll('[data-email-form]').forEach(form => {
+    const message = form.querySelector('[name="message"]');
+    form.addEventListener('input', () => {
+      message.setCustomValidity('');
+      form.querySelector('[data-draft-status]').hidden = true;
+    });
     form.addEventListener('submit', event => {
       event.preventDefault();
+      message.setCustomValidity(message.value.trim() ? '' : 'Please enter a message before opening your email draft.');
       if (!form.reportValidity()) return;
       const fields = new FormData(form);
       const subject = `RYNOR Medtech — ${fields.get('topic')}`;
@@ -97,11 +103,12 @@
   const search = document.querySelector('#catalog-search');
   if (cards.length && filters.length) {
     let category = 'all';
+    const normaliseSearch = value => value.toLowerCase().normalize('NFKC').replace(/[^\p{L}\p{N}]/gu, '');
     const applyFilters = () => {
-      const query = (search?.value || '').trim().toLowerCase();
+      const query = normaliseSearch(search?.value || '');
       let count = 0;
       cards.forEach(card => {
-        const show = (category === 'all' || card.dataset.category === category) && card.textContent.toLowerCase().includes(query);
+        const show = (category === 'all' || card.dataset.category === category) && normaliseSearch(card.textContent).includes(query);
         card.hidden = !show;
         if (show) count++;
       });

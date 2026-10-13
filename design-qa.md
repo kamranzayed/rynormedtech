@@ -39,6 +39,21 @@ Axe-core 4.14.0 reported **zero WCAG 2 A/AA and WCAG 2.1 AA rule violations acro
 
 No remaining blocking visual or interaction findings were identified in the reviewed states.
 
+## Follow-up testing and fixes — 13 October 2026
+
+After the owner confirmed the site opens on their phone, a second pass covered copy, spacing, additional screen sizes and form/search edge cases. The expanded suite passed **21 functional check groups**, with **zero automated accessibility violations across the five pages**. Results and screenshots are in `/workspace/rynor-design/qa-round2/`.
+
+Confirmed issues fixed:
+
+- Searches such as `2L`, `swan neck`, `APD CAPD` and `MINI CAPs` now find the corresponding supplies despite spacing, punctuation or capitalisation differences.
+- A message containing only spaces cannot open an email draft. Editing the message or other form values hides an outdated draft link until the draft is prepared again.
+- At tablet widths, the machine exterior is fully visible and the headline/section alignment is more balanced. Before/after captures at 768 and 1024 pixels were visually compared.
+- Home, logo and breadcrumb links use the homepage directory URL, without adding `index.html` to the address.
+- The bag-size label uses normal spacing; catheter terminology and brand/email consistency were proofread. British spellings such as “enquiries” and “programme” are intentional.
+- Stylesheet and script URLs include content versions so browsers request changed assets after a rebuild.
+
+Additional verification covered invalid email addresses, corrected form input after validation errors, 320/375/390/414/768/1024 pixel layouts, and touch navigation/filter/enquiry interactions using Chromium's iPhone 13 and Pixel 7 emulation settings. All five pages also passed checks for unique IDs, valid label/control references, local resource paths and the contact email address. Sitemap XML and the custom-domain file remain valid. Versioned assets were separately loaded and exercised through mobile navigation on each page.
+
 ## Verification limits
 
 Email draft creation was checked; no email was sent and mailbox delivery was not tested. Automated accessibility checks supplement the visual and keyboard checks, and are not an accessibility certification. Safari, Firefox and physical devices were not tested. Public GitHub Pages deployment is a separate publishing check; this result covers the built website served in the development environment.

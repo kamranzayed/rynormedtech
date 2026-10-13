@@ -40,7 +40,8 @@ with sync_playwright() as p:
         assert page.locator('head meta[name="description"]').get_attribute('content')
         assert page.locator('img').evaluate_all('(items)=>items.every(i=>i.complete && i.naturalWidth>0)')
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')
-        expect(page.locator(f'.primary-nav a[href="{name}.html"]')).to_have_attribute('aria-current','page')
+        nav_href = './' if name == 'index' else f'{name}.html'
+        expect(page.locator(f'.primary-nav a[href="{nav_href}"]')).to_have_attribute('aria-current','page')
         local_links = page.locator('a[href]').evaluate_all('(items)=>[...new Set(items.map(i=>i.getAttribute("href")).filter(h=>h && !/^(mailto:|https?:|#)/.test(h)))]')
         for href in local_links:
             assert context.request.get(f'{args.base_url}/{href}').status == 200, href
@@ -52,6 +53,14 @@ with sync_playwright() as p:
             axe_results.append({'page':name,'violations':violations,'passes':len(result['passes'])})
         passed(f'{name}: content, metadata, active navigation, loaded assets and local links')
 
+    page.goto(f'{args.base_url}/machine.html')
+    page.locator('.primary-nav').get_by_role('link', name='Home', exact=True).click()
+    expect(page).to_have_url(f'{args.base_url}/')
+    page.goto(f'{args.base_url}/contact.html')
+    page.locator('.site-footer .brand').click()
+    expect(page).to_have_url(f'{args.base_url}/')
+    passed('Home and logo navigation use the clean homepage address')
+
     page.goto(f'{args.base_url}/supplies.html',wait_until='networkidle')
     expect(page.locator('[data-category]:visible')).to_have_count(4)
     for category in ['bags','tubing','catheters','caps']:
@@ -62,6 +71,10 @@ with sync_playwright() as p:
     page.get_by_label('Search planned supplies').fill('Swan-neck')
     expect(page.locator('[data-category]:visible')).to_have_count(1)
     expect(page.locator('[data-category="catheters"]')).to_be_visible()
+    for query,category in [('swan neck','catheters'),('2L','bags'),('5 L','bags'),('APD CAPD','tubing'),('  MINI CAPs  ','caps')]:
+        page.get_by_label('Search planned supplies').fill(query)
+        expect(page.locator('[data-category]:visible')).to_have_count(1)
+        expect(page.locator(f'[data-category="{category}"]')).to_be_visible()
     page.get_by_label('Search planned supplies').fill('zzzz-no-product')
     expect(page.locator('[data-category]:visible')).to_have_count(0)
     expect(page.locator('[data-empty-state]')).to_be_visible()
@@ -87,6 +100,16 @@ with sync_playwright() as p:
     form.get_by_role('button',name='Open email draft').click()
     expect(page.locator('#contact-message')).to_be_focused()
     expect(form.locator('[data-draft-status]')).not_to_be_visible()
+    page.locator('#contact-message').fill('   \n   ')
+    form.get_by_role('button',name='Open email draft').click()
+    expect(form.locator('[data-draft-status]')).not_to_be_visible()
+    assert page.locator('#contact-message').evaluate('(field)=>!field.validity.valid')
+    page.locator('#contact-message').fill('A product enquiry')
+    assert page.locator('#contact-message').evaluate('(field)=>field.validity.valid')
+    page.locator('#contact-email').fill('invalid-address')
+    form.get_by_role('button',name='Open email draft').click()
+    expect(page.locator('#contact-email')).to_be_focused()
+    expect(form.locator('[data-draft-status]')).not_to_be_visible()
     page.locator('#contact-name').fill('Website smoke check')
     page.locator('#contact-email').fill('check@example.com')
     page.locator('#contact-topic').select_option('Distribution partnership')
@@ -101,6 +124,8 @@ with sync_playwright() as p:
     assert query['subject']==['RYNOR Medtech — Distribution partnership']
     assert message in query['body'][0] and 'check@example.com' in query['body'][0]
     assert 'Nothing is sent automatically.' in form.inner_text()
+    page.locator('#contact-message').fill('Updated enquiry')
+    expect(form.locator('[data-draft-status]')).not_to_be_visible()
     passed('Contact validation and correctly encoded email draft; no message sent')
 
     page.goto(f'{args.base_url}/about.html')
@@ -108,7 +133,7 @@ with sync_playwright() as p:
     expect(page.get_by_text('The entire supply range is planned to launch together with the machine. None of the products shown are currently offered for sale.')).to_be_visible()
     passed('FAQ disclosure interaction')
 
-    for width,height in [(768,1024),(390,844),(320,700)]:
+    for width,height in [(1024,768),(768,1024),(414,896),(390,844),(375,812),(320,700)]:
         page.set_viewport_size({'width':width,'height':height})
         for name in pages:
             page.goto(f'{args.base_url}/{name}.html',wait_until='networkidle')
@@ -131,6 +156,25 @@ with sync_playwright() as p:
     page.screenshot(path=str(out/'enquiry-mobile.png'),full_page=False)
     page.get_by_role('button',name='Close enquiry').click()
     passed('Mobile navigation, page transition and enquiry dialog')
+
+    for device in ['iPhone 13', 'Pixel 7']:
+        phone_context = browser.new_context(**p.devices[device])
+        phone_page = phone_context.new_page()
+        phone_page.goto(f'{args.base_url}/',wait_until='networkidle')
+        expect(phone_page.locator('main h1')).to_be_visible()
+        phone_page.get_by_role('button',name='Open navigation').tap()
+        phone_page.locator('.primary-nav').get_by_role('link',name='Supplies',exact=True).tap()
+        expect(phone_page).to_have_url(f'{args.base_url}/supplies.html')
+        phone_page.locator('[data-filter="bags"]').tap()
+        expect(phone_page.locator('[data-category]:visible')).to_have_count(1)
+        phone_page.locator('[data-category="bags"] [data-enquiry]').tap()
+        expect(phone_page.locator('dialog')).to_be_visible()
+        expect(phone_page.locator('#dialog-topic')).to_have_value('Dialysis fluid bags')
+        phone_page.get_by_role('button',name='Close enquiry').tap()
+        expect(phone_page.locator('dialog')).not_to_be_visible()
+        phone_context.close()
+        passed(f'{device}: touch navigation, product filters and enquiry (Chromium emulation)')
+
     page.goto(f'{args.base_url}/catalog.html',wait_until='networkidle')
     expect(page).to_have_url(f'{args.base_url}/supplies.html')
     passed('Legacy catalog URL reaches the new supplies page')

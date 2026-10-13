@@ -17,7 +17,7 @@ No package installation, database, API keys, or frontend build is required to se
 - `assets/site.css` contains desktop, tablet and mobile layouts.
 - `assets/site.js` contains navigation, supply filters, search and email enquiry interactions.
 
-After changing the templates, regenerate the committed HTML:
+After changing the templates, CSS or JavaScript, regenerate the committed HTML. The generator includes a content version in the stylesheet and script URLs so browsers request the updated assets:
 
 ```bash
 python3 scripts/build_site.py
@@ -37,7 +37,7 @@ The prepared cloud environment includes Python Playwright and Chromium. With the
 python3 scripts/check_site.py --base-url http://127.0.0.1:8000 --output /tmp/rynor-qa
 ```
 
-The smoke checks cover page/asset links, catalog category filters and search, empty-state recovery, product enquiry topics, keyboard modal behaviour, required fields, encoded email drafts, mobile navigation, responsive widths, FAQ disclosures and the legacy catalog redirect. Email delivery is not tested or performed. Screenshots and a JSON report are written to the output directory.
+The smoke checks cover page/asset links, clean homepage navigation, catalog category filters and flexible search, empty-state recovery, product enquiry topics, keyboard modal behaviour, blank-message and invalid-email validation, encoded email drafts, mobile navigation, six responsive widths, touch controls in Chromium phone emulation, FAQ disclosures and the legacy catalog redirect. Email delivery is not tested or performed. Screenshots and a JSON report are written to the output directory.
 
 For WCAG A/AA automated checks, also supply a local copy of `axe.min.js` with `--axe /path/to/axe.min.js`. When axe-core is missing, the runner explicitly reports that the accessibility scan did not run. These automated checks supplement visual and keyboard review; they are not an accessibility certification.
 

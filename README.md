@@ -11,6 +11,16 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 No package installation, database, API keys, or frontend build is required to serve the committed pages. Fonts, icons, illustrations and logos are served locally.
 
+## Animation and visitor preferences
+
+`assets/motion.js` progressively adds GSAP entrances and section reveals across the five pages. On fine-pointer desktops at least 900px wide, Lenis smooths wheel scrolling; mobile and touch scrolling remain native. The homepage adds a low-opacity Vanta Waves background behind its copy, with the matching Three.js r134 renderer loaded only when needed. Browser data-saving mode skips that background, and failures leave the original static hero usable.
+
+The footer's **Pause motion** button stops animations and smooth scrolling, restores visible content, and remembers the visitor's choice when local storage is available. The operating system's reduced-motion preference takes precedence. Open enquiry dialogs stop background smooth scrolling, and page lifecycle cleanup releases animations and WebGL resources.
+
+Run `node scripts/check_motion.mjs` to check reduced-motion, saved opt-out, and missing-library fallback paths. Browser QA should also check the homepage canvas, the pause/resume control, mobile native scrolling, product filters, and enquiry dialog behavior.
+
+All runtime files are self-hosted in `assets/vendor/`: GSAP/ScrollTrigger 3.15.0, Lenis 1.3.27, Vanta Waves 0.5.24, and Three.js 0.134.0. `assets/vendor/versions.json` records source packages and file hashes. MIT notices for Lenis, Vanta, and Three.js are in `assets/licenses/`; GSAP uses its standard no-charge license at https://gsap.com/standard-license, with its copyright and license header retained in both distribution files. These libraries do not require a build step on GitHub Pages. Keep versions and notices together when updating.
+
 ## Edit and rebuild the pages
 
 - `scripts/build_site.py` contains the page content and shared HTML templates.

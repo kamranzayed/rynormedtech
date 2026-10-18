@@ -112,3 +112,8 @@ html[data-motion="on"] .product-preview:hover .product-art img{transform:scale(1
 html[data-motion="on"] .button .icon,html[data-motion="on"] .text-link .icon{transition:transform .25s ease}
 html[data-motion="on"] .button:hover .icon,html[data-motion="on"] .text-link:hover .icon{transform:translateX(4px)}
 }
+
+/* Blend the original logo artwork into the header without a white image tile. */
+.site-header{isolation:isolate}
+.site-header .brand{mix-blend-mode:multiply;backface-visibility:hidden;border-radius:0}
+.site-header .brand img{width:100%;pointer-events:none;user-select:none;-webkit-user-drag:none}

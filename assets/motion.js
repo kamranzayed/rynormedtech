@@ -13,7 +13,7 @@
   const hero = document.querySelector('[data-hero-motion]');
   let preference;
   try { preference = localStorage.getItem('rynor-motion'); } catch { /* Storage is optional. */ }
-  let context, lenis, ticker, modalObserver, heroObserver, waves;
+  let context, lenis, ticker, modalObserver, heroObserver, waves, releaseLogo;
   let heroVisible = true;
   let webglSupport;
   let generation = 0;
@@ -67,6 +67,7 @@
     heroObserver?.disconnect(); heroObserver = null;
     if (ticker) { gsap.ticker.remove(ticker); ticker = null; }
     lenis?.destroy(); lenis = null;
+    releaseLogo?.(); releaseLogo = null;
     context?.revert(); context = null;
     destroyWaves();
     delete root.dataset.smoothScroll;
@@ -85,6 +86,35 @@
     const id = generation;
     try {
       context = gsap.context(() => {
+        const logo = document.querySelector('.site-header .brand');
+        if (logo && desktop.matches) {
+          gsap.set(logo, { transformPerspective: 700, transformOrigin: '50% 50%' });
+          const entrance = gsap.fromTo(logo,
+            { rotationY: -20, rotationX: 6, y: 5 },
+            { rotationY: 0, rotationX: 0, y: 0, duration: 1.1, ease: 'power3.out' });
+          const tiltX = gsap.quickTo(logo, 'rotationX', { duration: 0.5, ease: 'power3.out' });
+          const tiltY = gsap.quickTo(logo, 'rotationY', { duration: 0.5, ease: 'power3.out' });
+          const lift = gsap.quickTo(logo, 'y', { duration: 0.5, ease: 'power3.out' });
+          const move = event => {
+            if (event.pointerType !== 'mouse') return;
+            entrance.kill();
+            const box = logo.getBoundingClientRect();
+            const x = Math.max(-1, Math.min(1, (event.clientX - box.left) / box.width * 2 - 1));
+            const y = Math.max(-1, Math.min(1, (event.clientY - box.top) / box.height * 2 - 1));
+            tiltX(-y * 5);
+            tiltY(x * 9);
+            lift(-1);
+          };
+          const reset = () => { entrance.kill(); tiltX(0); tiltY(0); lift(0); };
+          logo.addEventListener('pointermove', move);
+          logo.addEventListener('pointerleave', reset);
+          logo.addEventListener('blur', reset);
+          releaseLogo = () => {
+            logo.removeEventListener('pointermove', move);
+            logo.removeEventListener('pointerleave', reset);
+            logo.removeEventListener('blur', reset);
+          };
+        }
         const heroCopy = document.querySelector('.hero-copy');
         if (heroCopy) {
           const lines = desktop.matches ? heroCopy.querySelectorAll('.hero-line') : heroCopy.querySelector('h1');

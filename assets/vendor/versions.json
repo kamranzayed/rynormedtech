@@ -1,0 +1,29 @@
+{
+  "packages": {
+    "gsap": "3.15.0",
+    "lenis": "1.3.27",
+    "vanta": "0.5.24",
+    "three": "0.134.0"
+  },
+  "source": "Published npm distribution files, copied from the reviewed version-pinned local installation",
+  "files": {
+    "gsap-3.15.0.min.js": {
+      "sha256": "92bb9a96476f983d212a2bc4f54c889039c1696dd4461d40a736860938570fbb"
+    },
+    "lenis-1.3.27.css": {
+      "sha256": "2f668ae84a668327f246faf8a770383a2bf69196d214290fbc4d5548910606c5"
+    },
+    "lenis-1.3.27.min.js": {
+      "sha256": "80f53e77f1c13e379fc246d2b5e299188e20bcb2b2fe7ebb13e8e8c7563a6da7"
+    },
+    "scroll-trigger-3.15.0.min.js": {
+      "sha256": "b0b14d67b55b0c43c756ac0b106cfcb09d0879945f6ead64451065b0672916a2"
+    },
+    "three-0.134.0.min.js": {
+      "sha256": "74782bdbcf6518f7745ed77035968fcae95ed4ab5c9a0f90cf646a69c20785ec"
+    },
+    "vanta-waves-0.5.24.min.js": {
+      "sha256": "60a30382a898ae570dd0e88ac903fac9273fd188ae8c8d1984200b9ebd89237d"
+    }
+  }
+}

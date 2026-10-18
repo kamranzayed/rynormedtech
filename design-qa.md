@@ -57,3 +57,14 @@ Additional verification covered invalid email addresses, corrected form input af
 ## Verification limits
 
 Email draft creation was checked; no email was sent and mailbox delivery was not tested. Automated accessibility checks supplement the visual and keyboard checks, and are not an accessibility certification. Safari, Firefox and physical devices were not tested. Public GitHub Pages deployment is a separate publishing check; this result covers the built website served in the development environment.
+
+## Motion enhancement verification — October 18, 2026
+
+- Homepage checked in the Codex in-app browser at desktop size: GSAP/Lenis initialized, Vanta created one canvas, no horizontal overflow, and no warning/error console entries were reported.
+- Pause control: canvas removed, Lenis scrolling removed, animated content restored to full visibility; re-enabling motion worked.
+- Enquiry dialog: opened normally, Lenis stopped while open, Escape closed the dialog and restored focus to the trigger. No email was sent.
+- Mobile viewport 390 x 844: Vanta canvas removed, smooth scrolling disabled in favor of native scrolling, no horizontal overflow; mobile menu opened and navigation to Supplies worked.
+- Supplies Tubing filter: only the tubing category remained visible and count updated to one.
+- Node fallback checks: reduced-motion preference, saved opt-out, and unavailable libraries do not initialize animation engines.
+- Generated pages rebuilt successfully and git diff whitespace checks passed.
+- Browser checks cover the motion changes and representative existing interactions, not a full rerun of scripts/check_site.py or an accessibility certification. Browser WebGL support and device performance still vary; the static fallback remains available.

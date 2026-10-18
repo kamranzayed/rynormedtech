@@ -30,3 +30,69 @@
 html[data-smooth-scroll="lenis"]{scroll-behavior:auto}
 @media(max-width:899px){.hero-motion{display:none}}
 @media(prefers-reduced-motion:reduce){.hero-motion{display:none}}
+
+/* ===== Design refresh layer (appended; delete from here down to revert) ===== */
+:root{--deep:#041a35;--aqua:#6fd6e8;--amber:#f0b44c;--mist:#f4f9fb;--shadow:0 22px 50px -26px rgba(6,38,75,.45)}
+::selection{background:#bfe9f1}
+h1,h2,h3{text-wrap:balance}p{text-wrap:pretty}
+h2{font-weight:800}
+.site-header{position:sticky;top:0;background:rgba(255,255,255,.9);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom-color:rgba(6,38,75,.08)}
+.nav-contact{border-radius:999px}
+.button{border-radius:10px;box-shadow:0 10px 22px -14px rgba(6,38,75,.7)}
+.button-light{box-shadow:none}
+.eyebrow{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--teal)}
+.eyebrow:before{content:"";width:26px;height:2px;border-radius:2px;background:currentColor}
+.page-heading .eyebrow{font-size:14px}
+.catalog-card .eyebrow{font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:8px;text-transform:none;letter-spacing:0;font-size:12px;border-radius:999px;padding:5px 12px}
+.stage-list .pill:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
+@media(min-width:901px){.section{padding:104px 0}}
+
+/* Hero: brand-navy copy panel, machine image in a rounded light frame */
+.home-hero{background:linear-gradient(115deg,var(--deep),var(--navy) 60%,#0b3a68)}
+.home-hero .hero-motion{display:none}
+.hero-copy h1{color:#fff}
+.hero-copy h1 .accent{color:var(--aqua)}
+.hero-copy p{color:#c9dbe8}
+.hero-copy .button{background:#fff;color:var(--navy)}
+.hero-copy .button:hover{background:#e9f4f8}
+.hero-copy .button .icon{filter:none}
+.hero-copy .text-link{color:#fff}
+.hero-copy .text-link .icon{filter:brightness(0) invert(1)}
+.hero-copy .text-link:hover{color:var(--aqua)}
+.hero-figure{padding:28px 28px 28px 0}
+.hero-figure>img{border-radius:22px;box-shadow:0 30px 70px -30px rgba(0,0,0,.6);background:var(--ice)}
+.hero-figure figcaption{bottom:48px;right:52px}
+@media(max-width:720px){.hero-figure{padding:0 20px 28px}.hero-figure figcaption{bottom:42px;right:34px}}
+.status-strip{background:var(--deep);color:#c9dbe8}
+.status-heading{color:#fff}
+.status-heading .icon{filter:brightness(0) invert(1)}
+.status-description{border-left-color:#35587a;color:#b9cfdf}
+.status-description:before{content:"";display:inline-block;width:8px;height:8px;margin-right:10px;border-radius:50%;background:var(--amber)}
+@media(max-width:720px){.status-description:before{display:none}}
+
+/* Products and catalog */
+.product-preview{text-align:left;background:var(--mist);border-radius:18px;padding:14px 14px 22px;border-bottom:0;transition:transform .25s,box-shadow .25s}
+.product-preview:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.product-preview .product-art{border-radius:12px}
+.product-preview h3,.product-preview p{padding:0 8px}
+.catalog-card figure{background:var(--mist);border-radius:16px}
+.catalog-card{transition:transform .25s}
+.contact-card{border-radius:18px}
+.principle{border-top-width:3px}
+
+/* Development stages read as a real timeline */
+.stage-list{position:relative;border-top:0;padding-left:34px}
+.stage-list:before{content:"";position:absolute;left:7px;top:12px;bottom:12px;width:2px;background:var(--line)}
+.stage-list li{position:relative;border-bottom:0;padding:0 0 36px}
+.stage-list li:last-child{padding-bottom:0}
+.stage-list li:before{content:"";position:absolute;left:-34px;top:6px;width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #9db6c6}
+.stage-list .current{border-left:0;padding-left:0}
+.stage-list .current:before{background:var(--amber);border-color:var(--amber);box-shadow:0 0 0 6px rgba(240,180,76,.25)}
+
+/* Page headings, contact band, forms */
+.page-heading{background:linear-gradient(180deg,#e7f4f8,#f7fbfd)}
+.contact-band{background:linear-gradient(120deg,var(--deep),var(--navy))}
+.field input:focus,.field select:focus,.field textarea:focus,.search-field input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(0,122,147,.18)}
+.field input,.field select,.field textarea{border-radius:8px}
+.enquiry-dialog{border-radius:18px}

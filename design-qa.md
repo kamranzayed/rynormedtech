@@ -68,3 +68,11 @@ Email draft creation was checked; no email was sent and mailbox delivery was not
 - Node fallback checks: reduced-motion preference, saved opt-out, and unavailable libraries do not initialize animation engines.
 - Generated pages rebuilt successfully and git diff whitespace checks passed.
 - Browser checks cover the motion changes and representative existing interactions, not a full rerun of scripts/check_site.py or an accessibility certification. Browser WebGL support and device performance still vary; the static fallback remains available.
+
+## Sandbox regression pass — October 18, 2026
+
+Two performance/fallback defects were reproduced and fixed: Vanta continued rendering after the hero scrolled offscreen, and unsupported WebGL still downloaded the renderer and logged an avoidable error. The corrected motion runtime probes WebGL before loading Three.js and releases/recreates its renderer on hero intersection changes.
+
+Retests passed: offscreen zero-canvas state, one-canvas restoration, pause cleanup, reduced-motion/missing-library/blocked-storage/data-saving fallbacks, all five pages at six verified widths (1024, 768, 414, 390, 375 and 320px), modal focus trapping/Escape, invalid contact inputs, email draft encoding without sending, filters/search/reset, mobile navigation, FAQ and legacy catalog redirect. All five main-content comparisons against the original pre-animation site and local asset reference checks passed.
+
+axe-core 4.14.0 found zero automated WCAG A/AA violations across the five stable pages with motion paused. Homepage image-caption contrast required visual review; no accessibility certification or physical-device/browser-matrix claim is made. The independent local sandbox and its failure simulations are not deployed with the website.

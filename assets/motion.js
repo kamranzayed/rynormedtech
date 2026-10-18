@@ -13,7 +13,9 @@
   const hero = document.querySelector('[data-hero-motion]');
   let preference;
   try { preference = localStorage.getItem('rynor-motion'); } catch { /* Storage is optional. */ }
-  let context, lenis, ticker, modalObserver, waves;
+  let context, lenis, ticker, modalObserver, heroObserver, waves;
+  let heroVisible = true;
+  let webglSupport;
   let generation = 0;
   const loaders = new Map();
   const load = name => {
@@ -30,12 +32,22 @@
     if (waves) { waves.destroy(); waves = null; }
     if (hero) { hero.replaceChildren(); hero.dataset.state = 'static'; }
   };
+  const supportsWebGL = () => {
+    if (webglSupport !== undefined) return webglSupport;
+    try {
+      const canvas = document.createElement('canvas');
+      const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+      webglSupport = Boolean(gl);
+      gl?.getExtension('WEBGL_lose_context')?.loseContext();
+    } catch { webglSupport = false; }
+    return webglSupport;
+  };
   const startWaves = async id => {
-    if (!hero || !desktop.matches || document.hidden || navigator.connection?.saveData) return;
+    if (!hero || !heroVisible || !desktop.matches || document.hidden || navigator.connection?.saveData || !supportsWebGL()) return;
     try {
       await load('three-0.134.0.min.js');
       await load('vanta-waves-0.5.24.min.js');
-      if (id !== generation || reduced.matches || preference === 'off' || document.hidden || waves) return;
+      if (id !== generation || !heroVisible || reduced.matches || preference === 'off' || document.hidden || waves) return;
       waves = window.VANTA.WAVES({
         el: hero, THREE: window.THREE,
         mouseControls: false, touchControls: false, gyroControls: false,
@@ -52,6 +64,7 @@
   const dispose = () => {
     generation++;
     modalObserver?.disconnect(); modalObserver = null;
+    heroObserver?.disconnect(); heroObserver = null;
     if (ticker) { gsap.ticker.remove(ticker); ticker = null; }
     lenis?.destroy(); lenis = null;
     context?.revert(); context = null;
@@ -93,6 +106,19 @@
         syncModal();
       }
       ScrollTrigger.refresh();
+      if (hero && desktop.matches) {
+        const bounds = hero.getBoundingClientRect();
+        heroVisible = bounds.bottom > -120 && bounds.top < innerHeight + 120;
+        if ('IntersectionObserver' in window) {
+          heroObserver = new IntersectionObserver(entries => {
+            if (id !== generation) return;
+            heroVisible = entries[0].isIntersecting;
+            if (!heroVisible) destroyWaves();
+            else if (root.dataset.motion === 'on') startWaves(id);
+          }, { rootMargin: '120px 0px' });
+          heroObserver.observe(hero);
+        }
+      }
       startWaves(id);
     } catch {
       dispose();

@@ -39,14 +39,14 @@ The generated pages are `index.html`, `machine.html`, `supplies.html`, `about.ht
 
 ## Contact behaviour
 
-The contact page and enquiry dialog support direct submission through Formspree. To activate delivery:
+The contact page and enquiry dialog submit directly through the owner-provided Formspree endpoint `https://formspree.io/f/mbgdblpw`. Inbox delivery must be verified in the owner’s Formspree account. To configure a replacement form:
 
 1. Create a Formspree form with destination `syedkamran@rynormedtech.com` and verify the destination in the owner's account.
 2. Put its public endpoint (for example, `https://formspree.io/f/FORM_ID`) in `site-config.json` under `formspree_endpoint`. Never add an API key or password.
 3. Run `python3 scripts/build_site.py`, commit the generated HTML and publish to `main`.
 4. Submit an enquiry and verify it arrives in the destination inbox. Check the provider's spam settings and account usage limits as needed.
 
-Until the endpoint is supplied, the existing email-draft form remains available; direct sending is not activated. Setting the endpoint switches both forms and their explanatory text together.
+The configured endpoint enables both direct-send forms and their explanatory text together. Clearing the endpoint and rebuilding restores the email-draft fallback.
 
 The direct form requires an email address and message, supplies a default topic, and preserves product-specific topics. It submits via HTTPS without opening an email app; Formspree processes the message and routes it to the configured destination. Visitors see a link to Formspree's privacy policy and a reminder not to share sensitive medical information. Loading, success and failure states are announced inline. Failed or unconfirmed requests retain the message for retry. Buttons and fields are disabled during sending to prevent duplicate clicks. A hidden honeypot complements Formspree's spam protection. Direct email remains available as an alternative. With JavaScript disabled, a configured form posts to Formspree using the browser's native form submission.
 

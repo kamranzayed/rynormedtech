@@ -87,3 +87,10 @@ A configurable Formspree integration now supports direct web enquiries. The dest
 Verification: 21 existing functional check groups passed, with zero automated accessibility violations across all five pages. Three motion fallback checks passed. The direct-form fixture passed validation, payload, inline success, duplicate prevention, server rejection, connection failure, retry and mobile dialog checks, with zero axe violations on its contact page and open mobile dialog. Every Formspree request in these checks was intercepted: no real email was sent, and inbox delivery is not yet verified. Desktop wave rendering was separately confirmed with one visible canvas; desktop and mobile screenshots were inspected.
 
 Evidence is saved in `/workspace/rynor-review/refined/`, including `form-qa/` for the prepared direct forms. Tests used local Chromium; physical phones and Safari were not tested. Public-domain verification remains unavailable through this environment's network proxy.
+
+
+## Formspree endpoint activation — October 18, 2026
+
+Configured the owner-provided public endpoint `https://formspree.io/f/mbgdblpw` and regenerated all five pages. Both the contact form and shared enquiry dialog now use direct POST submission, with required reply email, automatic subject, inline feedback and no email-app redirect. All six generated forms were checked for the exact endpoint and POST method; the obsolete email-draft instructions are absent.
+
+The full configured-site suite passed 21 functional check groups and reported zero automated accessibility violations across all five pages. The submission check intercepted the provider request, so no real message was sent and inbox receipt remains unverified. Evidence is in `/workspace/rynor-review/form-activated/`. The owner should submit one enquiry on the deployed website and confirm receipt in the configured Formspree destination inbox.

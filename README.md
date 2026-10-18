@@ -17,6 +17,8 @@ No package installation, database, API keys, or frontend build is required to se
 
 The footer's **Pause motion** button stops animations and smooth scrolling, restores visible content, and remembers the visitor's choice when local storage is available. The operating system's reduced-motion preference takes precedence. Open enquiry dialogs stop background smooth scrolling, and page lifecycle cleanup releases animations and WebGL resources.
 
+The hero checks WebGL support before downloading its renderer. An IntersectionObserver releases the wave renderer while the hero is offscreen and recreates it when the visitor returns, avoiding continuous GPU work below the hero.
+
 Run `node scripts/check_motion.mjs` to check reduced-motion, saved opt-out, and missing-library fallback paths. Browser QA should also check the homepage canvas, the pause/resume control, mobile native scrolling, product filters, and enquiry dialog behavior.
 
 All runtime files are self-hosted in `assets/vendor/`: GSAP/ScrollTrigger 3.15.0, Lenis 1.3.27, Vanta Waves 0.5.24, and Three.js 0.134.0. `assets/vendor/versions.json` records source packages and file hashes. MIT notices for Lenis, Vanta, and Three.js are in `assets/licenses/`; GSAP uses its standard no-charge license at https://gsap.com/standard-license, with its copyright and license header retained in both distribution files. These libraries do not require a build step on GitHub Pages. Keep versions and notices together when updating.

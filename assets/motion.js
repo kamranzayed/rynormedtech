@@ -43,7 +43,7 @@
     return webglSupport;
   };
   const startWaves = async id => {
-    if (!hero || !heroVisible || !desktop.matches || document.hidden || navigator.connection?.saveData || !supportsWebGL()) return;
+    if (!hero || !heroVisible || getComputedStyle(hero).display === 'none' || !desktop.matches || document.hidden || navigator.connection?.saveData || !supportsWebGL()) return;
     try {
       await load('three-0.134.0.min.js');
       await load('vanta-waves-0.5.24.min.js');
@@ -86,11 +86,11 @@
     try {
       context = gsap.context(() => {
         const intro = document.querySelector('.hero-copy, .page-heading .container');
-        if (intro) gsap.from(intro.children, { y: 16, opacity: 0, duration: 0.65, stagger: 0.09, ease: 'power2.out', clearProps: 'transform,opacity' });
+        if (intro) gsap.from(intro.children, { y: 12, opacity: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform,opacity' });
         const figure = document.querySelector('.hero-figure');
         if (figure) gsap.from(figure, { opacity: 0, duration: 0.8, ease: 'power1.out', clearProps: 'opacity' });
         document.querySelectorAll('.section-top, .product-preview, .two-column > .copy-stack, .principle, .contact-band-inner > div').forEach(element => {
-          gsap.from(element, { y: 18, opacity: 0, duration: 0.65, ease: 'power2.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: element, start: 'top 94%', once: true } });
+          gsap.from(element, { y: 12, opacity: 0, duration: 0.5, ease: 'power2.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: element, start: 'top 94%', once: true } });
         });
       });
       if (desktop.matches) {

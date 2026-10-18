@@ -3,9 +3,15 @@
 from html import escape
 from hashlib import sha256
 from pathlib import Path
+import json
+import re
 
 ROOT = Path(__file__).resolve().parents[1]
 EMAIL = 'syedkamran@rynormedtech.com'
+CONFIG = json.loads((ROOT / 'site-config.json').read_text())
+FORM_ENDPOINT = CONFIG['formspree_endpoint'].strip()
+if FORM_ENDPOINT and not re.fullmatch(r'https://formspree\.io/f/[A-Za-z0-9]+', FORM_ENDPOINT):
+    raise ValueError('Use the public Formspree endpoint: https://formspree.io/f/FORM_ID')
 ORIGIN = 'https://www.rynormedtech.com'
 NAV = [('index.html', 'Home'), ('machine.html', 'Our Machine'), ('supplies.html', 'Supplies'), ('about.html', 'About'), ('contact.html', 'Contact')]
 TOPICS = ['General enquiry', 'Our machine', 'Dialysis fluid bags', 'APD / CAPD tubing', 'Peritoneal dialysis catheters', 'Mini-caps & disinfection accessories', 'Clinical collaboration', 'Distribution partnership', 'Investor enquiry']
@@ -42,6 +48,18 @@ def status():
 
 def email_form(prefix):
     options = ''.join(f'<option value="{escape(topic, quote=True)}">{escape(topic)}</option>' for topic in TOPICS)
+    if FORM_ENDPOINT:
+        return f'''<form data-email-form data-direct-send action="{FORM_ENDPOINT}" method="post">
+<div class="field-row"><div class="field"><label for="{prefix}-name">Your name <span class="optional">(optional)</span></label><input id="{prefix}-name" name="name" autocomplete="name" maxlength="100"></div>
+<div class="field"><label for="{prefix}-email">Your email</label><input id="{prefix}-email" name="email" type="email" autocomplete="email" required maxlength="180" placeholder="you@example.com"></div></div>
+<div class="field"><label for="{prefix}-topic">Topic <span class="optional">(optional)</span></label><select id="{prefix}-topic" name="topic">{options}</select></div>
+<div class="field"><label for="{prefix}-message">Your message</label><textarea id="{prefix}-message" name="message" rows="4" required maxlength="1800" placeholder="How can we help?"></textarea></div>
+<div class="form-honeypot" aria-hidden="true"><label for="{prefix}-website">Leave this field empty</label><input id="{prefix}-website" name="_gotcha" tabindex="-1" autocomplete="off"></div>
+<button class="button" type="submit"><span data-submit-label>Send enquiry</span>{icon('arrow-right')}</button>
+<p class="form-note">Your message goes to the RYNOR team via <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer">Formspree</a>. We’ll reply to the email address you provide. Please don’t include medical records or sensitive health information.</p>
+<div class="form-status" data-draft-status role="status" aria-live="polite" aria-atomic="true" hidden></div>
+<p class="form-note">Prefer email? <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+</form>'''
     return f'''<form data-email-form action="mailto:{EMAIL}" method="get">
 <div class="field-row"><div class="field"><label for="{prefix}-name">Your name <span class="optional">(optional)</span></label><input id="{prefix}-name" name="name" autocomplete="name" maxlength="100"></div>
 <div class="field"><label for="{prefix}-email">Your email <span class="optional">(optional)</span></label><input id="{prefix}-email" name="email" type="email" autocomplete="email" maxlength="180"></div></div>
@@ -112,10 +130,13 @@ supplies=heading('Supplies', 'A complete planned range.', 'Dialysis fluid bags, 
 about=heading('About RYNOR', 'A shared purpose.<br>A considered path forward.', 'RYNOR Medtech is developing a peritoneal dialysis machine and supporting supplies, with a focus on the next stage of clinical evaluation.')+f'''
 <section class="section"><div class="container"><p class="eyebrow">Our purpose</p><p class="about-statement">We are working towards a future where peritoneal dialysis technology and its supporting supplies are considered together, around the people who will use them.</p><div class="principles"><article class="principle"><h3>A complete perspective</h3><p>Our development plans bring the machine, dialysis fluid bags, tubing, catheters and accessories into one coordinated future range.</p></article><article class="principle"><h3>A responsible progression</h3><p>Preparing for clinical trials is our current priority. Verified progress, clinical evaluation and regulatory milestones will guide the path to launch.</p></article><article class="principle"><h3>An open conversation</h3><p>We welcome questions and conversations with clinicians, hospitals, patients, distributors and prospective investors.</p></article></div></div></section>
 <section class="section tint-section" id="partnerships"><div class="container two-column"><div class="copy-stack"><p class="eyebrow">Future partnerships</p><h2>Let’s build the right conversations.</h2><p>Every audience brings a different perspective. Contact us about the development programme, planned products or a potential future partnership.</p>{enquiry_link('Connect with RYNOR',css='button')}</div><ul class="audience-list"><li><strong>Doctors &amp; hospitals</strong><p>Discuss the programme, clinical collaboration and future product information.</p></li><li><strong>Patients &amp; families</strong><p>Ask about our development plans. Products are not yet available; personal treatment questions should be discussed with your care team.</p></li><li><strong>Distributors</strong><p>Introduce your organisation and discuss the planned range and potential future distribution.</p></li><li><strong>Investors</strong><p>Connect with the team for an introductory conversation about RYNOR Medtech.</p></li></ul></div></section>
-<section class="section"><div class="container faq"><p class="eyebrow">A few clear answers</p><h2>Where we are today.</h2><details><summary>Is the RYNOR machine available to buy?</summary><p>No. The machine is in development and we are preparing for clinical trials. Commercial availability has not been announced.</p></details><details><summary>Can I order the supplies separately now?</summary><p>The entire supply range is planned to launch together with the machine. None of the products shown are currently offered for sale.</p></details><details><summary>Do the images show the final products?</summary><p>The product images on this website are concept illustrations. The final appearance, packaging and specifications may change during development.</p></details><details><summary>How can I contact the team?</summary><p>Email <a href="mailto:{EMAIL}">{EMAIL}</a>, or use the enquiry button to prepare an email draft.</p></details></div></section>'''
+<section class="section"><div class="container faq"><p class="eyebrow">A few clear answers</p><h2>Where we are today.</h2><details><summary>Is the RYNOR machine available to buy?</summary><p>No. The machine is in development and we are preparing for clinical trials. Commercial availability has not been announced.</p></details><details><summary>Can I order the supplies separately now?</summary><p>The entire supply range is planned to launch together with the machine. None of the products shown are currently offered for sale.</p></details><details><summary>Do the images show the final products?</summary><p>The product images on this website are concept illustrations. The final appearance, packaging and specifications may change during development.</p></details><details><summary>How can I contact the team?</summary><p>Email <a href="mailto:{EMAIL}">{EMAIL}</a>, or use the enquiry button to {'send us a message' if FORM_ENDPOINT else 'prepare an email draft'}.</p></details></div></section>'''
+
+CONTACT_INTRO = 'Write your message and leave your email address. We’ll reply directly to you.' if FORM_ENDPOINT else 'Choose a topic and write a short message. We’ll prepare a draft in your own email app.'
+CONTACT_PRIVACY = '' if FORM_ENDPOINT else '<p class="contact-context">This website does not store your form entries. Your message is shared with RYNOR only when you send it through your email service. Please keep enquiries general and avoid including medical records or sensitive health information.</p>'
 
 contact=heading('Contact', 'The right conversation<br>starts here.', 'For product enquiries, clinical collaboration, future distribution or investment conversations, connect with the RYNOR Medtech team by email.')+f'''
-<section class="section"><div class="container contact-layout"><aside class="contact-card"><p class="eyebrow">Email RYNOR</p><h2>Let’s stay in touch.</h2><a class="email-display" href="mailto:{EMAIL}">{EMAIL.replace("@", "@<wbr>")}</a><button class="copy-email" type="button" data-copy-email>{icon('copy')}<span aria-live="polite">Copy email address</span></button><p class="small-copy">Our machine and supplies are in development. We welcome enquiries about the planned range and future partnerships.</p><div class="contact-context"><p><strong>Product information</strong><br>Machine, dialysis fluid bags, APD / CAPD tubing, catheters and accessories.</p><p><strong>Collaboration</strong><br>Clinical discussions, distribution partnerships and investor enquiries.</p></div></aside><div><h2 class="form-title">What’s on your mind?</h2><p class="form-intro">Choose a topic and write a short message. We’ll prepare a draft in your own email app.</p>{email_form('contact')}<p class="contact-context">This website does not store your form entries. Your message is shared with RYNOR only when you send it through your email service. Please keep enquiries general and avoid including medical records or sensitive health information.</p><noscript><p>You can contact us directly at <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></noscript></div></div></section>'''
+<section class="section"><div class="container contact-layout"><aside class="contact-card"><p class="eyebrow">Email RYNOR</p><h2>Let’s stay in touch.</h2><a class="email-display" href="mailto:{EMAIL}">{EMAIL.replace("@", "@<wbr>")}</a><button class="copy-email" type="button" data-copy-email>{icon('copy')}<span aria-live="polite">Copy email address</span></button><p class="small-copy">Our machine and supplies are in development. We welcome enquiries about the planned range and future partnerships.</p><div class="contact-context"><p><strong>Product information</strong><br>Machine, dialysis fluid bags, APD / CAPD tubing, catheters and accessories.</p><p><strong>Collaboration</strong><br>Clinical discussions, distribution partnerships and investor enquiries.</p></div></aside><div><h2 class="form-title">What’s on your mind?</h2><p class="form-intro">{CONTACT_INTRO}</p>{email_form('contact')}{CONTACT_PRIVACY}<noscript><p>You can contact us directly at <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></noscript></div></div></section>'''
 
 pages = [
 ('index.html','RYNOR Medtech | Advancing peritoneal dialysis','Discover the RYNOR peritoneal dialysis machine and planned supply range. Preparing for clinical trials. Product and partnership enquiries by email.',home),
@@ -127,7 +148,7 @@ pages = [
 
 if __name__ == '__main__':
     for filename,title,description,content in pages:
-        (ROOT/filename).write_text(page(filename,title,description,content),encoding='utf-8')
+        (ROOT/filename).write_text(page(filename,title,description,content),encoding='utf-8',newline='\r\n')
     (ROOT/'catalog.html').write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Supplies | RYNOR Medtech</title><meta http-equiv="refresh" content="0;url=supplies.html"><link rel="canonical" href="https://www.rynormedtech.com/supplies.html"></head><body><p>Our catalog is now available on the <a href="supplies.html">planned supplies page</a>.</p></body></html>\n')
     urls=''.join(f'<url><loc>{ORIGIN}{"/" if filename=="index.html" else "/"+filename}</loc></url>' for filename,*_ in pages)
     (ROOT/'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')

@@ -39,7 +39,18 @@ The generated pages are `index.html`, `machine.html`, `supplies.html`, `about.ht
 
 ## Contact behaviour
 
-The contact form and enquiry dialog prepare a correctly encoded email draft addressed to `syedkamran@rynormedtech.com`. The visitor's email application is responsible for sending it. The site has no messaging backend, live agent, or form database, and does not automatically send messages. A direct email address and draft link remain available when an email application does not open.
+The contact page and enquiry dialog support direct submission through Formspree. To activate delivery:
+
+1. Create a Formspree form with destination `syedkamran@rynormedtech.com` and verify the destination in the owner's account.
+2. Put its public endpoint (for example, `https://formspree.io/f/FORM_ID`) in `site-config.json` under `formspree_endpoint`. Never add an API key or password.
+3. Run `python3 scripts/build_site.py`, commit the generated HTML and publish to `main`.
+4. Submit an enquiry and verify it arrives in the destination inbox. Check the provider's spam settings and account usage limits as needed.
+
+Until the endpoint is supplied, the existing email-draft form remains available; direct sending is not activated. Setting the endpoint switches both forms and their explanatory text together.
+
+The direct form requires an email address and message, supplies a default topic, and preserves product-specific topics. It submits via HTTPS without opening an email app; Formspree processes the message and routes it to the configured destination. Visitors see a link to Formspree's privacy policy and a reminder not to share sensitive medical information. Loading, success and failure states are announced inline. Failed or unconfirmed requests retain the message for retry. Buttons and fields are disabled during sending to prevent duplicate clicks. A hidden honeypot complements Formspree's spam protection. Direct email remains available as an alternative. With JavaScript disabled, a configured form posts to Formspree using the browser's native form submission.
+
+`python3 scripts/check_enquiry.py` builds an isolated fixture with a dummy endpoint and intercepts every provider request. It checks validation, submitted fields, duplicate prevention, success, server rejection, network failure, retry and the mobile enquiry dialog. It never sends real email and does not establish live delivery.
 
 ## Check the website
 
@@ -49,7 +60,7 @@ The prepared cloud environment includes Python Playwright and Chromium. With the
 python3 scripts/check_site.py --base-url http://127.0.0.1:8000 --output /tmp/rynor-qa
 ```
 
-The smoke checks cover page/asset links, clean homepage navigation, catalog category filters and flexible search, empty-state recovery, product enquiry topics, keyboard modal behaviour, blank-message and invalid-email validation, encoded email drafts, mobile navigation, six responsive widths, touch controls in Chromium phone emulation, FAQ disclosures and the legacy catalog redirect. Email delivery is not tested or performed. Screenshots and a JSON report are written to the output directory.
+The smoke checks cover page/asset links, clean homepage navigation, catalog category filters and flexible search, empty-state recovery, product enquiry topics, keyboard modal behaviour, blank-message and invalid-email validation, email drafts or simulated direct submission (depending on configuration), mobile navigation, six responsive widths, touch controls in Chromium phone emulation, FAQ disclosures and the legacy catalog redirect. Email delivery is not tested or performed. Screenshots and a JSON report are written to the output directory.
 
 For WCAG A/AA automated checks, also supply a local copy of `axe.min.js` with `--axe /path/to/axe.min.js`. When axe-core is missing, the runner explicitly reports that the accessibility scan did not run. These automated checks supplement visual and keyboard review; they are not an accessibility certification.
 

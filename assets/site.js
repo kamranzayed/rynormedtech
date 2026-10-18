@@ -35,7 +35,7 @@
     const topic = dialog.querySelector('[name="topic"]');
     if (trigger.dataset.enquiry && [...topic.options].some(option => option.value === trigger.dataset.enquiry)) topic.value = trigger.dataset.enquiry;
     else topic.value = 'General enquiry';
-    dialog.querySelector('[data-draft-status]').hidden = true;
+    if (dialog.querySelector('form').getAttribute('aria-busy') !== 'true') dialog.querySelector('[data-draft-status]').hidden = true;
     closeMenu();
     dialog.showModal();
     document.body.classList.add('dialog-open');
@@ -70,6 +70,60 @@
 
   document.querySelectorAll('[data-email-form]').forEach(form => {
     const message = form.querySelector('[name="message"]');
+    if (form.hasAttribute('data-direct-send')) {
+      const status = form.querySelector('[data-draft-status]');
+      const button = form.querySelector('[type="submit"]');
+      const label = button.querySelector('[data-submit-label]');
+      let sending = false;
+      const showStatus = (state, text) => {
+        status.dataset.state = state;
+        status.textContent = text;
+        status.hidden = false;
+      };
+      form.addEventListener('input', () => {
+        message.setCustomValidity('');
+        if (!sending) status.hidden = true;
+      });
+      form.addEventListener('submit', async event => {
+        event.preventDefault();
+        if (sending) return;
+        message.setCustomValidity(message.value.trim() ? '' : 'Please enter a message.');
+        if (!form.reportValidity()) return;
+        const fields = new FormData(form);
+        fields.set('message', message.value.trim());
+        fields.set('email', String(fields.get('email')).trim());
+        fields.set('name', String(fields.get('name') || '').trim());
+        fields.set('_subject', `RYNOR Medtech — ${fields.get('topic') || 'General enquiry'}`);
+        sending = true;
+        form.setAttribute('aria-busy', 'true');
+        const inputs = [...form.querySelectorAll('input, select, textarea')];
+        inputs.forEach(input => { input.disabled = true; });
+        button.disabled = true;
+        label.textContent = 'Sending…';
+        showStatus('sending', 'Sending your enquiry…');
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 20000);
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST', body: fields, headers: { Accept: 'application/json' }, signal: controller.signal
+          });
+          const result = await response.json();
+          if (!response.ok || result.ok !== true) throw new Error('Submission not confirmed');
+          form.reset();
+          showStatus('success', 'Thank you. Your enquiry has been submitted to RYNOR. We’ll reply to the email address you provided.');
+        } catch {
+          showStatus('error', `We couldn’t confirm your submission. Your message is still here. Please try again, or email ${email} directly.`);
+        } finally {
+          clearTimeout(timeout);
+          sending = false;
+          form.removeAttribute('aria-busy');
+          inputs.forEach(input => { input.disabled = false; });
+          button.disabled = false;
+          label.textContent = 'Send enquiry';
+        }
+      });
+      return;
+    }
     form.addEventListener('input', () => {
       message.setCustomValidity('');
       form.querySelector('[data-draft-status]').hidden = true;

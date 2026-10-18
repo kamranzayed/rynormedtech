@@ -97,36 +97,54 @@ with sync_playwright() as p:
 
     page.goto(f'{args.base_url}/contact.html',wait_until='networkidle')
     form = page.locator('main [data-email-form]')
-    form.get_by_role('button',name='Open email draft').click()
-    expect(page.locator('#contact-message')).to_be_focused()
-    expect(form.locator('[data-draft-status]')).not_to_be_visible()
-    page.locator('#contact-message').fill('   \n   ')
-    form.get_by_role('button',name='Open email draft').click()
-    expect(form.locator('[data-draft-status]')).not_to_be_visible()
-    assert page.locator('#contact-message').evaluate('(field)=>!field.validity.valid')
-    page.locator('#contact-message').fill('A product enquiry')
-    assert page.locator('#contact-message').evaluate('(field)=>field.validity.valid')
-    page.locator('#contact-email').fill('invalid-address')
-    form.get_by_role('button',name='Open email draft').click()
-    expect(page.locator('#contact-email')).to_be_focused()
-    expect(form.locator('[data-draft-status]')).not_to_be_visible()
-    page.locator('#contact-name').fill('Website smoke check')
-    page.locator('#contact-email').fill('check@example.com')
-    page.locator('#contact-topic').select_option('Distribution partnership')
-    message = 'Please discuss the planned range. Special text: & + ? # %\nSecond line.'
-    page.locator('#contact-message').fill(message)
-    form.get_by_role('button',name='Open email draft').click()
-    expect(form.locator('[data-draft-status]')).to_be_visible()
-    mailto=form.locator('[data-draft-status] a').get_attribute('href')
-    uri=urlsplit(mailto)
-    assert uri.scheme=='mailto' and uri.path=='syedkamran@rynormedtech.com'
-    query=parse_qs(uri.query)
-    assert query['subject']==['RYNOR Medtech — Distribution partnership']
-    assert message in query['body'][0] and 'check@example.com' in query['body'][0]
-    assert 'Nothing is sent automatically.' in form.inner_text()
-    page.locator('#contact-message').fill('Updated enquiry')
-    expect(form.locator('[data-draft-status]')).not_to_be_visible()
-    passed('Contact validation and correctly encoded email draft; no message sent')
+    if form.get_attribute('data-direct-send') is not None:
+        submitted = []
+        def accept_enquiry(route):
+            submitted.append(route.request.post_data)
+            route.fulfill(status=200, json={'ok': True})
+        context.route('https://formspree.io/**', accept_enquiry)
+        expect(form.locator('[name=email]')).to_have_attribute('required', '')
+        form.locator('[name=email]').fill('check@example.com')
+        form.locator('[name=message]').fill('   ')
+        form.get_by_role('button', name='Send enquiry').click()
+        assert not submitted
+        form.locator('[name=message]').fill('A planned supply enquiry')
+        form.get_by_role('button', name='Send enquiry').click()
+        expect(form.locator('[role=status]')).to_contain_text('Your enquiry has been submitted')
+        assert len(submitted) == 1 and 'check@example.com' in submitted[0]
+        expect(form.locator('[name=message]')).to_have_value('')
+        passed('Direct enquiry validation and inline success with simulated provider; no email sent')
+    else:
+        form.get_by_role('button',name='Open email draft').click()
+        expect(page.locator('#contact-message')).to_be_focused()
+        expect(form.locator('[data-draft-status]')).not_to_be_visible()
+        page.locator('#contact-message').fill('   \n   ')
+        form.get_by_role('button',name='Open email draft').click()
+        expect(form.locator('[data-draft-status]')).not_to_be_visible()
+        assert page.locator('#contact-message').evaluate('(field)=>!field.validity.valid')
+        page.locator('#contact-message').fill('A product enquiry')
+        assert page.locator('#contact-message').evaluate('(field)=>field.validity.valid')
+        page.locator('#contact-email').fill('invalid-address')
+        form.get_by_role('button',name='Open email draft').click()
+        expect(page.locator('#contact-email')).to_be_focused()
+        expect(form.locator('[data-draft-status]')).not_to_be_visible()
+        page.locator('#contact-name').fill('Website smoke check')
+        page.locator('#contact-email').fill('check@example.com')
+        page.locator('#contact-topic').select_option('Distribution partnership')
+        message = 'Please discuss the planned range. Special text: & + ? # %\nSecond line.'
+        page.locator('#contact-message').fill(message)
+        form.get_by_role('button',name='Open email draft').click()
+        expect(form.locator('[data-draft-status]')).to_be_visible()
+        mailto=form.locator('[data-draft-status] a').get_attribute('href')
+        uri=urlsplit(mailto)
+        assert uri.scheme=='mailto' and uri.path=='syedkamran@rynormedtech.com'
+        query=parse_qs(uri.query)
+        assert query['subject']==['RYNOR Medtech — Distribution partnership']
+        assert message in query['body'][0] and 'check@example.com' in query['body'][0]
+        assert 'Nothing is sent automatically.' in form.inner_text()
+        page.locator('#contact-message').fill('Updated enquiry')
+        expect(form.locator('[data-draft-status]')).not_to_be_visible()
+        passed('Contact validation and correctly encoded email draft; no message sent')
 
     page.goto(f'{args.base_url}/about.html')
     page.get_by_text('Can I order the supplies separately now?',exact=True).click()

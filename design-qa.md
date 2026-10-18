@@ -76,3 +76,14 @@ Two performance/fallback defects were reproduced and fixed: Vanta continued rend
 Retests passed: offscreen zero-canvas state, one-canvas restoration, pause cleanup, reduced-motion/missing-library/blocked-storage/data-saving fallbacks, all five pages at six verified widths (1024, 768, 414, 390, 375 and 320px), modal focus trapping/Escape, invalid contact inputs, email draft encoding without sending, filters/search/reset, mobile navigation, FAQ and legacy catalog redirect. All five main-content comparisons against the original pre-animation site and local asset reference checks passed.
 
 axe-core 4.14.0 found zero automated WCAG A/AA violations across the five stable pages with motion paused. Homepage image-caption contrast required visual review; no accessibility certification or physical-device/browser-matrix claim is made. The independent local sandbox and its failure simulations are not deployed with the website.
+
+
+## Styling refinement and direct enquiry preparation — October 18, 2026
+
+Retained the navy hero, sticky navigation and development timeline. Reduced desktop section spacing and heading weight, simplified product cards, and removed the conflicting Contact underline. GSAP entrances are shorter and gentler. The desktop wave layer is visible at low opacity, and its renderer is skipped when CSS hides it. Mobile, reduced-motion, pause and data-saving fallbacks remain supported. Generated pages were rebuilt to refresh CSS and JavaScript cache versions.
+
+A configurable Formspree integration now supports direct web enquiries. The destination account's public endpoint is still required in `site-config.json`; while empty, the existing email-draft flow remains active. No dummy endpoint is published. Direct forms require a reply email and a nonblank message, carry the chosen product topic, disable repeated submission while sending, and retain input after an unsuccessful or unconfirmed request. Privacy information and a direct email alternative are included.
+
+Verification: 21 existing functional check groups passed, with zero automated accessibility violations across all five pages. Three motion fallback checks passed. The direct-form fixture passed validation, payload, inline success, duplicate prevention, server rejection, connection failure, retry and mobile dialog checks, with zero axe violations on its contact page and open mobile dialog. Every Formspree request in these checks was intercepted: no real email was sent, and inbox delivery is not yet verified. Desktop wave rendering was separately confirmed with one visible canvas; desktop and mobile screenshots were inspected.
+
+Evidence is saved in `/workspace/rynor-review/refined/`, including `form-qa/` for the prepared direct forms. Tests used local Chromium; physical phones and Safari were not tested. Public-domain verification remains unavailable through this environment's network proxy.

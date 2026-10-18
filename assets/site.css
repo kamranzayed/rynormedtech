@@ -50,7 +50,7 @@ h2{font-weight:700}
 
 /* Hero: brand-navy copy panel, machine image in a rounded light frame */
 .home-hero{background:linear-gradient(115deg,var(--deep),var(--navy) 60%,#0b3a68)}
-.home-hero .hero-motion{opacity:.12;z-index:0}
+.home-hero .hero-motion{opacity:.32;z-index:0}
 .hero-grid{position:relative;z-index:1}
 .hero-copy h1{color:#fff}
 .hero-copy h1 .accent{color:var(--aqua)}
@@ -104,3 +104,11 @@ h2{font-weight:700}
 .form-status[data-state="error"]{border-color:#a93a36;color:#832a27;background:#fff8f7}
 .form-status[data-state="success"]{border-color:#34816f;color:#14594b;background:#f1faf7}
 .form-honeypot{display:none}
+
+/* Product interactions follow the same visitor motion preference as GSAP. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+html[data-motion="on"] .product-preview .product-art img{transition:transform .55s cubic-bezier(.2,.65,.3,1)}
+html[data-motion="on"] .product-preview:hover .product-art img{transform:scale(1.035)}
+html[data-motion="on"] .button .icon,html[data-motion="on"] .text-link .icon{transition:transform .25s ease}
+html[data-motion="on"] .button:hover .icon,html[data-motion="on"] .text-link:hover .icon{transform:translateX(4px)}
+}

@@ -13,7 +13,7 @@ No package installation, database, API keys, or frontend build is required to se
 
 ## Animation and visitor preferences
 
-`assets/motion.js` progressively adds GSAP entrances and section reveals across the five pages. On fine-pointer desktops at least 900px wide, Lenis smooths wheel scrolling; mobile and touch scrolling remain native. The homepage adds a low-opacity Vanta Waves background behind its copy, with the matching Three.js r134 renderer loaded only when needed. Browser data-saving mode skips that background, and failures leave the original static hero usable.
+`assets/motion.js` progressively adds GSAP entrances and section reveals across the five pages. The desktop homepage headline enters line by line, the machine image rises into place, and product cards and development stages reveal in sequence. Hovering a product gently enlarges its image; button arrows move to acknowledge interaction. These effects follow the visitor’s motion preference. On fine-pointer desktops at least 900px wide, Lenis smooths wheel scrolling; mobile and touch scrolling remain native. The homepage adds a visible, translucent Vanta Waves background behind its copy, with the matching Three.js r134 renderer loaded only when needed. Browser data-saving mode skips that background, and failures leave the original static hero usable.
 
 The footer's **Pause motion** button stops animations and smooth scrolling, restores visible content, and remembers the visitor's choice when local storage is available. The operating system's reduced-motion preference takes precedence. Open enquiry dialogs stop background smooth scrolling, and page lifecycle cleanup releases animations and WebGL resources.
 

@@ -51,7 +51,7 @@
       waves = window.VANTA.WAVES({
         el: hero, THREE: window.THREE,
         mouseControls: false, touchControls: false, gyroControls: false,
-        color: 0x4c93a8, shininess: 12, waveHeight: 6, waveSpeed: 0.28,
+        color: 0x23768f, shininess: 30, waveHeight: 12, waveSpeed: 0.42,
         zoom: 0.85, scale: 1.5, scaleMobile: 2, minHeight: 200, minWidth: 200
       });
       const canvas = hero.querySelector('canvas');
@@ -85,12 +85,24 @@
     const id = generation;
     try {
       context = gsap.context(() => {
-        const intro = document.querySelector('.hero-copy, .page-heading .container');
-        if (intro) gsap.from(intro.children, { y: 12, opacity: 0, duration: 0.5, stagger: 0.06, ease: 'power2.out', clearProps: 'transform,opacity' });
+        const heroCopy = document.querySelector('.hero-copy');
+        if (heroCopy) {
+          const lines = desktop.matches ? heroCopy.querySelectorAll('.hero-line') : heroCopy.querySelector('h1');
+          gsap.from(lines, { y: 30, opacity: 0, duration: 0.85, stagger: 0.14, ease: 'power3.out', clearProps: 'transform,opacity' });
+          gsap.from(heroCopy.querySelectorAll('p, .actions'), { y: 22, opacity: 0, duration: 0.7, delay: 0.3, stagger: 0.16, ease: 'power2.out', clearProps: 'transform,opacity' });
+        } else {
+          const intro = document.querySelector('.page-heading .container');
+          if (intro) gsap.from(intro.children, { y: 26, opacity: 0, duration: 0.75, stagger: 0.12, ease: 'power3.out', clearProps: 'transform,opacity' });
+        }
         const figure = document.querySelector('.hero-figure');
-        if (figure) gsap.from(figure, { opacity: 0, duration: 0.8, ease: 'power1.out', clearProps: 'opacity' });
-        document.querySelectorAll('.section-top, .product-preview, .two-column > .copy-stack, .principle, .contact-band-inner > div').forEach(element => {
-          gsap.from(element, { y: 12, opacity: 0, duration: 0.5, ease: 'power2.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: element, start: 'top 94%', once: true } });
+        if (figure) gsap.from(figure, { y: 28, scale: 0.96, opacity: 0, duration: 1.05, delay: 0.12, ease: 'power3.out', clearProps: 'transform,opacity' });
+        document.querySelectorAll('.section-top, .two-column > .copy-stack, .contact-band-inner > div').forEach(element => {
+          gsap.from(element, { y: 28, opacity: 0, duration: 0.8, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: element, start: 'top 92%', once: true } });
+        });
+        ['.product-preview', '.principle', '.stage-list li'].forEach(selector => {
+          document.querySelectorAll(selector).forEach((element, index) => {
+            gsap.from(element, { y: 32, opacity: 0, duration: 0.8, delay: desktop.matches ? (index % 3) * 0.14 : 0, ease: 'power3.out', clearProps: 'transform,opacity', scrollTrigger: { trigger: element, start: 'top 92%', once: true } });
+          });
         });
       });
       if (desktop.matches) {

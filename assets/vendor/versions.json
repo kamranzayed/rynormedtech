@@ -24,6 +24,9 @@
     },
     "vanta-waves-0.5.24.min.js": {
       "sha256": "60a30382a898ae570dd0e88ac903fac9273fd188ae8c8d1984200b9ebd89237d"
+    },
+    "gltf-loader-0.134.0.js": {
+      "sha256": "c394264dab5b8dd6cfdd1b4cc3b95261f165454a2e0e67c81dffe8c6648d5a6b"
     }
   }
 }

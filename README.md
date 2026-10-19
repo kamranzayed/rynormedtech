@@ -25,6 +25,10 @@ All runtime files are self-hosted in `assets/vendor/`: GSAP/ScrollTrigger 3.15.0
 
 ## Edit and rebuild the pages
 
+The homepage hero progressively replaces its static machine image with a self-hosted Three.js concept viewer. Visitors can rotate the enclosure, open the lower front lid independently of the fixed screen, open the top heating lid, select front/right/rear/top views, and zoom using labelled buttons. The original image remains the fallback for disabled JavaScript, unavailable WebGL, or failed asset loading. Data-saving mode waits for an explicit request to load the viewer. Touch scrolling remains native; horizontal dragging rotates the machine. Rendering stops when idle, offscreen, or the page is hidden, and resources are disposed on page exit. Reduced-motion and the footer motion preference make requested transitions immediate.
+
+The model is `assets/models/rynor-machine-concept.glb`; the viewer's isolated styles and behaviour are `assets/machine-viewer.css` and `assets/machine-viewer.js`. The matching r134 GLTFLoader is self-hosted in `assets/vendor/gltf-loader-0.134.0.js` and shares the site's existing Three.js runtime. This is a visual enclosure concept with proposed side/rear/internal details, not a production CAD assembly. Both lids have independent pivots and embedded opening clips. Nominal closed enclosure dimensions are 457.2 × 254 × 254 mm.
+
 - `scripts/build_site.py` contains the page content and shared HTML templates.
 - `assets/site.css` contains desktop, tablet and mobile layouts.
 - `assets/site.js` contains navigation, supply filters, search and email enquiry interactions.
@@ -74,7 +78,7 @@ Publishing a Codex development environment is separate from publishing these web
 
 - The original RYNOR SVG logos were supplied by the owner.
 - The four machine and supply images are generated exterior/product concepts, visibly labelled on the website. They are not photographs of finished products. Lossless WebP conversion preserves their pixels.
-- The public machine preview shows its closed exterior only.
+- The homepage has an interactive enclosure concept, with independently opening front and heating lids. Unseen side, rear and internal details are proposed; final designs and specifications may change. The machine detail page retains the original exterior illustration.
 - All supplies are planned to launch with the machine. No checkout or current stock claim is present.
 - No certifications, approvals, clinical outcomes, institutional endorsements, telephone number, launch date, or legal company suffix are invented.
 - Manrope 5.3.0 is self-hosted under its SIL Open Font License. Bootstrap Icons 1.13.2 is used under the MIT License. Package integrity was verified before extracting assets. Licenses are in `assets/licenses/`.

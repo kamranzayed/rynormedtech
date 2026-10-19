@@ -13,7 +13,7 @@ FORM_ENDPOINT = CONFIG['formspree_endpoint'].strip()
 if FORM_ENDPOINT and not re.fullmatch(r'https://formspree\.io/f/[A-Za-z0-9]+', FORM_ENDPOINT):
     raise ValueError('Use the public Formspree endpoint: https://formspree.io/f/FORM_ID')
 ORIGIN = 'https://www.rynormedtech.com'
-NAV = [('index.html', 'Home'), ('machine.html', 'Our Machine'), ('supplies.html', 'Supplies'), ('about.html', 'About'), ('contact.html', 'Contact')]
+NAV = [('index.html', 'Home'), ('machine.html', 'Our Machine'), ('supplies.html', 'Supplies'), ('pd-at-home.html', 'PD at Home'), ('about.html', 'About'), ('contact.html', 'Contact')]
 TOPICS = ['General enquiry', 'Our machine', 'Dialysis fluid bags', 'APD / CAPD tubing', 'Peritoneal dialysis catheters', 'Mini-caps & disinfection accessories', 'Clinical collaboration', 'Distribution partnership', 'Investor enquiry']
 
 
@@ -32,7 +32,7 @@ def brand():
 
 def header(current):
     links = ''.join(f'<a class="nav-link{" nav-contact" if href == "contact.html" else ""}" href="{"./" if href == "index.html" else href}" {"aria-current=\"page\"" if href == current else ""}>{label}</a>' for href, label in NAV)
-    return f'''<a class="skip-link" href="#main">Skip to content</a>
+    return f'''<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute"><defs><filter id="rynor-logo-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  -1 -1 -1 0 3"/></filter></defs></svg><a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header"><div class="container header-inner">{brand()}
 <button class="menu-toggle" type="button" data-menu-toggle aria-controls="primary-nav" aria-expanded="false" aria-label="Open navigation">{icon('list')}</button>
 <nav class="primary-nav" id="primary-nav" aria-label="Primary navigation">{links}</nav></div></header>'''
@@ -72,7 +72,7 @@ def email_form(prefix):
 
 
 def footer():
-    links = ''.join(f'<a href="{href}">{label}</a>' for href, label in NAV[1:])
+    links = ''.join(f'<a href="{href}">{label}</a>' for href, label in NAV[1:]) + '<a href="privacy.html">Privacy</a>'
     return f'''<section class="contact-band" aria-label="Contact Rynor"><div class="container contact-band-inner"><div><h2>Let’s start a conversation.</h2><p>For product enquiries, clinical collaboration and future partnerships.</p></div><a class="contact-email" href="mailto:{EMAIL}">{icon('envelope')}<span>{EMAIL}</span></a>{enquiry_link('Enquire', css='button button-light')}</div></section>
 <footer class="site-footer"><div class="container"><div class="footer-top">{brand()}<nav class="footer-links" aria-label="Footer navigation">{links}</nav></div><div class="footer-bottom"><div class="footer-preferences"><span>© 2026 RYNOR Medtech.</span><button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false" hidden>Pause motion</button></div><p>Machine and supplies are in development and are not yet available for sale. Product visuals are concept illustrations; final designs and specifications may change.</p></div></div></footer>
 <a class="floating-enquiry" href="contact.html" data-enquiry="General enquiry" aria-label="Open email enquiry">{icon('chat-dots')}<span>Enquire</span></a>
@@ -83,11 +83,14 @@ def page(filename, title, description, content):
     canonical = ORIGIN + ('/' if filename == 'index.html' else '/' + filename)
     image_preload = '<link rel="preload" as="image" href="assets/images/machine-concept.webp" fetchpriority="high">' if filename == 'index.html' else ''
     viewer_assets = f'<link rel="stylesheet" href="{versioned_asset("assets/machine-viewer.css")}"><script src="{versioned_asset("assets/machine-viewer.js")}" defer></script>' if filename in ('index.html', 'machine.html') else ''
+    community_assets = f'<link rel="stylesheet" href="{versioned_asset("assets/pd-community.css")}">'
+    if filename == 'pd-at-home.html':
+        community_assets += f'<script src="{versioned_asset("assets/pd-community.js")}" defer></script>'
     return f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#06264b">
 <title>{escape(title)}</title><meta name="description" content="{escape(description, quote=True)}"><link rel="canonical" href="{canonical}">
 <meta property="og:type" content="website"><meta property="og:site_name" content="RYNOR Medtech"><meta property="og:title" content="{escape(title, quote=True)}"><meta property="og:description" content="{escape(description, quote=True)}"><meta property="og:url" content="{canonical}"><meta property="og:image" content="{ORIGIN}/assets/images/machine-concept.webp"><meta property="og:image:alt" content="Exterior concept illustration of the RYNOR peritoneal dialysis machine">
-<link rel="icon" type="image/svg+xml" href="assets/brand/rynor-logo-square.svg"><link rel="preload" href="assets/fonts/manrope-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>{image_preload}<link rel="stylesheet" href="{versioned_asset("assets/site.css")}"><link rel="stylesheet" href="assets/vendor/lenis-1.3.27.css"><script>document.documentElement.classList.add('js');</script><script src="{versioned_asset("assets/site.js")}" defer></script><script src="assets/vendor/gsap-3.15.0.min.js" defer></script><script src="assets/vendor/scroll-trigger-3.15.0.min.js" defer></script><script src="assets/vendor/lenis-1.3.27.min.js" defer></script><script src="{versioned_asset("assets/motion.js")}" defer></script>{viewer_assets}</head>
+<link rel="icon" type="image/svg+xml" href="assets/brand/rynor-logo-square.svg"><link rel="preload" href="assets/fonts/manrope-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>{image_preload}<link rel="stylesheet" href="{versioned_asset("assets/site.css")}"><link rel="stylesheet" href="assets/vendor/lenis-1.3.27.css"><script>document.documentElement.classList.add('js');</script><script src="{versioned_asset("assets/site.js")}" defer></script><script src="assets/vendor/gsap-3.15.0.min.js" defer></script><script src="assets/vendor/scroll-trigger-3.15.0.min.js" defer></script><script src="assets/vendor/lenis-1.3.27.min.js" defer></script><script src="{versioned_asset("assets/motion.js")}" defer></script>{viewer_assets}{community_assets}</head>
 <body>{header(filename)}<main id="main">{content}</main>{footer()}</body></html>
 '''
 
@@ -104,9 +107,13 @@ machine_preview = f'''<figure class="hero-figure machine-hero"><div class="machi
 home = f'''<section class="home-hero" aria-labelledby="home-title"><div class="hero-motion" data-hero-motion aria-hidden="true"></div><div class="hero-grid"><div class="hero-copy"><h1 id="home-title"><span class="hero-line">Advancing</span> <span class="hero-line">the future of</span> <span class="hero-line">peritoneal dialysis<span class="accent">.</span></span></h1><p>We are developing an automated peritoneal dialysis system and a complete planned supply range, with a clear focus on the next stage: clinical trials.</p><div class="actions"><a class="button" href="machine.html">Explore our machine{icon('arrow-right')}</a>{enquiry_link()}</div></div>{machine_preview}</div></section>
 {status()}
 <section class="section" aria-labelledby="range-title"><div class="container"><div class="section-top"><div><p class="eyebrow">Planned product range</p><h2 id="range-title">A planned range, designed around peritoneal dialysis.</h2></div><div class="section-intro"><p>Our machine and supplies are being developed as one future range. Fluid bags, tubing, catheters and accessories are planned to launch together with the machine.</p><a class="text-link" href="supplies.html">Explore supplies{icon('arrow-right')}</a></div></div><div class="home-products">
-<a class="product-preview" href="supplies.html?category=bags"><div class="product-art"><img src="assets/images/bags-concept.webp" width="1448" height="1086" loading="lazy" alt="Concept RYNOR dialysis fluid bags in 2 litre and 5 litre sizes"></div><h3>Dialysis fluid bags</h3><p>2 L / 5 L</p></a>
-<a class="product-preview" href="supplies.html?category=tubing"><div class="product-art"><img src="assets/images/tubing-concept.webp" width="1448" height="1086" loading="lazy" alt="Concept clear dialysis tubing with blue connector accents"></div><h3>APD / CAPD tubing</h3><p>Planned tubing range</p></a>
-<a class="product-preview" href="supplies.html?category=catheters"><div class="product-art"><img src="assets/images/accessories-concept.webp" width="1448" height="1086" loading="lazy" alt="Concept RYNOR catheters, packaging and mini-caps"></div><h3>Catheters &amp; accessories</h3><p>Planned product range</p></a></div><p class="concept-note">Concept illustrations. Final product designs may change.</p></div></section>'''
+<a class="product-preview" href="supplies.html?category=bags"><div class="product-art"><img src="assets/illustrations/fluid-bags.svg" width="800" height="580" loading="lazy" alt="Technical concept illustration of planned 2 litre and 5 litre dialysis fluid bags"></div><h3>Dialysis fluid bags</h3><p>2 L / 5 L</p></a>
+<a class="product-preview" href="supplies.html?category=tubing"><div class="product-art"><img src="assets/illustrations/tubing.svg" width="800" height="580" loading="lazy" alt="Technical concept illustration of coiled dialysis tubing and connectors"></div><h3>APD / CAPD tubing</h3><p>Planned tubing range</p></a>
+<a class="product-preview" href="supplies.html?category=catheters"><div class="product-art"><img src="assets/illustrations/catheters.svg" width="800" height="580" loading="lazy" alt="Technical concept illustration of curved and coiled peritoneal dialysis catheters"></div><h3>Catheters &amp; accessories</h3><p>Planned product range</p></a></div><p class="concept-note">Technical concept illustrations. Final products, packaging and compatibility remain subject to development.</p></div></section>'''
+
+home += '''
+<section class="pd-home-invitation" aria-labelledby="pd-invitation-title"><div class="container"><div><p class="eyebrow">For patients, families and kidney-care teams</p><h2 id="pd-invitation-title">Could home dialysis be part of your life?</h2><p>Start with a short APD animation, explore how it works, and share your interest with RYNOR. More affordable access to an Indian machine and supplies is our ambition.</p></div><a class="button" href="pd-at-home.html">Understand PD at home →</a></div></section>
+'''
 
 home += '''
 <section class="section tint-section" id="dialysis-at-home" aria-labelledby="home-dialysis-title"><div class="container two-column"><div class="copy-stack"><p class="eyebrow">For patients &amp; families</p><h2 id="home-dialysis-title">Understanding dialysis at home</h2><p class="small-copy">RYNOR’s machine and supplies are in development and not yet available for purchase.</p></div><div class="copy-stack"><p>Peritoneal dialysis can allow suitable patients to receive treatment at home. After a procedure to place a soft tube called a catheter in the abdomen, patients receive training to manage treatment themselves or with a caregiver. With ongoing support from their kidney-care team, many people can continue working and taking part in everyday activities.</p><p class="small-copy">Your kidney-care team will guide treatment suitability, diet, fluid limits and support needs.</p></div></div></section>'''
@@ -118,16 +125,16 @@ machine = heading('Our machine', 'A new perspective on peritoneal dialysis.', 'M
 <section class="section"><div class="container two-column"><div><p class="eyebrow">The supporting range</p><h2>One machine.<br>A complete planned range.</h2></div><div class="copy-stack"><p>Explore 2 L and 5 L dialysis fluid bags, APD and CAPD tubing, peritoneal dialysis catheters, mini-caps and disinfection accessories.</p><a class="button" href="supplies.html">Explore planned supplies{icon('arrow-right')}</a></div></div></section>'''
 
 PRODUCTS = [
-    dict(category='bags', title='Dialysis fluid bags', image='bags', alt='Concept RYNOR 2 L and 5 L dialysis fluid bags', description='Two planned bag sizes within the RYNOR peritoneal dialysis range. Product details and final packaging will be shared before launch.', variants=['2 L','5 L'], topic='Dialysis fluid bags'),
-    dict(category='tubing', title='APD & CAPD tubing', image='tubing', alt='Concept coiled peritoneal dialysis tubing', description='A planned tubing range covering automated peritoneal dialysis (APD) and continuous ambulatory peritoneal dialysis (CAPD). Final configurations will be confirmed during development.', variants=['APD tubing','CAPD tubing'], topic='APD / CAPD tubing'),
-    dict(category='catheters', title='Peritoneal dialysis catheters', image='accessories', alt='Concept catheter range with RYNOR packaging and accessories', description='The planned catheter portfolio includes swan-neck and curled variants. Final combinations, sizes and product specifications will be confirmed before launch.', variants=['Swan-neck variants','Curled variants'], topic='Peritoneal dialysis catheters'),
-    dict(category='caps', title='Mini-caps & disinfection accessories', image='accessories', alt='Concept RYNOR accessory range, including blue and white caps', description='Mini-caps and related disinfection accessories are part of the planned supporting range. Final products and packaging remain in development.', variants=['Mini-caps','Disinfection accessories'], topic='Mini-caps & disinfection accessories'),
+    dict(category='bags', title='Dialysis fluid bags', image='fluid-bags', alt='Technical concept illustration of 2 L and 5 L dialysis fluid bags', description='Two planned bag sizes within the RYNOR peritoneal dialysis range. Product details and final packaging will be shared before launch.', variants=['2 L','5 L'], topic='Dialysis fluid bags'),
+    dict(category='tubing', title='APD & CAPD tubing', image='tubing', alt='Technical concept illustration of coiled dialysis tubing with capped connectors', description='A planned tubing range covering automated peritoneal dialysis (APD) and continuous ambulatory peritoneal dialysis (CAPD). Final configurations will be confirmed during development.', variants=['APD tubing','CAPD tubing'], topic='APD / CAPD tubing'),
+    dict(category='catheters', title='Peritoneal dialysis catheters', image='catheters', alt='Technical concept illustration of swan-neck and curled dialysis catheters', description='The planned catheter portfolio includes swan-neck and curled variants. Final combinations, sizes and product specifications will be confirmed before launch.', variants=['Swan-neck variants','Curled variants'], topic='Peritoneal dialysis catheters'),
+    dict(category='caps', title='Mini-caps & disinfection accessories', image='caps', alt='Technical concept illustration of protective caps and disinfection accessories', description='Mini-caps and related disinfection accessories are part of the planned supporting range. Final products and packaging remain in development.', variants=['Mini-caps','Disinfection accessories'], topic='Mini-caps & disinfection accessories'),
 ]
 
 
 def product_card(product):
     variants=''.join(f'<li>{escape(item)}</li>' for item in product['variants'])
-    return f'''<article class="catalog-card" data-category="{product['category']}" id="{product['category']}"><figure><img src="assets/images/{product['image']}-concept.webp" width="1448" height="1086" loading="lazy" alt="{escape(product['alt'],quote=True)}"><figcaption>Concept illustration</figcaption></figure><p class="eyebrow">Planned for launch with the machine</p><h2>{escape(product['title'])}</h2><p>{product['description']}</p><ul class="variant-list" aria-label="Planned variants">{variants}</ul><div class="catalog-card-foot">{enquiry_link('Product enquiry',product['topic'])}</div></article>'''
+    return f'''<article class="catalog-card" data-category="{product['category']}" id="{product['category']}"><figure><img src="assets/illustrations/{product['image']}.svg" width="800" height="580" loading="lazy" alt="{escape(product['alt'],quote=True)}"><figcaption>Technical concept illustration · Not to scale</figcaption></figure><p class="eyebrow">Planned for launch with the machine</p><h2>{escape(product['title'])}</h2><p>{product['description']}</p><ul class="variant-list" aria-label="Planned variants">{variants}</ul><div class="catalog-card-foot">{enquiry_link('Product enquiry',product['topic'])}</div></article>'''
 
 
 filters=''.join(f'<button class="filter-button" type="button" data-filter="{value}" aria-pressed="{"true" if value=="all" else "false"}">{label}</button>' for value,label in [('all','All supplies'),('bags','Fluid bags'),('tubing','Tubing'),('catheters','Catheters'),('caps','Caps & accessories')])
@@ -145,7 +152,12 @@ CONTACT_PRIVACY = '' if FORM_ENDPOINT else '<p class="contact-context">This webs
 contact=heading('Contact', 'The right conversation<br>starts here.', 'For product enquiries, clinical collaboration, future distribution or investment conversations, connect with the RYNOR Medtech team by email.')+f'''
 <section class="section"><div class="container contact-layout"><aside class="contact-card"><p class="eyebrow">Email RYNOR</p><h2>Let’s stay in touch.</h2><a class="email-display" href="mailto:{EMAIL}">{EMAIL.replace("@", "@<wbr>")}</a><button class="copy-email" type="button" data-copy-email>{icon('copy')}<span aria-live="polite">Copy email address</span></button><p class="small-copy">Our machine and supplies are in development. We welcome enquiries about the planned range and future partnerships.</p><div class="contact-context"><p><strong>Product information</strong><br>Machine, dialysis fluid bags, APD / CAPD tubing, catheters and accessories.</p><p><strong>Collaboration</strong><br>Clinical discussions, distribution partnerships and investor enquiries.</p></div></aside><div><h2 class="form-title">What’s on your mind?</h2><p class="form-intro">{CONTACT_INTRO}</p>{email_form('contact')}{CONTACT_PRIVACY}<noscript><p>You can contact us directly at <a href="mailto:{EMAIL}">{EMAIL}</a>.</p></noscript></div></div></section>'''
 
+pd_at_home = (ROOT/'content/pd-at-home.html').read_text(encoding='utf-8').replace('{{FORM_ENDPOINT}}', escape(FORM_ENDPOINT, quote=True))
+privacy = (ROOT/'content/privacy.html').read_text(encoding='utf-8')
+
 pages = [
+('pd-at-home.html','PD at Home | Learn & Connect | RYNOR Medtech','Learn how APD works with a short animation and interactive guide. Patients, caregivers and doctors can register interest using one contact method.',pd_at_home),
+('privacy.html','PD Interest Privacy | RYNOR Medtech','How RYNOR handles contact details and consent submitted through its patient and doctor PD interest form.',privacy),
 ('index.html','RYNOR Medtech | Advancing peritoneal dialysis','Discover the RYNOR peritoneal dialysis machine and planned supply range. Preparing for clinical trials. Product and partnership enquiries by email.',home),
 ('machine.html','Our Machine | RYNOR Medtech','Explore the exterior concept and development stage of the RYNOR automated peritoneal dialysis machine, now preparing for clinical trials.',machine),
 ('supplies.html','Planned Supplies | RYNOR Medtech','Explore planned 2 L and 5 L dialysis fluid bags, APD and CAPD tubing, catheters, mini-caps and accessories from RYNOR Medtech.',supplies),
@@ -161,4 +173,4 @@ if __name__ == '__main__':
     (ROOT/'sitemap.xml').write_text(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     (ROOT/'robots.txt').write_text(f'User-agent: *\nAllow: /\nSitemap: {ORIGIN}/sitemap.xml\n')
     (ROOT/'.nojekyll').touch()
-    print('Built 5 website pages, catalog redirect, sitemap and robots.txt.')
+    print(f'Built {len(pages)} website pages, catalog redirect, sitemap and robots.txt.')

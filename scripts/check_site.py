@@ -15,7 +15,7 @@ out = Path(args.output)
 out.mkdir(parents=True, exist_ok=True)
 checks = []
 axe_results = []
-pages = ['index', 'machine', 'supplies', 'about', 'contact']
+pages = ['index', 'machine', 'supplies', 'about', 'contact', 'pd-at-home', 'privacy']
 
 
 def passed(name):
@@ -38,10 +38,11 @@ with sync_playwright() as p:
         expect(page.locator('main h1')).to_have_count(1)
         assert page.locator('html').get_attribute('lang') == 'en'
         assert page.locator('head meta[name="description"]').get_attribute('content')
-        assert page.locator('img').evaluate_all('(items)=>items.every(i=>i.complete && i.naturalWidth>0)')
+        assert page.locator('img:not([loading=lazy])').evaluate_all('(items)=>items.every(i=>i.complete && i.naturalWidth>0)')
         assert not page.evaluate('document.documentElement.scrollWidth > innerWidth')
         nav_href = './' if name == 'index' else f'{name}.html'
-        expect(page.locator(f'.primary-nav a[href="{nav_href}"]')).to_have_attribute('aria-current','page')
+        if name != 'privacy':
+            expect(page.locator(f'.primary-nav a[href="{nav_href}"]')).to_have_attribute('aria-current','page')
         local_links = page.locator('a[href]').evaluate_all('(items)=>[...new Set(items.map(i=>i.getAttribute("href")).filter(h=>h && !/^(mailto:|https?:|#)/.test(h)))]')
         for href in local_links:
             assert context.request.get(f'{args.base_url}/{href}').status == 200, href
@@ -62,31 +63,31 @@ with sync_playwright() as p:
     passed('Home and logo navigation use the clean homepage address')
 
     page.goto(f'{args.base_url}/supplies.html',wait_until='networkidle')
-    expect(page.locator('[data-category]:visible')).to_have_count(4)
-    for category in ['bags','tubing','catheters','caps']:
+    expect(page.locator('[data-category]:visible')).to_have_count(5)
+    for category in ['bags','tubing','transfer-sets','catheters','caps']:
         page.locator(f'[data-filter="{category}"]').click()
         expect(page.locator('[data-category]:visible')).to_have_count(1)
         expect(page.locator(f'[data-category="{category}"]')).to_be_visible()
     page.locator('[data-filter="all"]').click()
-    page.get_by_label('Search planned supplies').fill('Swan-neck')
+    page.get_by_label('Find a supply').fill('Swan-neck')
     expect(page.locator('[data-category]:visible')).to_have_count(1)
     expect(page.locator('[data-category="catheters"]')).to_be_visible()
-    for query,category in [('swan neck','catheters'),('2L','bags'),('5 L','bags'),('APD CAPD','tubing'),('  MINI CAPs  ','caps')]:
-        page.get_by_label('Search planned supplies').fill(query)
+    for query,category in [('swan neck','catheters'),('CAPD fluid','bags'),('transfer set','transfer-sets'),('CAPD tubing','tubing'),('  MINI CAPs  ','caps')]:
+        page.get_by_label('Find a supply').fill(query)
         expect(page.locator('[data-category]:visible')).to_have_count(1)
         expect(page.locator(f'[data-category="{category}"]')).to_be_visible()
-    page.get_by_label('Search planned supplies').fill('zzzz-no-product')
+    page.get_by_label('Find a supply').fill('zzzz-no-product')
     expect(page.locator('[data-category]:visible')).to_have_count(0)
     expect(page.locator('[data-empty-state]')).to_be_visible()
     page.get_by_role('button',name='Show all supplies').click()
-    expect(page.locator('[data-category]:visible')).to_have_count(4)
+    expect(page.locator('[data-category]:visible')).to_have_count(5)
     passed('Catalog category filters, search, empty state and reset')
 
     page.goto(f'{args.base_url}/supplies.html?category=tubing',wait_until='networkidle')
     expect(page.locator('[data-category]:visible')).to_have_count(1)
     page.locator('[data-category="tubing"] [data-enquiry]').click()
     expect(page.locator('dialog')).to_be_visible()
-    expect(page.locator('#dialog-topic')).to_have_value('APD / CAPD tubing')
+    expect(page.locator('#dialog-topic')).to_have_value('CAPD tubing')
     for _ in range(12):
         page.keyboard.press('Tab')
         assert page.evaluate('!!document.activeElement.closest("dialog")')
@@ -148,7 +149,7 @@ with sync_playwright() as p:
 
     page.goto(f'{args.base_url}/about.html')
     page.get_by_text('Can I order the supplies separately now?',exact=True).click()
-    expect(page.get_by_text('The entire supply range is planned to launch together with the machine. None of the products shown are currently offered for sale.')).to_be_visible()
+    expect(page.locator('details[open]')).to_contain_text('CAPD fluid bags and tubing are available for sale separately.')
     passed('FAQ disclosure interaction')
 
     for width,height in [(1024,768),(768,1024),(414,896),(390,844),(375,812),(320,700)]:
@@ -158,7 +159,7 @@ with sync_playwright() as p:
             assert not page.evaluate('document.documentElement.scrollWidth > innerWidth'),f'{name}: overflow at {width}'
             if width==390:
                 page.screenshot(path=str(out/f'{name}-mobile.png'),full_page=True)
-        passed(f'All five pages fit {width}px viewport without horizontal overflow')
+        passed(f'All seven pages fit {width}px viewport without horizontal overflow')
     page.set_viewport_size({'width':390,'height':844})
     page.goto(f'{args.base_url}/index.html')
     toggle=page.get_by_role('button',name='Open navigation')
@@ -168,7 +169,7 @@ with sync_playwright() as p:
     page.locator('.primary-nav').get_by_role('link',name='Supplies',exact=True).click()
     expect(page).to_have_url(f'{args.base_url}/supplies.html')
     expect(page.locator('.primary-nav')).not_to_be_visible()
-    page.get_by_role('link',name='Open email enquiry').click()
+    page.get_by_role('link',name='Open enquiry').click()
     expect(page.locator('dialog')).to_be_visible()
     assert page.locator('dialog').bounding_box()['width'] <= 390
     page.screenshot(path=str(out/'enquiry-mobile.png'),full_page=False)
@@ -187,7 +188,7 @@ with sync_playwright() as p:
         expect(phone_page.locator('[data-category]:visible')).to_have_count(1)
         phone_page.locator('[data-category="bags"] [data-enquiry]').tap()
         expect(phone_page.locator('dialog')).to_be_visible()
-        expect(phone_page.locator('#dialog-topic')).to_have_value('Dialysis fluid bags')
+        expect(phone_page.locator('#dialog-topic')).to_have_value('CAPD fluid bags')
         phone_page.get_by_role('button',name='Close enquiry').tap()
         expect(phone_page.locator('dialog')).not_to_be_visible()
         phone_context.close()

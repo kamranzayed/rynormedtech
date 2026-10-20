@@ -46,7 +46,7 @@
       delete message.dataset.autofilled;
     }
     if (supply && (!message.value.trim() || message.value === message.dataset.autofilled)) {
-      message.value = `Please share current pricing, availability and pack details for ${topic.value}.`;
+      message.value = topic.value.startsWith('CAPD ') ? `Please share future availability updates for ${topic.value}.` : `Please confirm availability and pack details for ${topic.value}.`;
       message.dataset.autofilled = message.value;
     }
   };
@@ -265,7 +265,9 @@
     if (filters.some(button => button.dataset.filter === initial)) category = initial;
     const initialAvailability = new URLSearchParams(location.search).get('availability');
     if (availabilityFilter && [...availabilityFilter.options].some(option => option.value === initialAvailability)) availability = initialAvailability;
+    if (initialAvailability === 'available' && availabilityFilter?.querySelector('[value=unavailable]')) availability = 'unavailable';
     if (availabilityFilter) availabilityFilter.value = availability;
     applyFilters();
+    if (initialAvailability === 'available') saveFilters();
   }
 })();

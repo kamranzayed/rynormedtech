@@ -121,6 +121,8 @@ Browser verification covered desktop, a 390px framed mobile viewport (375px cont
 
 ## CAPD sales, transfer sets and loading review — October 19, 2026
 
+**Availability correction:** The owner subsequently clarified that CAPD bags and tubing are not currently available. The correction below supersedes this section's earlier sales status.
+
 Reviewed four current live steps before editing: Home, Supplies, product enquiry, and PD learning. Captured and inspected screenshots for each. The principal defect was conflicting copy that labelled every supply as unavailable, despite the owner's confirmation that CAPD bags and tubing are sold now. Transfer sets were missing from the catalogue and enquiry topics. Product enquiries also required email, and the legacy machine photo was visible while 3D loaded.
 
 The update keeps the existing visual system and machine model. Product data now drives catalogue cards, availability badges, homepage supply cards and enquiry topics from `content/products.json`. CAPD bags/tubing are marked available, transfer sets have a stock-enquiry route, and the APD machine/dedicated range retain development status. Corrected Home, About, Contact, Supplies, PD learning, footer and metadata. Added combined availability/category/search filters with shareable category/status URLs, empty-state reset and a short ordering FAQ. Direct enquiry forms accept phone or email, retain product context and preserve failed submissions. The PD page's floating contact link goes to its patient-first interest form. Learning controls are hidden when JavaScript cannot power them.
@@ -130,3 +132,11 @@ The 3D component shows a loading panel instead of the old image during startup; 
 Local desktop and 390px viewport browser checks covered combined filters, empty recovery, transfer-set artwork, topic routing, a phone-only CAPD enquiry, an email-only general enquiry, native validation, local provider rejection/retry, mobile menu, modal Escape, patient learning and both 3D lids. No horizontal overflow was observed at 375px content width. Mock requests went only to a local test server, never Formspree. All three JS syntax checks, the catalogue static check and existing reduced-motion/opt-out/missing-library checks passed.
 
 Limits: no real product photographs, exact brands/prices/strengths or delivery commitments were provided, so these were not invented. Formspree inbox delivery and account retention were not tested. Physical iOS/Android devices and a full accessibility conformance audit were not covered. Follow-up priorities are verified product specifications/photos, owner-side delivery/storage checks, and clinically reviewed regional-language education.
+
+## Supply availability and illustration correction — October 19, 2026
+
+The owner corrected the earlier CAPD availability instruction: fluid bags and tubing are not currently available. Both catalogue records, their badges and enquiry prompts, page copy, metadata and shared footer now state that status. Enquiries request future availability updates and do not imply an order or reservation. Old links using `availability=available` map to the corrected unavailable filter. Transfer sets continue to require an availability enquiry.
+
+Replaced the tubing artwork with a thin branched schematic and small capped connectors. Removed the bandage-like central object from the transfer-set artwork, leaving continuous flexible tubing and end connectors. The SVGs remain labelled technical illustrations, with no brand or exact configuration claimed. Content hashes on image URLs ensure visitors receive the revised drawings. The 3D model and its viewer are unchanged.
+
+The catalogue static check passed for five categories, all seven generated pages, 323 local links/assets and the unchanged GLB hash. JavaScript syntax, desktop catalogue filtering and legacy availability-link normalization were verified. At a 390px mobile viewport, the tubing card remained fully readable with no horizontal overflow (375px content/scroll width). No live enquiry was submitted.

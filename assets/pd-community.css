@@ -22,6 +22,23 @@
 .catalog-card>p:not(.eyebrow){font-size:15px;margin-top:15px}
 .catalog-card .variant-list{margin-top:18px;align-self:start}
 .catalog-card .catalog-card-foot{padding-top:12px;margin-top:0}
+.supply-status{display:inline-flex;align-items:center;gap:7px;justify-self:start;align-self:start;width:fit-content;padding:5px 10px;border:1px solid #cbdce6;border-radius:30px;font-size:11px;font-weight:700;line-height:1.5;color:#3d5b72;background:#f0f5f8}
+.supply-status[data-availability=available]{background:#e9f6ef;color:#17613d;border-color:#bcdfcb}
+.supply-status[data-availability=available]:before{content:"";width:6px;height:6px;border-radius:50%;background:#24764b}
+.supply-status[data-availability=enquire]{background:#fff6df;color:#735016;border-color:#e8d8af}
+.product-preview .supply-status{margin-top:18px}
+.product-preview h3{margin-top:12px}
+.catalog-card>.supply-status{margin:12px 0 17px}
+.catalog-tools{display:block}
+.catalog-search-row{display:grid;grid-template-columns:230px minmax(0,1fr);gap:22px;margin-top:22px}
+.catalog-search-row .field{margin:0}
+.catalog-search-row input,.catalog-search-row select{min-height:48px}
+.supply-help{display:grid;grid-template-columns:.8fr 1.2fr;gap:65px;margin:60px 0 30px;padding-top:38px;border-top:1px solid var(--line)}
+.supply-help h2{font-size:33px}.supply-help>div>p:not(.eyebrow){margin-top:20px;font-size:14px}
+.supply-help .faq{max-width:none}.supply-help .faq summary{font-size:16px}
+body[data-page=supplies] .page-heading{padding-block:45px}
+.pd-intro-strip a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:720px){.catalog-search-row{grid-template-columns:1fr;gap:18px}.catalog-search-row input,.catalog-search-row select{font-size:16px}.supply-help{grid-template-columns:1fr;gap:25px;margin-top:38px}.supply-help h2{font-size:29px}.catalog-card>.supply-status{margin:7px 0 16px}body[data-page=supplies] .page-heading{padding-block:32px}}
 .pd-hero{padding:68px 0 64px;background:linear-gradient(120deg,#f5f9fb,#e9f4f6)}
 .pd-hero-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:56px;align-items:center}
 .pd-hero h1{font-size:clamp(40px,4.4vw,62px);line-height:1.06;color:var(--navy)}

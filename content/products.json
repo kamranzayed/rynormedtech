@@ -1,7 +1,72 @@
 [
-  {"category":"bags","title":"CAPD dialysis fluid bags","image":"fluid-bags","alt":"Technical illustration of dialysis fluid bags; actual packaging may vary","description":"We sell CAPD dialysis fluid bags. Ask our team about current brands, available pack sizes and strengths, prices, and delivery to your city.","variants":["CAPD fluid bags","Pack details on enquiry"],"topic":"CAPD fluid bags","availability":"available","cta":"Request price & availability"},
-  {"category":"tubing","title":"CAPD tubing","image":"tubing","alt":"Technical illustration of coiled dialysis tubing with capped connectors","description":"We sell CAPD tubing. Contact us for current configurations, pack details, prices and availability. Confirm the exact product required with your PD team.","variants":["CAPD tubing","Configuration confirmed on enquiry"],"topic":"CAPD tubing","availability":"available","cta":"Request price & availability"},
-  {"category":"transfer-sets","title":"PD transfer sets","image":"transfer-sets","alt":"Technical illustration of a PD transfer set with tubing, clamp and capped connectors","description":"Transfer sets are included in our PD supply catalogue. Contact RYNOR to check current availability, connector configuration and pack details.","variants":["Transfer sets","Compatibility to be confirmed"],"topic":"PD transfer sets","availability":"enquire","cta":"Enquire about transfer sets"},
-  {"category":"catheters","title":"Peritoneal dialysis catheters","image":"catheters","alt":"Technical concept illustration of curved and curled dialysis catheters","description":"Our planned catheter portfolio includes swan-neck and curled variants. Final combinations, sizes and specifications remain in development.","variants":["Swan-neck variants","Curled variants"],"topic":"Peritoneal dialysis catheters","availability":"planned","cta":"Ask about development"},
-  {"category":"caps","title":"Mini-caps & disinfection accessories","image":"caps","alt":"Technical concept illustration of protective caps and disinfection accessories","description":"Mini-caps and related disinfection accessories are part of the planned supporting range. Final products and packaging remain in development.","variants":["Mini-caps","Disinfection accessories"],"topic":"Mini-caps & disinfection accessories","availability":"planned","cta":"Ask about development"}
+  {
+    "category": "bags",
+    "title": "CAPD dialysis fluid bags",
+    "image": "fluid-bags",
+    "alt": "Technical illustration of dialysis fluid bags; actual packaging may vary",
+    "description": "CAPD dialysis fluid bags are not currently available. Contact RYNOR for future availability updates and pack details when confirmed.",
+    "variants": [
+      "CAPD fluid bags",
+      "Pack details on enquiry"
+    ],
+    "topic": "CAPD fluid bags",
+    "availability": "unavailable",
+    "cta": "Enquire about future availability"
+  },
+  {
+    "category": "tubing",
+    "title": "CAPD tubing",
+    "image": "tubing",
+    "alt": "Schematic illustration of clear branched CAPD tubing and small capped connectors",
+    "description": "CAPD tubing is not currently available. Configuration, compatibility and pack details will be confirmed before supply.",
+    "variants": [
+      "CAPD tubing",
+      "Configuration confirmed on enquiry"
+    ],
+    "topic": "CAPD tubing",
+    "availability": "unavailable",
+    "cta": "Enquire about future availability"
+  },
+  {
+    "category": "transfer-sets",
+    "title": "PD transfer sets",
+    "image": "transfer-sets",
+    "alt": "Schematic illustration of a PD transfer set with flexible tubing and capped end connectors",
+    "description": "Transfer sets are included in our PD supply catalogue. Contact RYNOR to check current availability, connector configuration and pack details.",
+    "variants": [
+      "Transfer sets",
+      "Compatibility to be confirmed"
+    ],
+    "topic": "PD transfer sets",
+    "availability": "enquire",
+    "cta": "Enquire about transfer sets"
+  },
+  {
+    "category": "catheters",
+    "title": "Peritoneal dialysis catheters",
+    "image": "catheters",
+    "alt": "Technical concept illustration of curved and curled dialysis catheters",
+    "description": "Our planned catheter portfolio includes swan-neck and curled variants. Final combinations, sizes and specifications remain in development.",
+    "variants": [
+      "Swan-neck variants",
+      "Curled variants"
+    ],
+    "topic": "Peritoneal dialysis catheters",
+    "availability": "planned",
+    "cta": "Ask about development"
+  },
+  {
+    "category": "caps",
+    "title": "Mini-caps & disinfection accessories",
+    "image": "caps",
+    "alt": "Technical concept illustration of protective caps and disinfection accessories",
+    "description": "Mini-caps and related disinfection accessories are part of the planned supporting range. Final products and packaging remain in development.",
+    "variants": [
+      "Mini-caps",
+      "Disinfection accessories"
+    ],
+    "topic": "Mini-caps & disinfection accessories",
+    "availability": "planned",
+    "cta": "Ask about development"
+  }
 ]

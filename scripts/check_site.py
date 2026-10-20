@@ -149,7 +149,7 @@ with sync_playwright() as p:
 
     page.goto(f'{args.base_url}/about.html')
     page.get_by_text('Can I order the supplies separately now?',exact=True).click()
-    expect(page.locator('details[open]')).to_contain_text('CAPD fluid bags and tubing are available for sale separately.')
+    expect(page.locator('details[open]')).to_contain_text('CAPD fluid bags and tubing are not currently available.')
     passed('FAQ disclosure interaction')
 
     for width,height in [(1024,768),(768,1024),(414,896),(390,844),(375,812),(320,700)]:

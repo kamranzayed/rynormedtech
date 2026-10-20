@@ -7,7 +7,8 @@ import json,re
 ROOT=Path(__file__).resolve().parents[1]
 products=json.loads((ROOT/'content/products.json').read_text(encoding='utf-8'))
 assert len(products)==5
-assert {p['category'] for p in products if p['availability']=='available'}=={'bags','tubing'}
+assert {p['category'] for p in products if p['availability']=='unavailable'}=={'bags','tubing'}
+assert not any(p['availability']=='available' for p in products)
 assert next(p for p in products if p['category']=='transfer-sets')['availability']=='enquire'
 assert len({p['topic'] for p in products})==len(products)
 class Page(HTMLParser):
@@ -28,7 +29,8 @@ for file in ['index.html','machine.html','supplies.html','pd-at-home.html','abou
         target=ROOT/unquote(u.path) if u.path else ROOT/file
         assert target.exists(),f'Missing {file}: {value}'
         count+=1
-    assert 'CAPD fluid bags and tubing are available for sale.' in html,file
+    assert 'CAPD fluid bags and tubing are not currently available.' in html,file
+    assert 'Available to buy' not in html and 'We sell CAPD' not in html and 'Buy CAPD' not in html,file
     for stale in ['Machine and supplies are in development and are not yet available for sale.','None of the products shown are currently offered for sale.','The complete range is in development and is not yet available for sale.']:
         assert stale not in html,(file,stale)
     if file=='supplies.html':

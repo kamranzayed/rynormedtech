@@ -23,8 +23,7 @@
 .catalog-card .variant-list{margin-top:18px;align-self:start}
 .catalog-card .catalog-card-foot{padding-top:12px;margin-top:0}
 .supply-status{display:inline-flex;align-items:center;gap:7px;justify-self:start;align-self:start;width:fit-content;padding:5px 10px;border:1px solid #cbdce6;border-radius:30px;font-size:11px;font-weight:700;line-height:1.5;color:#3d5b72;background:#f0f5f8}
-.supply-status[data-availability=available]{background:#e9f6ef;color:#17613d;border-color:#bcdfcb}
-.supply-status[data-availability=available]:before{content:"";width:6px;height:6px;border-radius:50%;background:#24764b}
+.supply-status[data-availability=unavailable]{background:#f1f3f5;color:#44566a;border-color:#d4dde4}
 .supply-status[data-availability=enquire]{background:#fff6df;color:#735016;border-color:#e8d8af}
 .product-preview .supply-status{margin-top:18px}
 .product-preview h3{margin-top:12px}

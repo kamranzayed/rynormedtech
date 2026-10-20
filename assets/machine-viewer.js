@@ -57,6 +57,7 @@
   }
   function fallback() {
     releaseResources();root.dataset.state='fallback';controls.hidden=true;help.hidden=true;start.hidden=false;
+    root.removeAttribute('aria-busy');
     start.textContent='Retry 3D view';start.disabled=false;
   }
   function render(now) {
@@ -113,6 +114,7 @@
     if(loading || renderer || disposed)return;
     loading=true;const id=++generation;
     start.textContent='Loading 3D…';start.disabled=true;start.hidden=false;root.dataset.state='loading';
+    root.setAttribute('aria-busy','true');
     let controller;
     try {
       const probe=document.createElement('canvas'),context=probe.getContext('webgl2')||probe.getContext('webgl');
@@ -177,7 +179,7 @@
       resizeObserver=new ResizeObserver(resize);resizeObserver.observe(stage);resize();
       frontButton.setAttribute('aria-pressed',String(state.front>0));heatButton.setAttribute('aria-pressed',String(state.heat>0));
       currentFront=state.front;currentHeat=state.heat;yaw=state.yaw;pitch=state.pitch;
-      render(performance.now());root.dataset.state='ready';root.querySelector('.machine-viewer__badge').textContent='Interactive concept';start.hidden=true;
+      render(performance.now());root.dataset.state='ready';root.removeAttribute('aria-busy');root.querySelector('.machine-viewer__badge').textContent='Interactive concept';start.hidden=true;
     } catch {if(id===generation && !disposed)fallback();}
     finally {loading=false;}
   }

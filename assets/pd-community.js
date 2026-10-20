@@ -9,13 +9,14 @@
     const show=phase=>{learning.dataset.phase=phase;learning.querySelector('[data-phase-title]').textContent=phases[phase][0];learning.querySelector('[data-phase-text]').textContent=phases[phase][1];learning.querySelectorAll('[data-phase-button]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.phaseButton===phase)));};
     const step=()=>{if(index>=3){stop();return;}show(['fill','dwell','drain'][index++]);timer=setTimeout(step,6000);};
     learning.querySelectorAll('[data-phase-button]').forEach(b=>b.addEventListener('click',()=>{stop();show(b.dataset.phaseButton);}));
-    play.hidden=false;play.setAttribute('aria-pressed','false');
+    learning.querySelector('.pd-phase-buttons').hidden=false;play.hidden=false;play.setAttribute('aria-pressed','false');
     play.addEventListener('click',()=>{if(timer){stop();return;}index=0;learning.classList.add('is-playing');play.textContent='Pause the exchange';play.setAttribute('aria-pressed','true');step();});
     document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();});
     reduced.addEventListener('change',()=>{if(reduced.matches)stop();});
   }
   const quiz=document.querySelector('[data-pd-quiz]');
   if(quiz){
+    quiz.querySelector('.pd-quiz-options').hidden=false;
     const questions=[{q:'What moves through an APD cycler?',a:['Dialysis fluid','Blood outside the body'],correct:0,why:'The cycler moves dialysis fluid. Your blood stays inside your body.'},{q:'Who decides if PD is suitable for you?',a:['The kidney-care team','The result of a website quiz'],correct:0,why:'Your kidney-care team assesses your health, home situation and support needs.'},{q:'Does home PD remove the need for follow-up?',a:['Yes—no clinic reviews are needed','No—reviews and tests are still needed'],correct:1,why:'Home treatment still needs clinical monitoring, supplies and a daily care routine.'}];
     let index=0,answered=false;const buttons=[...quiz.querySelectorAll('[data-quiz-answer]')],next=quiz.querySelector('[data-quiz-next]'),feedback=quiz.querySelector('[data-quiz-feedback]');
     const show=()=>{const q=questions[index];answered=false;quiz.querySelector('[data-quiz-count]').textContent=`Question ${index+1} of 3`;quiz.querySelector('[data-quiz-question]').textContent=q.q;buttons.forEach((b,i)=>{b.textContent=q.a[i];b.setAttribute('aria-pressed','false');b.disabled=false;});feedback.hidden=true;next.hidden=true;};
@@ -45,7 +46,7 @@
     event.preventDefault();if(sending)return;
     name.value=name.value.trim();contact.value=contact.value.trim();name.setCustomValidity(name.value?'':'Please enter your name.');
     const phone=method.value==='phone',digits=contact.value.replace(/\D/g,'');
-    contact.setCustomValidity(phone && (digits.length<7||digits.length>15||!/^[+\d\s().-]+$/.test(contact.value))?'Please enter a phone number with 7 to 15 digits, including your country code if needed.':'');
+    contact.setCustomValidity(phone && (digits.length<7||digits.length>15||!/^\+?[\d\s().-]+$/.test(contact.value))?'Please enter a phone number with 7 to 15 digits, including your country code if needed.':'');
     if(!form.reportValidity())return;
     const fields=new FormData(form),audience=fields.get('audience');
     fields.set('contact_method',phone?'phone':'email');

@@ -25,6 +25,20 @@
   }
   const form=document.querySelector('[data-interest-form]');
   if(!form)return;
+  const shortcut=document.querySelector('.floating-enquiry');
+  const connectSection=document.querySelector('#connect');
+  if(shortcut && connectSection && 'IntersectionObserver' in window){
+    // The shortcut is useful while reading, but must not cover the form itself.
+    const observer=new IntersectionObserver(entries=>{
+      const inView=entries[0].isIntersecting;
+      if(inView && document.activeElement===shortcut){
+        form.querySelector('[name=name]').focus({preventScroll:true});
+      }
+      shortcut.hidden=inView;
+    },{threshold:0});
+    observer.observe(connectSection);
+  }
+
   const method=form.querySelector('[name=contact_method]'),contact=form.querySelector('#interest-contact'),name=form.querySelector('[name=name]');
   const organisation=form.querySelector('[name=organisation]'),doctorField=form.querySelector('[data-doctor-field]');
   const status=form.querySelector('[data-interest-status]'),submit=form.querySelector('[type=submit]'),label=form.querySelector('[data-interest-submit]');

@@ -46,12 +46,16 @@ with sync_playwright() as p:
         local_links = page.locator('a[href]').evaluate_all('(items)=>[...new Set(items.map(i=>i.getAttribute("href")).filter(h=>h && !/^(mailto:|https?:|#)/.test(h)))]')
         for href in local_links:
             assert context.request.get(f'{args.base_url}/{href}').status == 200, href
+        # Inspect settled content; entrance fades can otherwise produce transient contrast failures.
+        page.emulate_media(reduced_motion='reduce')
+        expect(page.locator('html')).to_have_attribute('data-motion', 'off')
         page.screenshot(path=str(out/f'{name}-desktop.png'), full_page=True)
         if Path(args.axe).exists():
             page.add_script_tag(path=args.axe)
             result = page.evaluate('async()=>await axe.run(document,{runOnly:{type:"tag",values:["wcag2a","wcag2aa","wcag21aa"]}})')
             violations = [{'id':v['id'],'impact':v['impact'],'description':v['description'],'nodes':[{'target':n['target'],'summary':n.get('failureSummary')} for n in v['nodes']]} for v in result['violations']]
             axe_results.append({'page':name,'violations':violations,'passes':len(result['passes'])})
+        page.emulate_media(reduced_motion='no-preference')
         passed(f'{name}: content, metadata, active navigation, loaded assets and local links')
 
     page.goto(f'{args.base_url}/machine.html')

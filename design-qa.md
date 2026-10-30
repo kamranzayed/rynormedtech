@@ -140,3 +140,14 @@ The owner corrected the earlier CAPD availability instruction: fluid bags and tu
 Replaced the tubing artwork with a thin branched schematic and small capped connectors. Removed the bandage-like central object from the transfer-set artwork, leaving continuous flexible tubing and end connectors. The SVGs remain labelled technical illustrations, with no brand or exact configuration claimed. Content hashes on image URLs ensure visitors receive the revised drawings. The 3D model and its viewer are unchanged.
 
 The catalogue static check passed for five categories, all seven generated pages, 323 local links/assets and the unchanged GLB hash. JavaScript syntax, desktop catalogue filtering and legacy availability-link normalization were verified. At a 390px mobile viewport, the tubing card remained fully readable with no horizontal overflow (375px content/scroll width). No live enquiry was submitted.
+
+
+## Copy, spacing and patient-flow cleanup
+
+Proofread the current pages and simplified vague headings and repeated copy. The homepage now has one patient introduction with a direct learning link; the machine, supply and company headings state their purpose more plainly. The patient page explains PD/APD in its introductory wording, labels the registration link by its actual action, and calls the quiz a learning check rather than a medical score. Existing availability statements, care-team guidance and development status are retained.
+
+The patient page’s floating Connect shortcut now hides while its form section is visible and returns when the visitor leaves that section. Keyboard focus moves into the form if the focused shortcut is hidden. Mobile contact controls use 16px text. Learning anchors and quiz headings have clearance below the sticky menu.
+
+Validation: 23 existing functional groups passed, with zero automated WCAG A/AA rule violations across seven pages. The existing enquiry, catalogue and three motion-fallback checks also passed. Six focused checks verified the single patient introduction and learning link, unobstructed interest form, simulated failure recovery, shortcut restoration, quiz focus/visibility and mobile control sizing without overflow. Provider requests were intercepted; no real email was sent. Desktop and mobile captures were visually inspected and saved at `/workspace/rynor-review/copy-cleanup/`.
+
+The smoke runner now inspects screenshots and contrast with reduced motion enabled, avoiding previously diagnosed failures caused by capturing entrance fades; it restores normal motion for subsequent interactions. These automated checks are not an accessibility certification. Live deployment, native Safari, physical phones and actual inbox receipt remain unverified.

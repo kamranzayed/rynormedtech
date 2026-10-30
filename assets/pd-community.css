@@ -136,3 +136,7 @@ html[data-motion=off] .pd-learning *{animation:none!important;transition:none!im
 
 /* Maintain readable small headings on pale patient-information panels. */
 .pd-home-invitation .eyebrow,.pd-connect-copy>.eyebrow{color:#006b82}
+
+.floating-enquiry[hidden]{display:none}
+.pd-quiz h3,#learn{scroll-margin-top:110px}
+@media(max-width:720px){.field input,.field select,.field textarea{font-size:16px}.field .form-note{font-size:12px}}

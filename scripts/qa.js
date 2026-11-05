@@ -47,8 +47,16 @@ window.runQA = async () => {
 
   // Language switch.
   const navLink = document.querySelector('.nav [data-i18n="nav.supplies"]');
-  document.querySelector('.lang button[data-lang="hi"]').click(); await wait(100);
+  document.querySelector('.lang button[data-lang="hi"]').click(); await wait(700);
   ok(navLink.textContent === 'सप्लाई' && document.documentElement.lang === 'hi', 'Hindi switch translates navigation');
+  // Hindi coverage: visible English left on the page (brand names, units and abbreviations allowed), including inside forms.
+  const ALLOWED = /\b(RYNOR|Medtech|APD|CAPD|PD|HD|NHS|NIDDK|Formspree|EN|3D|PDF|L|h|pm|am|Captions?)\b|[\w.+-]+@[\w.-]+|©|\+91/g;
+  const leftovers = root => { const out = new Set(); const tw = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); let n; while ((n = tw.nextNode())) { const el = n.parentElement; if (!el || el.closest('script,style,.lang,noscript')) continue; if (!visible(el) && !el.closest('dialog[open]')) continue; const t = n.nodeValue.replace(ALLOWED, '').trim(); if (/[a-z]{3,}/i.test(t)) out.add(n.nodeValue.trim().slice(0, 50)); } return [...out]; };
+  const pageLeft = leftovers(document.body);
+  const formLeft = [];
+  for (const type of [...new Set([...document.querySelectorAll('[data-modal]')].map(b => b.dataset.modal))]) { window.RYNOR.openModal(type, ''); await wait(60); formLeft.push(...leftovers(document.getElementById('modal'))); document.getElementById('modal').close(); }
+  ok(pageLeft.length === 0, 'Hindi covers all visible page text', pageLeft.slice(0, 8).join(' · '));
+  ok(formLeft.length === 0, 'Hindi covers all form text', [...new Set(formLeft)].slice(0, 8).join(' · '));
   document.querySelector('.lang button[data-lang="en"]').click(); await wait(100);
   ok(navLink.textContent === 'Supplies' && document.documentElement.lang === 'en', 'English switch restores text');
 

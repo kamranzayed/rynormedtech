@@ -22,26 +22,97 @@
   };
   window.RYNOR = { icon, waLink, EMAIL, hasWhatsApp: Boolean(WHATSAPP) };
 
-  // --- Language: English / Hindi (Hindi is a draft for native review) ---
-  const HI = {
-    'nav.home': 'होम', 'nav.machine': 'मशीन', 'nav.supplies': 'सप्लाई', 'nav.pd': 'घर पर पीडी', 'nav.doctors': 'डॉक्टरों के लिए', 'nav.investors': 'निवेशकों के लिए', 'nav.about': 'हमारे बारे में', 'nav.contact': 'संपर्क करें',
-    'bar.home': 'होम', 'bar.supplies': 'सप्लाई', 'bar.video': 'पीडी वीडियो', 'bar.wa': 'व्हाट्सऐप',
-    'cta.wa': 'व्हाट्सऐप पर बात करें', 'cta.quote': 'कोटेशन माँगें', 'cta.interest': 'रुचि दर्ज करें', 'cta.notify': 'मुझे सूचित करें', 'cta.contact': 'संपर्क करें',
-    'home.title': 'पेरिटोनियल डायलिसिस का भविष्य, भारत में विकसित।', 'home.lead': 'रायनर मेडटेक एक भारतीय कंपनी है जो ऑटोमेटेड पेरिटोनियल डायलिसिस (APD) मशीन और पीडी सप्लाई की पूरी रेंज विकसित कर रही है।',
-    'home.watch': 'देखें पीडी कैसे काम करता है', 'home.explore': 'सप्लाई देखें', 'home.iam': 'मैं हूँ…', 'aud.patient': 'मरीज़ या परिवार', 'aud.doctor': 'डॉक्टर', 'aud.investor': 'निवेशक', 'aud.distributor': 'वितरक',
-    'sup.title': 'पेरिटोनियल डायलिसिस सप्लाई।', 'pd.title': 'घर पर डायलिसिस को समझें।', 'doc.title': 'डॉक्टरों और पीडी विशेषज्ञों के लिए।', 'inv.title': 'भारत में होम डायलिसिस का निर्माण।', 'about.title': 'हमारा उद्देश्य, हमारी टीम।',
-    'foot.updates': 'विकास से जुड़ी जानकारी पाएँ'
+  // --- Language: English / Hindi ---
+  // Translates by matching the English text of each paragraph, heading, button or label against assets/i18n-hi.js,
+  // keeping links and markup inside mixed elements intact. A MutationObserver translates text that appears later
+  // (forms, video captions, quiz steps, product details), and switching back restores the original English.
+  const INLINE = new Set(['B', 'STRONG', 'EM', 'I', 'BR', 'SPAN']);
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEXTAREA', 'INPUT']);
+  const norm = s => s.replace(/\s+/g, ' ').trim();
+  const inlineOnly = el => [...el.children].every(c => INLINE.has(c.nodeName.toUpperCase()) && inlineOnly(c));
+  const textOf = el => { let out = ''; el.childNodes.forEach(n => { if (n.nodeType === 3) out += n.nodeValue; else if (n.nodeName.toUpperCase() === 'BR') out += ' '; else if (n.nodeType === 1) out += textOf(n); }); return out; };
+  const lookup = key => {
+    const dict = window.RYNOR_HI || {};
+    if (Object.prototype.hasOwnProperty.call(dict, key)) return dict[key];
+    for (const [re, fn] of window.RYNOR_HI_PATTERNS || []) { const m = key.match(re); if (m) return fn(m); }
+    return null;
   };
-  const getLang = () => { try { return localStorage.getItem('rynor-lang') || 'en'; } catch { return 'en'; } };
-  const applyLang = lang => {
-    document.documentElement.lang = lang === 'hi' ? 'hi' : 'en';
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      if (!el.dataset.en) el.dataset.en = el.innerHTML;
-      el.innerHTML = lang === 'hi' && HI[el.dataset.i18n] ? HI[el.dataset.i18n] : el.dataset.en;
+  const changed = new Set();
+  const setHTML = (el, html) => { if (el instanceof SVGElement) el.textContent = html.replace(/<[^>]+>/g, ''); else el.innerHTML = html; };
+  const translate = root => {
+    if (!root || root.nodeType !== 1 || SKIP.has(root.nodeName.toUpperCase()) || root.closest('.lang, [data-no-translate]')) return;
+    ['placeholder', 'aria-label'].forEach(attr => [root, ...root.querySelectorAll(`[${attr}]`)].forEach(el => {
+      if (!el.hasAttribute(attr)) return;
+      const hi = lookup(norm(el.getAttribute(attr)));
+      if (hi !== null) { (el.__enAttr ||= {})[attr] = el.getAttribute(attr); el.setAttribute(attr, hi.replace(/<[^>]+>/g, '')); changed.add(el); }
+    }));
+    const walk = el => {
+      if (SKIP.has(el.nodeName.toUpperCase()) || el.matches('.lang, [data-no-translate]')) return;
+      if (inlineOnly(el)) {
+        const hi = lookup(norm(textOf(el)));
+        // Replace the whole element only if it has no child elements, or the translation supplies its own markup;
+        // otherwise translate the text pieces inside, so elements scripts rely on (ids, counters) survive.
+        if (hi !== null && (!el.children.length || /<[a-z]/i.test(hi))) { el.__en = el.innerHTML; setHTML(el, hi); changed.add(el); return; }
+      }
+      el.childNodes.forEach(n => {
+        if (n.nodeType === 1) walk(n);
+        else if (n.nodeType === 3 && /[a-z]/i.test(n.nodeValue)) {
+          const hi = lookup(norm(n.nodeValue));
+          if (hi !== null) { n.__en = n.nodeValue; n.nodeValue = n.nodeValue.match(/^\s*/)[0] + hi.replace(/<[^>]+>/g, '') + n.nodeValue.match(/\s*$/)[0]; changed.add(n); }
+        }
+      });
+    };
+    walk(root);
+  };
+  const revert = () => {
+    changed.forEach(x => {
+      if (x.nodeType === 3) { if (x.__en !== undefined) x.nodeValue = x.__en; }
+      else { if (x.__en !== undefined) x.innerHTML = x.__en; if (x.__enAttr) Object.entries(x.__enAttr).forEach(([a, v]) => x.setAttribute(a, v)); }
+      delete x.__en; delete x.__enAttr;
     });
+    changed.clear();
+  };
+  let observer;
+  const watch = on => {
+    observer?.disconnect(); observer = null;
+    if (!on) return;
+    observer = new MutationObserver(records => {
+      observer.disconnect();
+      const targets = new Set();
+      records.forEach(r => {
+        if (r.type === 'characterData') targets.add(r.target.parentElement);
+        if (r.type === 'attributes') targets.add(r.target);
+        r.addedNodes.forEach(n => targets.add(n.nodeType === 1 ? n : n.parentElement));
+      });
+      targets.forEach(t => t && t.isConnected && translate(t));
+      observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['aria-label', 'placeholder'] });
+    });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['aria-label', 'placeholder'] });
+  };
+  const I18N_V = '4a926bad95';
+  let dictLoading;
+  const loadDict = () => dictLoading ||= window.RYNOR_HI ? Promise.resolve() : new Promise(resolve => {
+    const tag = document.createElement('script');
+    tag.src = new URL('i18n-hi.js?v=' + I18N_V, document.currentScript?.src || document.querySelector('script[src*="assets/proto.js"]').src).href;
+    tag.onload = resolve; tag.onerror = resolve;
+    document.head.append(tag);
+  });
+  const getLang = () => { try { return localStorage.getItem('rynor-lang') || 'en'; } catch { return 'en'; } };
+  const applyLang = async lang => {
     document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
     try { localStorage.setItem('rynor-lang', lang); } catch { /* optional */ }
+    if (lang === 'hi') {
+      await loadDict();
+      document.documentElement.lang = 'hi';
+      translate(document.body);
+      watch(true);
+    } else {
+      watch(false);
+      revert();
+      document.documentElement.lang = 'en';
+    }
   };
+  window.RYNOR.applyLang = applyLang;
 
   // --- Shell: header, mobile menu, floating actions, bottom bar, footer, modal ---
   const NAV = [['index.html', 'nav.home', 'Home'], ['supplies.html', 'nav.supplies', 'Supplies'], ['pd-at-home.html', 'nav.pd', 'PD at Home'], ['doctors.html', 'nav.doctors', 'For doctors'], ['investors.html', 'nav.investors', 'For investors'], ['about.html', 'nav.about', 'About']];

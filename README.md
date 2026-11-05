@@ -26,7 +26,7 @@ No build step, package installation or API key is needed. Edit the HTML files di
 ## Shared kit
 
 - `assets/proto.css` – design kit: brand colours (navy, teal, aqua), Manrope, buttons, cards, status chips, mobile bottom bar, forms.
-- `assets/proto.js` – injects the header, mobile menu, footer, floating action button and mobile bottom bar on every page; English/Hindi switch (`data-i18n` keys; the Hindi text should be reviewed by a native speaker); reveal-on-scroll; and the smart enquiry forms.
+- `assets/proto.js` – injects the header, mobile menu, footer, floating action button and mobile bottom bar on every page; English/Hindi switch. Translations live in `assets/i18n-hi.js` (loaded only when a visitor picks Hindi), keyed by the exact English text of each paragraph, heading, button or label; text that appears later (forms, video captions, quiz, product details) is translated as it appears. When you add or change English text, add the matching line there. Noto Sans Devanagari is self-hosted for Hindi; reveal-on-scroll; and the smart enquiry forms.
 - `assets/products.js` – the single product list. Change a product's `status` (`available`, `enquire`, `unavailable`, `planned`) and every page updates.
 - `assets/machine-viewer.*`, `assets/models/`, `assets/vendor/` – the interactive 3D machine (Three.js r134 + GLTF loader).
 
@@ -58,4 +58,4 @@ Commit to `main`. GitHub Pages updates www.rynormedtech.com. `CNAME` must remain
 
 - No certifications, approvals, clinical outcomes, prices, launch dates or statistics are claimed.
 - Supply images are technical illustrations until real photos are added; the 3D machine is a concept.
-- Manrope is self-hosted under the SIL Open Font License; Three.js under MIT. Licenses are in `assets/licenses/`.
+- Manrope and Noto Sans Devanagari are self-hosted under the SIL Open Font License; Three.js under MIT. Licenses are in `assets/licenses/`.

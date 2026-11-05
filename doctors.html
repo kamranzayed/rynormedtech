@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>For doctors &amp; PD professionals | RYNOR Medtech</title>
+<meta name="description" content="Clinical collaboration with RYNOR Medtech: the APD programme, trial-site interest, product brochure and supplies for PD centres.">
+<link rel="stylesheet" href="assets/proto.css">
+<style>
+.stage{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:stretch}
+.stage-card{border-radius:24px;padding:36px;background:radial-gradient(60% 80% at 100% 0%,rgba(111,214,232,.2),transparent 60%),var(--navy);color:#fff}
+.stage-card h3{color:#fff;font-size:26px}
+.stage-card p{color:#c4d2e4;margin-top:10px}
+.stages{margin-top:26px;display:grid;gap:0}
+.stages li{display:grid;grid-template-columns:70px 1fr;gap:12px;padding:14px 0;border-top:1px solid rgba(255,255,255,.12);color:#d6e2ef;font-size:15px}
+.stages b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#8fa6c6}
+.stages li.now b{color:var(--aqua)}
+.meter{margin-top:28px;display:grid;gap:12px}
+.meter div{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;font-size:13.5px;color:#d6e2ef}
+.meter b{display:block;height:8px;border-radius:8px;background:rgba(255,255,255,.12);overflow:hidden}
+.meter b i{display:block;height:100%;border-radius:8px;background:linear-gradient(90deg,var(--aqua),var(--teal));width:0;transition:width 1.6s var(--ease)}
+.in .meter b i{width:var(--w)}
+.ways .card{display:flex;flex-direction:column}
+.ways .card .card-foot{margin-top:auto;padding-top:22px}
+.resource{display:flex;gap:18px;align-items:center}
+.resource .doc{flex-shrink:0;width:64px;height:80px;border-radius:10px;background:linear-gradient(160deg,#fff,var(--ice));border:1px solid var(--line);display:grid;place-items:center;font-size:11px;font-weight:800;color:var(--teal)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:700;font-size:17px;color:var(--navy);position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";position:absolute;right:6px;top:18px;font-size:24px;color:var(--teal);transition:transform .4s var(--ease)}
+.faq details[open] summary:after{transform:rotate(45deg)}
+.faq details p{padding-bottom:22px;max-width:820px}
+@media(max-width:900px){.stage{grid-template-columns:1fr}.stage-card{padding:26px 22px}.meter div{grid-template-columns:110px 1fr}}
+</style>
+</head>
+<body data-page="doctors">
+<main>
+  <section class="page-hero"><div class="container" data-reveal>
+    <p class="eyebrow">For doctors &amp; PD professionals</p>
+    <h1 data-i18n="doc.title">Build the future of home PD with us.</h1>
+    <p class="lead">RYNOR is developing an automated peritoneal dialysis machine and its supply range in India. We want clinicians involved early, from trial sites to product feedback.</p>
+    <div class="actions"><button class="btn" data-modal="trial">Clinical collaboration</button><button class="btn light" data-modal="brochure">Get the brochure</button></div>
+  </div></section>
+
+  <section class="section"><div class="container stage">
+    <div data-reveal><p class="eyebrow">The programme today</p><h2>Where the APD system stands.</h2><p style="margin-top:16px;font-size:17px">The RYNOR APD machine is preparing for clinical trials and is not yet available for sale. No certifications or approvals are claimed. Verified progress will be shared as it happens.</p><div class="actions" style="margin-top:26px"><a class="btn light" href="index.html#machine">Explore the 3D machine</a><a class="link" href="pd-at-home.html#apd">See how APD works →</a></div></div>
+    <div class="stage-card" data-reveal><h3>The road to launch</h3><p>Each step is completed and verified before the next.</p>
+      <ol class="stages"><li class="now"><b>Now</b>Preparing for clinical trials</li><li><b>Next</b>Clinical evaluation with partner centres</li><li><b>Then</b>Regulatory approval</li><li><b>Goal</b>Coordinated launch of machine and supplies</li></ol>
+    </div>
+  </div></section>
+
+  <section class="section tint"><div class="container">
+    <div class="section-head" data-reveal><div><p class="eyebrow">Ways to collaborate</p><h2>Choose how you’d like to be involved.</h2></div><p>Every conversation helps shape a system built for Indian patients and PD centres.</p></div>
+    <div class="grid c3 ways" data-stagger>
+      <article class="card" data-reveal><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 3v6l-5 9a2 2 0 0 0 2 3h12a2 2 0 0 0 2-3l-5-9V3"/><path d="M8 3h8"/></svg></div><h3>Clinical trial site</h3><p>Express interest in participating as a site when clinical evaluation begins.</p><div class="card-foot"><button class="btn small" data-modal="trial">Express interest</button></div></article>
+      <article class="card" data-reveal><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3>Product feedback</h3><p>Join a short feedback session on the machine, workflow and supplies.</p><div class="card-foot"><button class="btn small light" data-modal="trial">Join a session</button></div></article>
+      <article class="card" data-reveal><div class="icon-tile"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8"/></svg></div><h3>Supplies for your centre</h3><p>Check availability of transfer sets and the wider PD range for your patients.</p><div class="card-foot"><a class="btn small light" href="supplies.html">View supplies</a></div></article>
+    </div>
+  </div></section>
+
+  <section class="section"><div class="container">
+    <div class="section-head" data-reveal><div><p class="eyebrow">Resources</p><h2>For you and your team.</h2></div><p>Materials are prepared with care and reviewed before release.</p></div>
+    <div class="grid c2" data-stagger>
+      <article class="card resource" data-reveal><span class="doc">PDF</span><div><h3>Product brochure</h3><p>Machine concept and supply range overview. In preparation.</p><div class="card-foot" style="margin-top:12px"><button class="link" data-modal="brochure">Request a copy →</button></div></div></article>
+      <article class="card resource" data-reveal><span class="doc">VIDEO</span><div><h3>Patient education video</h3><p>The PD journey for patients and families, from eligibility to home treatment.</p><div class="card-foot" style="margin-top:12px"><a class="link" href="pd-at-home.html#apd">Watch →</a></div></div></article>
+    </div>
+  </div></section>
+
+  <section class="section tint"><div class="container faq">
+    <p class="eyebrow" data-reveal>Clinician questions</p><h2 data-reveal>Clear answers.</h2>
+    <div style="margin-top:28px" data-reveal>
+      <details><summary>Is the RYNOR APD machine available for clinical use?</summary><p>No. It is preparing for clinical trials and is not available for sale or clinical use. Commercial availability will follow evaluation and regulatory steps.</p></details>
+      <details><summary>Which supplies can my centre order now?</summary><p>Availability is shown on each product in the supplies catalogue. Transfer sets can be enquired about directly; other categories are listed with their current status.</p></details>
+      <details><summary>How are trial sites selected?</summary><p>Details will be shared when the clinical evaluation plan is confirmed. Registering interest helps us contact you first.</p></details>
+      <details><summary>Who can I speak to?</summary><p>Use the collaboration form or WhatsApp, and our team will connect you with the right person.</p></details>
+    </div>
+  </div></section>
+</main>
+<script src="assets/proto.js"></script>
+</body>
+</html>

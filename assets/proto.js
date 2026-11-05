@@ -68,10 +68,10 @@
   </nav>
   <footer class="site-footer"><div class="container">
     <div class="footer-grid">
-      <div><span class="footer-brand"><img src="assets/brand/rynor-logo.svg" alt="RYNOR Medtech"></span><p style="font-size:14px;color:#b8c3e0;max-width:300px">An Indian company developing an automated peritoneal dialysis machine and a complete PD supply range.</p></div>
+      <div><span class="footer-brand"><img src="assets/brand/rynor-logo.svg" alt="RYNOR Medtech"></span><p style="font-size:14px;color:#b7c9d8;max-width:300px">An Indian company developing an automated peritoneal dialysis machine and a complete PD supply range.</p></div>
       <div><h4>Explore</h4><a href="index.html#machine">Our machine</a><a href="supplies.html">Supplies</a><a href="pd-at-home.html">PD at home</a><a href="about.html">About RYNOR</a></div>
       <div><h4>Partners</h4><a href="doctors.html">For doctors</a><a href="investors.html">For investors</a><a href="supplies.html#distributors">Distributors</a><a href="privacy.html">Privacy notice</a></div>
-      <div><h4 data-i18n="foot.updates">Get development updates</h4><p style="font-size:13.5px;color:#b8c3e0">Occasional, verified progress news. No spam.</p><form class="signup" data-signup><input type="email" required placeholder="Your email" aria-label="Your email"><button class="btn teal small" type="submit">Join</button></form><a href="mailto:${EMAIL}" style="margin-top:14px">${EMAIL}</a></div>
+      <div><h4 data-i18n="foot.updates">Get development updates</h4><p style="font-size:13.5px;color:#b7c9d8">Occasional, verified progress news. No spam.</p><form class="signup" data-signup><input type="email" required placeholder="Your email" aria-label="Your email"><button class="btn teal small" type="submit">Join</button></form><a href="mailto:${EMAIL}" style="margin-top:14px">${EMAIL}</a></div>
     </div>
     <div class="footer-bottom"><span>© 2026 RYNOR Medtech · <a href="privacy.html" style="display:inline;padding:0;color:inherit;text-decoration:underline">Privacy</a></span><span>The RYNOR APD machine is in development and not for sale. General information, not medical advice.</span></div>
   </div></footer>
@@ -168,6 +168,9 @@
     document.querySelectorAll('[data-stagger]').forEach(group => [...group.querySelectorAll(':scope > [data-reveal]')].forEach((el, i) => { el.style.transitionDelay = `${i * 90}ms`; }));
     els.forEach(el => io.observe(el));
   };
+  // Backup for browsers that delay IntersectionObserver: reveal anything already scrolled into or past view.
+  const sweep = () => document.querySelectorAll('[data-reveal]:not(.in)').forEach(el => { if (el.getBoundingClientRect().top < innerHeight * .95) el.classList.add('in'); });
+  addEventListener('scroll', sweep, { passive: true });
   window.RYNOR.reveal = reveal;
-  addEventListener('DOMContentLoaded', () => { reveal(); applyLang(getLang()); });
+  addEventListener('DOMContentLoaded', () => { reveal(); applyLang(getLang()); setTimeout(sweep, 1200); });
 })();

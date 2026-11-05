@@ -110,17 +110,17 @@ button{cursor:pointer}
 .bottom-bar{display:none}
 
 /* Footer */
-.site-footer{background:var(--indigo);color:#b8c3e0;padding:72px 0 28px}
+.site-footer{background:radial-gradient(60% 120% at 85% 0%,rgba(111,214,232,.14),transparent 60%),linear-gradient(180deg,#0a3156,#05203a);border-top:1px solid rgba(111,214,232,.18);color:#b7c9d8;padding:72px 0 28px}
 .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1.3fr;gap:40px}
 .footer-grid h4{color:#fff;font-size:14px;margin-bottom:16px;letter-spacing:0}
-.footer-grid a{display:block;padding:6px 0;font-size:14px;color:#c9d2ea;transition:color .3s}
+.footer-grid a{display:block;padding:6px 0;font-size:14px;color:#c9d8e4;transition:color .3s}
 .footer-grid a:hover{color:var(--aqua)}
 .footer-brand{display:block;width:170px;height:50px;overflow:hidden;position:relative;background:#fff;border-radius:12px;margin-bottom:18px}
 .footer-brand img{position:absolute;width:190px;max-width:none;left:50%;top:50%;transform:translate(-50%,-50%)}
 .signup{display:flex;gap:8px;margin-top:12px}
 .signup input{flex:1;min-width:0;height:48px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;padding:0 14px}
-.signup input::placeholder{color:#8f9bc0}
-.footer-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#8f9bc0}
+.signup input::placeholder{color:#8fa7bb}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);font-size:12.5px;color:#8fa7bb}
 
 /* Modal */
 .modal{border:0;padding:0;border-radius:24px;width:min(560px,calc(100% - 28px));max-height:calc(100dvh - 32px);box-shadow:0 40px 120px -30px rgba(6,38,75,.6);color:var(--ink)}

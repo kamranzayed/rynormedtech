@@ -104,6 +104,12 @@ window.runQA = async () => {
     document.getElementById('quizAgain').click(); await wait(30);
     ok(/Question 1 of 5/i.test(document.getElementById('quizBody').innerText), 'Quiz restarts');
   }
+  if (document.querySelector('[data-week-rows]')) {
+    document.querySelector('[data-mode=pd]').click(); await wait(50);
+    ok(document.querySelector('[data-stat=days]').textContent === '7' && document.querySelectorAll('[data-week-rows] .week-row').length === 7, 'PD week view shows 7 nights');
+    document.querySelector('[data-mode=hd]').click(); await wait(50);
+    ok(document.querySelector('[data-stat=visits]').textContent === '3', 'HD week view shows 3 centre visits');
+  }
   if (window.__seek) {
     const play = document.getElementById('play'); window.__seek(41); await wait(60);
     ok(/Dwell/.test(document.getElementById('badgeText').textContent), 'Video seek lands on Dwell');

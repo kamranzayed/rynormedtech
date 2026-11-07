@@ -53,7 +53,7 @@
   <section class="page-hero"><div class="container" data-reveal>
     <p class="eyebrow">Supplies</p>
     <h1 data-i18n="sup.title">Peritoneal dialysis supplies.</h1>
-    <p class="lead">Fluid bags, tubing, transfer sets, catheters and accessories. Every product shows its status, so you always know what you can order today.</p>
+    <p class="lead">Fluid bags, tubing, transfer sets, catheters, mini-caps and cleaning supplies for CAPD and APD. Our supplies are not available to order yet. Tap Notify me to hear first when they are.</p>
     <div class="actions"><button class="btn" data-modal="quote">Request a quote</button><button class="btn light" data-modal="distributor">Become a distributor</button></div>
     <p class="photo-note"><b>Photos coming soon.</b> Real product photography is being prepared. Drawings are shown for now.</p>
   </div></section>
@@ -77,12 +77,12 @@
 
 <div class="drawer" id="drawer" aria-hidden="true"><div class="drawer-bg" data-close></div><aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle"><button class="close" data-close aria-label="Close">×</button><div id="drawerBody"></div></aside></div>
 
-<script src="assets/products.js?v=6ead6ee578"></script>
-<script src="assets/proto.js?v=e7d80382ac"></script>
+<script src="assets/products.js?v=eb2e21ae68"></script>
+<script src="assets/proto.js?v=167b28ab2b"></script>
 <script>
 (() => {
   const P = window.RYNOR_PRODUCTS, S = window.RYNOR_STATUS;
-  const cats = [['all', 'All'], ['bags', 'Fluid bags'], ['tubing', 'Tubing'], ['transfer-sets', 'Transfer sets'], ['catheters', 'Catheters'], ['caps', 'Caps & accessories']];
+  const cats = [['all', 'All'], ['bags', 'Fluid bags'], ['tubing', 'Tubing'], ['transfer-sets', 'Transfer sets'], ['catheters', 'Catheters'], ['caps', 'Caps & cleaning']];
   const params = new URLSearchParams(location.search);
   let cat = params.get('category') || 'all', avail = 'all', q = '';
   const chips = document.getElementById('chips');

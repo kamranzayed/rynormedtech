@@ -56,6 +56,23 @@ window.RYNOR_HI = {
   'Configuration confirmed on enquiry': 'पूछताछ पर कॉन्फ़िगरेशन की पुष्टि', 'Compatibility to be confirmed': 'अनुकूलता की पुष्टि बाकी', 'Connector configuration on request': 'कनेक्टर कॉन्फ़िगरेशन अनुरोध पर',
   'Swan-neck variants': 'स्वान-नेक प्रकार', 'Curled variants': 'कर्ल्ड प्रकार', 'Sizes and specifications in development': 'आकार और विनिर्देश विकास में', 'Mini-caps': 'मिनी-कैप', 'Disinfection accessories': 'डिसइन्फ़ेक्शन एक्सेसरीज़', 'Packaging in development': 'पैकेजिंग विकास में',
 
+  // Supplies: added products and updated wording
+  'Caps & cleaning': 'कैप और सफ़ाई', 'Mini-caps': 'मिनी-कैप', 'Supplies: not yet available to order': 'सप्लाई: अभी ऑर्डर के लिए उपलब्ध नहीं',
+  'Our supplies are not available to order yet. Ask to be notified the moment they can be ordered.': 'हमारी सप्लाई अभी ऑर्डर के लिए उपलब्ध नहीं है। ऑर्डर उपलब्ध होते ही सूचना पाने के लिए अनुरोध करें।',
+  'Fluid bags, tubing, transfer sets, catheters, mini-caps and cleaning supplies for CAPD and APD. Our supplies are not available to order yet. Tap Notify me to hear first when they are.': 'CAPD और APD के लिए फ़्लूइड बैग, ट्यूबिंग, ट्रांसफ़र सेट, कैथेटर, मिनी-कैप और सफ़ाई की सप्लाई। हमारी सप्लाई अभी ऑर्डर के लिए उपलब्ध नहीं है। उपलब्ध होते ही सबसे पहले जानने के लिए "मुझे सूचित करें" दबाएँ।',
+  '5 litre dialysis fluid bags for automated peritoneal dialysis (APD), planned for use with the RYNOR machine.': 'ऑटोमेटेड पेरिटोनियल डायलिसिस (APD) के लिए 5 लीटर के डायलिसिस फ़्लूइड बैग, जिन्हें RYNOR मशीन के साथ इस्तेमाल के लिए तैयार किया जा रहा है।',
+  'APD tubing set': 'APD ट्यूबिंग सेट', 'Cycler tubing set for automated peritoneal dialysis, connecting the 5 L fluid bags, the APD machine and the patient line.': 'ऑटोमेटेड पेरिटोनियल डायलिसिस के लिए साइक्लर ट्यूबिंग सेट, जो 5 लीटर फ़्लूइड बैग, APD मशीन और मरीज़ की लाइन को जोड़ता है।',
+  'For use with the RYNOR cycler': 'RYNOR साइक्लर के साथ इस्तेमाल के लिए',
+  'Protective mini-caps that close the connection after each exchange, used by CAPD and APD patients.': 'सुरक्षा मिनी-कैप, जो हर एक्सचेंज के बाद कनेक्शन को बंद करते हैं, CAPD और APD दोनों मरीज़ों के लिए।', 'For CAPD and APD': 'CAPD और APD के लिए', 'Single use': 'एक बार इस्तेमाल के लिए',
+  'Exit-site care kit': 'एग्ज़िट साइट देखभाल किट', 'Sterile gauze, dressings and antiseptic for cleaning and protecting the catheter exit site, as advised by your PD nurse.': 'कैथेटर की एग्ज़िट साइट को साफ़ और सुरक्षित रखने के लिए स्टेराइल गॉज़, ड्रेसिंग और एंटीसेप्टिक, आपकी पीडी नर्स की सलाह के अनुसार।',
+  'Sterile gauze and dressings': 'स्टेराइल गॉज़ और ड्रेसिंग', 'Antiseptic for exit-site cleaning': 'एग्ज़िट साइट की सफ़ाई के लिए एंटीसेप्टिक', 'For daily catheter care': 'रोज़ाना कैथेटर देखभाल के लिए',
+  'Hand rub & face masks': 'हैंड रब और फ़ेस मास्क', 'Alcohol-based hand rub and face masks, used before every connection to keep exchanges clean.': 'अल्कोहल वाला हैंड रब और फ़ेस मास्क, हर कनेक्शन से पहले इस्तेमाल होते हैं ताकि एक्सचेंज साफ़-सुथरा रहे।',
+  'Alcohol-based hand rub': 'अल्कोहल वाला हैंड रब', 'Face masks': 'फ़ेस मास्क', 'Used before every connection': 'हर कनेक्शन से पहले इस्तेमाल',
+  'Alcohol swabs & surface wipes': 'अल्कोहल स्वैब और सतह साफ़ करने वाले वाइप्स', 'Alcohol swabs and disinfectant wipes for cleaning the work surface and equipment before an exchange.': 'एक्सचेंज से पहले काम की जगह और उपकरण साफ़ करने के लिए अल्कोहल स्वैब और डिसइन्फ़ेक्टेंट वाइप्स।',
+  'Alcohol swabs': 'अल्कोहल स्वैब', 'Surface disinfectant wipes': 'सतह डिसइन्फ़ेक्टेंट वाइप्स', 'For a clean exchange area': 'साफ़ एक्सचेंज जगह के लिए',
+  'See the planned PD range for your patients and ask to be notified when it can be ordered.': 'अपने मरीज़ों के लिए योजनाबद्ध पीडी रेंज देखें और ऑर्डर उपलब्ध होने पर सूचना के लिए अनुरोध करें।',
+  'None at present. All supply categories are currently not available. Use Notify me in the supplies catalogue to hear first when they can be ordered.': 'अभी कोई नहीं। सभी सप्लाई श्रेणियाँ फ़िलहाल उपलब्ध नहीं हैं। ऑर्डर उपलब्ध होते ही सबसे पहले जानने के लिए सप्लाई सूची में "मुझे सूचित करें" का उपयोग करें।',
+
   // Supplies page
   'Peritoneal dialysis supplies.': 'पेरिटोनियल डायलिसिस सप्लाई।', 'Fluid bags, tubing, transfer sets, catheters and accessories. Every product shows its status, so you always know what you can order today.': 'फ़्लूइड बैग, ट्यूबिंग, ट्रांसफ़र सेट, कैथेटर और एक्सेसरीज़। हर उत्पाद अपनी स्थिति दिखाता है, ताकि आपको हमेशा पता रहे कि आज क्या ऑर्डर किया जा सकता है।',
   'Become a distributor': 'वितरक बनें', 'Photos coming soon.': 'फ़ोटो जल्द आ रही हैं।', 'Real product photography is being prepared. Drawings are shown for now.': 'असली उत्पाद की फ़ोटो तैयार की जा रही हैं। अभी चित्र दिखाए गए हैं।',

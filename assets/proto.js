@@ -89,7 +89,7 @@
     });
     observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['aria-label', 'placeholder'] });
   };
-  const I18N_V = '4a926bad95';
+  const I18N_V = 'b44dbb0b96';
   let dictLoading;
   const loadDict = () => dictLoading ||= window.RYNOR_HI ? Promise.resolve() : new Promise(resolve => {
     const tag = document.createElement('script');

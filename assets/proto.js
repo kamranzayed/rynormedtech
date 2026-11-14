@@ -89,7 +89,7 @@
     });
     observer.observe(document.body, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ['aria-label', 'placeholder'] });
   };
-  const I18N_V = 'b44dbb0b96';
+  const I18N_V = '82ab2455c6';
   let dictLoading;
   const loadDict = () => dictLoading ||= window.RYNOR_HI ? Promise.resolve() : new Promise(resolve => {
     const tag = document.createElement('script');
@@ -119,12 +119,12 @@
   const links = NAV.map(([href, key, label]) => `<a href="${href}" data-i18n="${key}" ${page === href.replace('.html', '') ? 'aria-current="page"' : ''}>${label}</a>`).join('');
   const lang = '<div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en">EN</button><button type="button" data-lang="hi">हिं</button></div>';
   const header = `<header class="site-header"><div class="container header-inner">
-    <a class="brand" href="index.html"><img src="assets/brand/rynor-logo.svg" alt="RYNOR Medtech"></a>
+    <a class="brand" href="index.html"><img src="assets/brand/rynor-logo.png" width="760" height="239" alt="RYNOR Medtech"></a>
     <nav class="nav" aria-label="Primary">${links}</nav>${lang}
     <button class="btn small" type="button" data-modal="contact" data-i18n="nav.contact">Contact</button>
     <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">${icon.menu}</button>
   </div></header>
-  <div class="mobile-menu" aria-hidden="true"><div class="mobile-menu-top"><a class="brand" href="index.html"><img src="assets/brand/rynor-logo.svg" alt="RYNOR Medtech"></a><button class="menu-toggle" style="display:inline-flex" type="button" aria-label="Close menu" data-close-menu>${icon.close}</button></div>
+  <div class="mobile-menu" aria-hidden="true"><div class="mobile-menu-top"><a class="brand" href="index.html"><img src="assets/brand/rynor-logo.png" width="760" height="239" alt="RYNOR Medtech"></a><button class="menu-toggle" style="display:inline-flex" type="button" aria-label="Close menu" data-close-menu>${icon.close}</button></div>
     <nav aria-label="Mobile">${links}</nav>${lang}
     <div class="actions" style="margin-top:24px">${WHATSAPP ? `<a class="btn wa" href="${waLink('Hello RYNOR, I would like to know more.')}" target="_blank" rel="noopener">${icon.wa.replace('<svg', '<svg fill="#fff"')}<span data-i18n="cta.wa">Chat on WhatsApp</span></a>` : ''}<button class="btn light" type="button" data-modal="contact" data-i18n="nav.contact">Contact</button></div>
   </div>`;
@@ -139,7 +139,7 @@
   </nav>
   <footer class="site-footer"><div class="container">
     <div class="footer-grid">
-      <div><span class="footer-brand"><img src="assets/brand/rynor-logo.svg" alt="RYNOR Medtech"></span><p style="font-size:14px;color:#b7c9d8;max-width:300px">An Indian company developing an automated peritoneal dialysis machine and a complete PD supply range.</p></div>
+      <div><span class="footer-brand"><img src="assets/brand/rynor-logo-light.png" width="760" height="239" alt="RYNOR Medtech"></span><p style="font-size:14px;color:#b7c9d8;max-width:300px">An Indian company developing an automated peritoneal dialysis machine and a complete PD supply range.</p></div>
       <div><h4>Explore</h4><a href="index.html#machine">Our machine</a><a href="supplies.html">Supplies</a><a href="pd-at-home.html">PD at home</a><a href="about.html">About RYNOR</a></div>
       <div><h4>Partners</h4><a href="doctors.html">For doctors</a><a href="investors.html">For investors</a><a href="supplies.html#distributors">Distributors</a><a href="privacy.html">Privacy notice</a></div>
       <div><h4 data-i18n="foot.updates">Get development updates</h4><p style="font-size:13.5px;color:#b7c9d8">Occasional, verified progress news. No spam.</p><form class="signup" data-signup><input type="email" required placeholder="Your email" aria-label="Your email"><button class="btn teal small" type="submit">Join</button></form><a href="mailto:${EMAIL}" style="margin-top:14px">${EMAIL}</a></div>

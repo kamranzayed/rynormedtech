@@ -34,6 +34,7 @@ button{font:inherit;cursor:pointer}
 .player-head strong{color:var(--navy)}
 .player-head span{color:var(--muted);font-size:12px}
 .scene-wrap{position:relative;background:#f4f9fb}
+.pd-video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#eef6fa}
 .scene{display:block;width:100%;height:auto}
 .caption{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;padding:16px 20px 6px;min-height:92px}
 .caption-badge{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--teal);padding:6px 12px;border-radius:999px;transition:background .4s}
@@ -209,332 +210,13 @@ button{font:inherit;cursor:pointer}
 
 <section class="section" id="apd" style="padding-top:24px"><div class="container">
   <div class="player">
-    <div class="player-head"><strong>APD, explained simply</strong><span id="duration">About a minute · No audio needed · Captions on</span></div>
-    <div class="scene-wrap">
-      <svg class="scene" viewBox="0 0 960 540" role="img" aria-labelledby="scene-title">
-        <title id="scene-title">Animated illustration of one night of automated peritoneal dialysis</title>
-        <defs>
-          <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop id="sky1" offset="0" stop-color="#0b1f44"/><stop id="sky2" offset="1" stop-color="#29457d"/></linearGradient>
-          <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eef5f9"/><stop offset="1" stop-color="#f7fbfd"/></linearGradient>
-          <clipPath id="win"><rect x="70" y="58" width="210" height="150" rx="12"/></clipPath>
-          <clipPath id="cavity"><ellipse cx="352" cy="330" rx="56" ry="17"/></clipPath>
-          <clipPath id="bagclip"><path d="M700 214 h120 a8 8 0 0 1 8 8 v14 a8 8 0 0 1 -8 8 h-120 a8 8 0 0 1 -8 -8 v-14 a8 8 0 0 1 8 -8z"/></clipPath>
-          <clipPath id="drainclip"><path d="M872 384 h52 a6 6 0 0 1 6 6 v62 a14 14 0 0 1 -14 14 h-36 a14 14 0 0 1 -14 -14 v-62 a6 6 0 0 1 6 -6z"/></clipPath>
-          <clipPath id="lens"><circle cx="0" cy="0" r="92"/></clipPath>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#06264b" flood-opacity=".14"/></filter>
-          <radialGradient id="lamp" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffe7b0" stop-opacity=".55"/><stop offset="1" stop-color="#ffe7b0" stop-opacity="0"/></radialGradient>
-        </defs>
-
-        <g id="nightScene">
-        <!-- Room -->
-        <rect width="960" height="540" fill="url(#wall)"/>
-        <rect y="472" width="960" height="68" fill="#e3ecf2"/>
-        <line x1="0" y1="472" x2="960" y2="472" stroke="#cfdce5"/>
-        <g clip-path="url(#win)">
-          <rect x="70" y="58" width="210" height="150" fill="url(#sky)"/>
-          <g id="stars" fill="#fff"><circle cx="100" cy="82" r="1.4"/><circle cx="150" cy="100" r="1"/><circle cx="205" cy="76" r="1.3"/><circle cx="250" cy="118" r="1"/><circle cx="118" cy="140" r="1.1"/><circle cx="232" cy="160" r="1.2"/></g>
-          <g id="moon"><circle cx="232" cy="96" r="16" fill="#f4f1de"/><circle cx="240" cy="90" r="14" fill="url(#sky)"/></g>
-          <circle id="sun" cx="175" cy="230" r="22" fill="#ffd27a" opacity="0"/>
-        </g>
-        <rect x="70" y="58" width="210" height="150" rx="12" fill="none" stroke="#c4d3de" stroke-width="6"/>
-        <line x1="175" y1="58" x2="175" y2="208" stroke="#c4d3de" stroke-width="4"/>
-        <circle id="lampglow" cx="780" cy="190" r="150" fill="url(#lamp)"/>
-
-        <!-- Bed -->
-        <rect x="52" y="250" width="26" height="222" rx="8" fill="#d6e2ea"/>
-        <rect x="62" y="356" width="574" height="44" rx="12" fill="#fff" stroke="#cbd8e1" stroke-width="2"/>
-        <rect x="62" y="398" width="574" height="18" rx="6" fill="#dbe6ed"/>
-        <rect x="80" y="414" width="14" height="58" rx="4" fill="#c9d6df"/><rect x="606" y="414" width="14" height="58" rx="4" fill="#c9d6df"/>
-        <ellipse cx="150" cy="346" rx="62" ry="17" fill="#fff" stroke="#cbd8e1" stroke-width="2"/>
-
-        <!-- Person lying down -->
-        <g id="person">
-          <path d="M196 312 C218 300 300 298 330 304 L420 310 C432 312 440 324 440 340 L440 356 L196 356 C186 346 186 322 196 312Z" fill="#9fc6d6"/>
-          <path d="M226 318 C262 312 300 312 318 316" stroke="#7fb0c4" stroke-width="2" fill="none"/>
-          <circle cx="160" cy="320" r="25" fill="#b98060"/>
-          <path d="M137 312 C140 292 172 286 184 304 C176 300 160 300 150 306Z" fill="#2b2321"/>
-          <path d="M150 324 q5 3 10 0" stroke="#6d4532" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <rect x="182" y="322" width="20" height="18" rx="6" fill="#b98060"/>
-          <!-- Peritoneal cavity, shown as a soft cut-away -->
-          <ellipse cx="352" cy="330" rx="56" ry="17" fill="#f6e2d6" stroke="#e3b9a2" stroke-width="1.5" stroke-dasharray="4 3"/>
-          <g clip-path="url(#cavity)"><rect id="bellyFluid" x="296" y="347" width="112" height="0" fill="#6fd6e8" opacity=".85"/></g>
-          <circle cx="360" cy="306" r="4.5" fill="#fff" stroke="#06264b" stroke-width="2"/>
-        </g>
-        <path d="M420 318 C470 304 560 304 636 318 L636 356 L410 356 C404 340 408 326 420 318Z" fill="#cfe6ee" stroke="#a9cbd8" stroke-width="2"/>
-        <path d="M450 330 C500 322 560 324 620 332" stroke="#b5d6e1" stroke-width="2" fill="none"/>
-
-        <!-- Bedside table and cycler -->
-        <rect x="660" y="330" width="196" height="142" rx="10" fill="#e2ebf1" stroke="#c6d4de" stroke-width="2"/>
-        <rect x="676" y="364" width="164" height="2" fill="#c6d4de"/>
-        <circle cx="758" cy="410" r="5" fill="#c6d4de"/>
-        <g filter="url(#soft)">
-          <rect x="680" y="246" width="160" height="84" rx="14" fill="#fff" stroke="#a9bccb" stroke-width="2"/>
-          <rect x="694" y="258" width="132" height="44" rx="7" fill="#06264b"/>
-          <text id="screen1" x="760" y="277" text-anchor="middle" font-size="12" font-weight="800" fill="#6fd6e8" letter-spacing="1.5">READY</text>
-          <text id="screen2" x="760" y="294" text-anchor="middle" font-size="10" font-weight="600" fill="#cfe6ee">Night therapy</text>
-          <text x="760" y="320" text-anchor="middle" font-size="9" font-weight="800" fill="#06264b" letter-spacing="2">RYNOR</text>
-          <circle cx="826" cy="316" r="4" id="led" fill="#6fd6e8"/>
-        </g>
-        <!-- Fresh fluid bag resting on the cycler's warming tray -->
-        <rect x="688" y="238" width="144" height="10" rx="4" fill="#dbe6ed"/>
-        <path d="M700 214 h120 a8 8 0 0 1 8 8 v14 a8 8 0 0 1 -8 8 h-120 a8 8 0 0 1 -8 -8 v-14 a8 8 0 0 1 8 -8z" fill="#eef8fb" stroke="#8fb8c8" stroke-width="1.5"/>
-        <g clip-path="url(#bagclip)"><rect id="bagFluid" x="692" y="214" width="136" height="30" fill="#6fd6e8" opacity=".75"/></g>
-        <!-- Drain bag hanging on the table -->
-        <path d="M898 356 v28" stroke="#a9bccb" stroke-width="2"/>
-        <path d="M872 384 h52 a6 6 0 0 1 6 6 v62 a14 14 0 0 1 -14 14 h-36 a14 14 0 0 1 -14 -14 v-62 a6 6 0 0 1 6 -6z" fill="#f7fafc" stroke="#a9bccb" stroke-width="1.5"/>
-        <g clip-path="url(#drainclip)"><rect id="drainFluid" x="866" y="466" width="64" height="0" fill="#f0b44c" opacity=".8"/></g>
-
-        <!-- Tubing: patient line and drain line, with animated flow -->
-        <path id="patientLine" d="M682 300 C610 300 584 246 520 252 C452 258 392 270 362 304" fill="none" stroke="#c9dbe5" stroke-width="5" stroke-linecap="round"/>
-        <path id="patientFlow" d="M682 300 C610 300 584 246 520 252 C452 258 392 270 362 304" fill="none" stroke="#6fd6e8" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 16" opacity="0"/>
-        <path id="drainLine" d="M840 310 C872 310 898 330 898 356" fill="none" stroke="#c9dbe5" stroke-width="5" stroke-linecap="round"/>
-        <path id="drainFlow" d="M840 310 C872 310 898 330 898 356" fill="none" stroke="#f0b44c" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14" opacity="0"/>
-
-        <!-- Labels -->
-        <g font-size="12.5" font-weight="700" fill="#06264b">
-          <text x="760" y="204" text-anchor="middle">Fresh fluid</text>
-          <text x="760" y="352" text-anchor="middle" font-size="11.5" fill="#566477">APD cycler</text>
-          <text x="900" y="488" text-anchor="middle">Drain bag</text>
-          <text x="352" y="384" text-anchor="middle" font-size="11.5" fill="#566477">Space inside the belly (shown cut away)</text>
-          <text x="560" y="238" text-anchor="middle" font-size="11.5" fill="#566477">Catheter tubing</text>
-        </g>
-
-        <!-- Magnifier: inside the belly -->
-        <line id="lensLine" x1="352" y1="322" x2="470" y2="214" stroke="#007a93" stroke-width="1.5" stroke-dasharray="4 4"/>
-        <g id="lensGroup" transform="translate(470 126)">
-          <circle r="98" fill="#fff" stroke="#007a93" stroke-width="3" filter="url(#soft)"/>
-          <g clip-path="url(#lens)">
-            <rect x="-100" y="-100" width="200" height="200" fill="#fdf7f3"/>
-            <!-- Blood vessel -->
-            <rect x="-100" y="-74" width="200" height="40" fill="#f3c6c3"/>
-            <path d="M-100 -74 H100 M-100 -34 H100" stroke="#d98c88" stroke-width="2"/>
-            <g id="cells"></g>
-            <!-- Peritoneum -->
-            <path d="M-100 -6 C-70 -14 -40 2 -10 -6 S50 2 100 -8 V8 C60 16 30 2 -10 10 S-70 16 -100 8Z" fill="#efc4a6" stroke="#d9a283" stroke-width="1.5"/>
-            <!-- Dialysis fluid -->
-            <rect id="lensFluid" x="-100" y="18" width="200" height="82" fill="#6fd6e8" opacity=".55"/>
-            <g id="waste"></g>
-          </g>
-          <g font-size="10.5" font-weight="700" fill="#06264b">
-            <text x="0" y="-80" text-anchor="middle">Tiny blood vessel</text>
-            <text x="0" y="-14" text-anchor="middle" fill="#8a4f33">Belly lining (peritoneum)</text>
-            <text id="lensFluidLabel" x="0" y="66" text-anchor="middle">Dialysis fluid</text>
-          </g>
-          <text x="0" y="-108" text-anchor="middle" font-size="12.5" font-weight="800" fill="#007a93">INSIDE THE BELLY</text>
-        </g>
-        </g>
-        <!-- ===== Scene 0: before PD, tired of centre-based haemodialysis ===== -->
-        <g id="hemoScene" opacity="0">
-          <rect width="960" height="540" fill="#f1f5f8"/>
-          <rect y="456" width="960" height="84" fill="#dfe7ee"/>
-          <line x1="0" y1="456" x2="960" y2="456" stroke="#c9d6df"/>
-          <text x="60" y="62" font-size="13" font-weight="800" fill="#566477" letter-spacing="1.5">DIALYSIS CENTRE</text>
-          <!-- Wall clock: hours passing -->
-          <circle cx="132" cy="150" r="46" fill="#fff" stroke="#c4d3de" stroke-width="4"/>
-          <g stroke="#c4d3de" stroke-width="3"><path d="M132 110v8M132 182v8M92 150h8M164 150h8"/></g>
-          <path id="hemoHour" d="M132 150 V124" stroke="#06264b" stroke-width="4" stroke-linecap="round"/>
-          <path id="hemoMin" d="M132 150 V114" stroke="#007a93" stroke-width="2.5" stroke-linecap="round"/>
-          <text x="132" y="222" text-anchor="middle" font-size="12" font-weight="700" fill="#566477">About 4 hours</text>
-          <!-- Recliner and tired patient -->
-          <path d="M250 300 L300 236 L330 246 L292 310Z" fill="#7f9fb8"/>
-          <rect x="280" y="300" width="190" height="34" rx="12" fill="#8fb0c6"/>
-          <rect x="452" y="290" width="70" height="20" rx="8" fill="#8fb0c6"/>
-          <rect x="300" y="334" width="14" height="122" rx="4" fill="#9fb3c2"/><rect x="430" y="334" width="14" height="122" rx="4" fill="#9fb3c2"/>
-          <path d="M300 250 C312 236 344 240 350 256 L372 300 L306 304Z" fill="#9fc6d6"/>
-          <path d="M366 300 L470 300 L478 280 L500 286 L488 318 L370 318Z" fill="#5a7187"/>
-          <g id="hemoHead"><circle cx="304" cy="226" r="23" fill="#b98060"/>
-          <path d="M282 220 C284 200 318 196 326 214 C318 208 298 208 290 216Z" fill="#2b2321"/>
-          <path d="M296 228 q4 -2 8 0 M310 228 q4 -2 8 0" stroke="#6d4532" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <path d="M302 240 q6 -3 12 0" stroke="#6d4532" stroke-width="2" fill="none" stroke-linecap="round"/></g>
-          <path d="M344 268 C370 278 392 282 416 282" stroke="#b98060" stroke-width="12" stroke-linecap="round" fill="none"/>
-          <!-- Haemodialysis machine and lines to the arm -->
-          <rect x="560" y="150" width="120" height="306" rx="14" fill="#fff" stroke="#a9bccb" stroke-width="2"/>
-          <rect x="574" y="166" width="92" height="56" rx="6" fill="#06264b"/>
-          <text x="620" y="190" text-anchor="middle" font-size="10" font-weight="800" fill="#f0b44c">HD</text>
-          <text id="hemoTimer" x="620" y="208" text-anchor="middle" font-size="10" font-weight="700" fill="#cfe6ee">1:12 left</text>
-          <circle cx="620" cy="270" r="26" fill="#eef3f6" stroke="#a9bccb" stroke-width="2"/>
-          <g id="hemoPump"><path d="M620 250 V290 M600 270 H640" stroke="#7f9fb8" stroke-width="5" stroke-linecap="round"/></g>
-          <rect x="590" y="318" width="60" height="90" rx="10" fill="#f4f8fa" stroke="#c4d3de"/>
-          <path d="M416 284 C470 292 520 300 574 270" stroke="#d98c88" stroke-width="4" fill="none"/>
-          <path d="M416 290 C476 304 524 316 590 340" stroke="#c97b70" stroke-width="4" fill="none" opacity=".8"/>
-          <!-- Weekly routine -->
-          <g filter="url(#soft)"><rect x="716" y="96" width="196" height="200" rx="16" fill="#fff" stroke="#dbe5ec" stroke-width="1.5"/></g>
-          <text x="736" y="126" font-size="13" font-weight="800" fill="#06264b">Every week</text>
-          <g id="hemoWeek" font-size="11" font-weight="700"></g>
-          <text x="736" y="262" font-size="11.5" font-weight="600" fill="#566477">3 sessions a week</text>
-          <text x="736" y="280" font-size="11.5" font-weight="600" fill="#566477">plus travel time</text>
-          <!-- Thought -->
-          <g id="hemoThought" opacity="0">
-            <circle cx="334" cy="186" r="5" fill="#fff" stroke="#c4d3de"/><circle cx="350" cy="168" r="8" fill="#fff" stroke="#c4d3de"/>
-            <rect x="350" y="96" width="196" height="56" rx="20" fill="#fff" stroke="#c4d3de" stroke-width="1.5"/>
-            <text x="448" y="120" text-anchor="middle" font-size="12.5" font-weight="800" fill="#06264b">Is there a treatment</text>
-            <text x="448" y="138" text-anchor="middle" font-size="12.5" font-weight="800" fill="#06264b">I can do at home?</text>
-          </g>
-        </g>
-
-        <!-- ===== Scene A: doctor visit ===== -->
-        <g id="clinicScene" opacity="0">
-          <rect width="960" height="540" fill="#f4f9fb"/>
-          <rect y="452" width="960" height="88" fill="#e3ecf2"/>
-          <line x1="0" y1="452" x2="960" y2="452" stroke="#cfdce5"/>
-          <!-- Wall: kidney-care poster and clock -->
-          <rect x="94" y="86" width="150" height="190" rx="12" fill="#fff" stroke="#cbd8e1" stroke-width="2"/>
-          <text x="169" y="118" text-anchor="middle" font-size="12" font-weight="800" fill="#06264b">Kidney care</text>
-          <path d="M146 150 C122 150 120 196 140 214 C152 226 168 214 162 196 C158 182 170 172 166 160 C162 152 154 150 146 150Z" fill="#e8a59a" stroke="#c97b70" stroke-width="2"/>
-          <path d="M192 150 C216 150 218 196 198 214 C186 226 170 214 176 196 C180 182 168 172 172 160 C176 152 184 150 192 150Z" fill="#e8a59a" stroke="#c97b70" stroke-width="2"/>
-          <path d="M162 196 C166 220 168 236 169 250 M176 196 C172 220 170 236 169 250" stroke="#c97b70" stroke-width="2" fill="none"/>
-          <circle cx="840" cy="120" r="30" fill="#fff" stroke="#cbd8e1" stroke-width="3"/>
-          <path id="clinicClockHand" d="M840 120 V100" stroke="#06264b" stroke-width="3" stroke-linecap="round"/>
-          <path d="M840 120 H854" stroke="#06264b" stroke-width="3" stroke-linecap="round"/>
-          <!-- Patient (left, seated) -->
-          <g id="clinicPatient">
-            <rect x="196" y="338" width="86" height="12" rx="5" fill="#9fb3c2"/>
-            <rect x="200" y="350" width="8" height="102" rx="3" fill="#9fb3c2"/><rect x="270" y="350" width="8" height="102" rx="3" fill="#9fb3c2"/>
-            <rect x="184" y="250" width="12" height="100" rx="5" fill="#9fb3c2"/>
-            <path d="M206 262 C206 240 262 238 270 262 L276 340 L202 340Z" fill="#9fc6d6"/>
-            <path d="M226 340 L306 340 L310 440 L294 440 L288 360 L232 360Z" fill="#5a7187"/>
-            <circle cx="238" cy="222" r="24" fill="#b98060"/>
-            <path d="M214 216 C216 196 252 190 262 210 C252 204 236 204 226 212Z" fill="#2b2321"/>
-            <path d="M262 286 C286 290 300 300 318 304" stroke="#9fc6d6" stroke-width="14" stroke-linecap="round" fill="none"/>
-          </g>
-          <!-- Desk -->
-          <rect x="300" y="318" width="380" height="16" rx="6" fill="#d6e2ea"/>
-          <rect x="314" y="334" width="12" height="118" rx="4" fill="#c4d3de"/><rect x="654" y="334" width="12" height="118" rx="4" fill="#c4d3de"/>
-          <rect x="440" y="262" width="104" height="58" rx="6" fill="#06264b"/>
-          <rect x="482" y="318" width="20" height="4" fill="#9fb3c2"/>
-          <path d="M470 292 C478 276 490 276 492 290 M498 290 C500 276 512 276 518 292" stroke="#6fd6e8" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <!-- Doctor (right, seated, white coat) -->
-          <g id="clinicDoctor">
-            <rect x="700" y="338" width="86" height="12" rx="5" fill="#9fb3c2"/>
-            <rect x="706" y="350" width="8" height="102" rx="3" fill="#9fb3c2"/><rect x="772" y="350" width="8" height="102" rx="3" fill="#9fb3c2"/>
-            <path d="M708 262 C716 238 770 240 774 262 L780 340 L702 340Z" fill="#fff" stroke="#cbd8e1" stroke-width="2"/>
-            <path d="M741 248 L741 340" stroke="#cbd8e1" stroke-width="2"/>
-            <path d="M728 252 C722 282 736 296 748 286" stroke="#007a93" stroke-width="3" fill="none"/>
-            <circle cx="749" cy="286" r="5" fill="#007a93"/>
-            <rect x="752" y="276" width="18" height="10" rx="2" fill="#6fd6e8"/>
-            <circle cx="741" cy="222" r="24" fill="#8d5a3f"/>
-            <path d="M717 218 C716 196 760 192 766 214 C756 208 734 206 724 214Z" fill="#1f1a18"/>
-            <path d="M712 288 C690 292 670 300 652 306" stroke="#fff" stroke-width="14" stroke-linecap="round" fill="none"/>
-          </g>
-          <!-- Checklist card -->
-          <g id="clinicCard" filter="url(#soft)">
-            <rect x="338" y="34" width="300" height="222" rx="16" fill="#fff" stroke="#dbe5ec" stroke-width="1.5"/>
-            <text x="360" y="64" font-size="14" font-weight="800" fill="#06264b">Is PD suitable for me?</text>
-            <g id="clinicItems" font-size="12.5" font-weight="600" fill="#08274b"></g>
-            <g id="clinicResult" opacity="0">
-              <rect x="354" y="206" width="268" height="36" rx="18" fill="#e3f4f6" stroke="#007a93" stroke-width="1.5"/>
-              <circle cx="374" cy="224" r="10" fill="#007a93"/>
-              <path d="M369 224 l3 3 l6 -6" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-              <text x="392" y="229" font-size="12.5" font-weight="800" fill="#06264b">Suitable for PD · next step</text>
-            </g>
-          </g>
-        </g>
-
-        <!-- ===== Scene B: catheter placement (minor procedure) ===== -->
-        <g id="surgeryScene" opacity="0">
-          <rect width="960" height="540" fill="#eef5f9"/>
-          <rect y="460" width="960" height="80" fill="#dde8ef"/>
-          <line x1="0" y1="460" x2="960" y2="460" stroke="#c9d8e2"/>
-          <!-- Overhead light -->
-          <path d="M300 0 V44" stroke="#b9c8d3" stroke-width="6"/>
-          <ellipse cx="300" cy="58" rx="74" ry="20" fill="#fff" stroke="#b9c8d3" stroke-width="3"/>
-          <path id="surgeryBeam" d="M232 64 L368 64 L430 330 L170 330Z" fill="#fff8df" opacity=".55"/>
-          <!-- Monitor -->
-          <path d="M100 460 V250" stroke="#b9c8d3" stroke-width="6"/>
-          <rect x="52" y="168" width="110" height="84" rx="10" fill="#06264b"/>
-          <path id="ecg" d="M60 214 h14 l6 -16 l7 30 l6 -14 h16 l6 -16 l7 30 l6 -14 h28" fill="none" stroke="#6fd6e8" stroke-width="2.5" stroke-linejoin="round" stroke-dasharray="1" pathLength="1"/>
-          <text x="107" y="244" text-anchor="middle" font-size="10" font-weight="700" fill="#9fd3de">Monitoring</text>
-          <!-- Procedure table and patient under a sheet -->
-          <rect x="170" y="338" width="420" height="22" rx="8" fill="#c4d3de"/>
-          <rect x="370" y="360" width="22" height="100" fill="#b9c8d3"/>
-          <rect x="320" y="448" width="120" height="12" rx="5" fill="#b9c8d3"/>
-          <circle cx="206" cy="318" r="22" fill="#b98060"/>
-          <path d="M186 306 C192 290 222 290 228 306Z" fill="#9fd3de"/>
-          <path d="M224 314 C260 300 520 300 580 316 L586 338 L222 338Z" fill="#9fd3de" stroke="#7fbccb" stroke-width="2"/>
-          <ellipse cx="360" cy="308" rx="20" ry="6" fill="#f6e2d6" stroke="#e3b9a2" stroke-width="1.5"/>
-          <!-- Surgeon in scrubs -->
-          <g id="surgeon">
-            <path d="M400 236 C404 210 456 210 462 236 L468 304 L396 304Z" fill="#2f8fa3"/>
-            <circle cx="430" cy="192" r="22" fill="#8d5a3f"/>
-            <path d="M408 186 C410 166 452 166 454 186Z" fill="#2f8fa3"/>
-            <rect x="414" y="196" width="32" height="14" rx="5" fill="#cfe6ee"/>
-            <path d="M404 252 C392 276 378 292 368 302" stroke="#2f8fa3" stroke-width="13" stroke-linecap="round" fill="none"/>
-            <circle cx="366" cy="304" r="6" fill="#cfe6ee"/>
-          </g>
-          <!-- Inset: where the catheter sits -->
-          <line x1="378" y1="306" x2="640" y2="250" stroke="#007a93" stroke-width="1.5" stroke-dasharray="4 4"/>
-          <g transform="translate(730 230)" id="cathInset">
-            <circle r="128" fill="#fff" stroke="#007a93" stroke-width="3" filter="url(#soft)"/>
-            <text y="-140" text-anchor="middle" font-size="12.5" font-weight="800" fill="#007a93">THE CATHETER</text>
-            <path d="M-104 -40 C-60 -70 60 -70 104 -40" fill="none" stroke="#c98e6a" stroke-width="10" stroke-linecap="round"/>
-            <path d="M-96 -24 C-50 -50 50 -50 96 -24" fill="none" stroke="#e7b99a" stroke-width="6" stroke-linecap="round"/>
-            <path d="M-90 -12 C-60 70 60 70 90 -12" fill="#fbeee6" stroke="#e3b9a2" stroke-width="2" stroke-dasharray="5 4"/>
-            <path id="cathPath" d="M-70 -86 C-60 -70 -40 -64 -26 -52 C-14 -40 -6 -10 0 14 C6 38 30 46 34 30 C38 14 18 10 14 24" fill="none" stroke="#ffffff" stroke-width="9" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
-            <path id="cathCore" d="M-70 -86 C-60 -70 -40 -64 -26 -52 C-14 -40 -6 -10 0 14 C6 38 30 46 34 30 C38 14 18 10 14 24" fill="none" stroke="#7fb0c4" stroke-width="3" stroke-linecap="round" pathLength="1" stroke-dasharray="1" stroke-dashoffset="1"/>
-            <rect id="cathCuff" x="-34" y="-64" width="14" height="9" rx="3" fill="#d9c8a8" transform="rotate(35 -27 -59)" opacity="0"/>
-            <g font-size="10.5" font-weight="700" fill="#06264b">
-              <text x="-62" y="-96" text-anchor="middle">Exit site</text>
-              <text x="70" y="-62" text-anchor="middle" fill="#8a4f33">Skin &amp; belly wall</text>
-              <text x="0" y="88" text-anchor="middle">Space inside the belly</text>
-              <text id="cathLabel" x="64" y="36" text-anchor="middle" fill="#007a93" opacity="0">Soft tube</text>
-            </g>
-          </g>
-        </g>
-
-        <!-- ===== Scene C: healing time, then training ===== -->
-        <g id="healScene" opacity="0">
-          <rect width="960" height="540" fill="#f4f9fb"/>
-          <!-- Calendar -->
-          <g filter="url(#soft)">
-            <rect x="70" y="70" width="380" height="380" rx="20" fill="#fff" stroke="#dbe5ec" stroke-width="1.5"/>
-          </g>
-          <rect x="70" y="70" width="380" height="58" rx="20" fill="#06264b"/>
-          <rect x="70" y="108" width="380" height="20" fill="#06264b"/>
-          <text x="96" y="106" font-size="15" font-weight="800" fill="#fff">Healing time</text>
-          <text id="healDay" x="424" y="106" text-anchor="end" font-size="15" font-weight="800" fill="#6fd6e8">Day 1</text>
-          <g id="calendar" font-size="12" font-weight="700"></g>
-          <rect x="96" y="410" width="328" height="8" rx="4" fill="#e6eef3"/>
-          <rect id="healBar" x="96" y="410" width="0" height="8" rx="4" fill="#007a93"/>
-          <text x="96" y="438" font-size="11.5" font-weight="600" fill="#566477">Often around 2 weeks · your team decides</text>
-          <!-- Training -->
-          <g id="trainCard">
-            <g filter="url(#soft)"><rect x="500" y="70" width="390" height="380" rx="20" fill="#fff" stroke="#dbe5ec" stroke-width="1.5"/></g>
-            <text x="526" y="106" font-size="15" font-weight="800" fill="#06264b">Training with a PD nurse</text>
-            <rect x="560" y="236" width="270" height="12" rx="5" fill="#d6e2ea"/>
-            <rect x="640" y="186" width="96" height="50" rx="9" fill="#fff" stroke="#a9bccb" stroke-width="2"/>
-            <rect x="650" y="194" width="76" height="22" rx="4" fill="#06264b"/>
-            <text x="688" y="209" text-anchor="middle" font-size="9" font-weight="800" fill="#6fd6e8">TRAINING</text>
-            <!-- Nurse -->
-            <path d="M770 172 C774 152 812 152 816 172 L820 236 L766 236Z" fill="#2f8fa3"/>
-            <circle cx="793" cy="138" r="18" fill="#8d5a3f"/>
-            <path d="M775 134 C776 118 810 116 812 134 C804 128 786 128 780 134Z" fill="#1f1a18"/>
-            <path id="nurseArm" d="M772 186 C760 196 748 200 736 202" stroke="#2f8fa3" stroke-width="10" stroke-linecap="round" fill="none"/>
-            <!-- Patient -->
-            <path d="M560 176 C564 156 600 156 604 176 L608 236 L556 236Z" fill="#9fc6d6"/>
-            <circle cx="582" cy="142" r="18" fill="#b98060"/>
-            <path d="M564 138 C566 122 598 120 600 136 C592 130 574 130 570 138Z" fill="#2b2321"/>
-            <g id="trainItems" font-size="12.5" font-weight="600" fill="#08274b"></g>
-          </g>
-        </g>
-
-        <text x="20" y="528" font-size="11" fill="#7a8a9b">Simplified illustration · Not to scale · Not operating instructions</text>
-      </svg>
-    </div>
-    <div class="caption" aria-live="polite">
-      <span class="caption-badge" id="badge"><i></i><span id="badgeText">Evening</span></span>
-      <div><h3 id="capTitle">Treatment is set up at bedtime</h3><p id="capText">The cycler and fresh fluid bags are ready. Your kidney-care team decides the prescription.</p></div>
-    </div>
-    <div class="controls">
-      <button class="play" id="play" aria-label="Pause"><svg viewBox="0 0 24 24" fill="currentColor" id="playIcon"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
-      <div class="scrub" id="scrub" role="slider" aria-label="Animation position" tabindex="0" aria-valuemin="0">
-        <div class="scrub-track" id="track"></div>
-        <div class="scrub-fill" id="fill"><div id="fillInner"></div></div>
-        <div class="scrub-head" id="head"></div>
-      </div>
-      <span class="time" id="time">0:00 / 0:42</span>
-    </div>
+    <div class="player-head"><strong>PD at home, explained simply</strong><span id="duration">2 min 20 s · APD and CAPD · No audio needed</span></div>
+    <video id="pdVideo" class="pd-video" controls playsinline preload="metadata" poster="assets/media/pd-at-home-poster.jpg" width="1920" height="1080" aria-label="Animated video: from haemodialysis to peritoneal dialysis at home, showing APD and CAPD">
+      <source src="assets/media/pd-at-home-video.mp4" type="video/mp4">
+      Your browser cannot play this video. <a href="assets/media/pd-at-home-video.mp4">Download the video</a>.
+    </video>
     <div class="chapters" id="chapters"></div>
-    <div class="player-foot"><span>An introduction to automated peritoneal dialysis (APD), not operating instructions for the RYNOR machine.</span><a href="#" style="color:var(--teal);font-weight:700">Read the transcript</a></div>
+    <div class="player-foot"><span>An introduction to peritoneal dialysis (APD and CAPD), not operating instructions for the RYNOR machine.</span><a href="#" style="color:var(--teal);font-weight:700">Read the transcript</a></div>
   </div>
 
   <p class="eyebrow" style="margin-top:72px">Your PD journey</p>
@@ -676,235 +358,62 @@ button{font:inherit;cursor:pointer}
 
 <script>
 (() => {
-  // --- Timeline: evening, cycle 1 in detail, cycles 2–4 condensed, morning ---
-  const SEG = []; let t0 = 0;
-  const add = (phase, cycle, dur) => { SEG.push({ phase, cycle, start: t0, end: t0 + dur }); t0 += dur; };
-  add('hemo', 0, 7); add('clinic', 0, 8); add('surgery', 0, 7); add('heal', 0, 8);
-  add('evening', 0, 3);
-  add('fill', 1, 5); add('dwell', 1, 7); add('drain', 1, 5);
-  for (let c = 2; c <= 4; c++) { add('fill', c, 1.8); add('dwell', c, 2.4); add('drain', c, 1.8); }
-  add('morning', 0, 4);
-  const TOTAL = t0, CYCLES = 4;
-  const COLORS = { hemo: '#d3c3c6', clinic: '#a7bfd1', surgery: '#8fb0c6', heal: '#b8cfdc', evening: '#c9d6df', fill: '#6fd6e8', dwell: '#9fd3de', drain: '#f0b44c', morning: '#c9d6df' };
-  const BADGE = { hemo: '#7a5a5e', clinic: '#06264b', surgery: '#06264b', heal: '#06264b', evening: '#566477', fill: '#007a93', dwell: '#0b6b80', drain: '#b07a1f', morning: '#566477' };
-
+  // PD video player: chapter buttons, step cards and the night timeline follow the video.
+  const v = document.getElementById('pdVideo');
   const $ = id => document.getElementById(id);
-  const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-  const lerp = (a, b, t) => a + (b - a) * t;
-  const ease = t => t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
-  const mixHex = (a, b, t) => { const pa = a.match(/\w\w/g).map(h => parseInt(h, 16)), pb = b.match(/\w\w/g).map(h => parseInt(h, 16)); return '#' + pa.map((v, i) => Math.round(lerp(v, pb[i], t)).toString(16).padStart(2, '0')).join(''); };
-  const fmt = s => { s = Math.round(s); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+  // Scene start times in seconds (from the video edit).
+  const T = { hd: 5.5, pros: 13, talk: 22.5, tests: 30, catheter: 36.5, heal: 43, apd: 49.5, evening: 53.5, fill: 58, dwell: 64.5, drain: 73, cycles: 78.5, morning: 84, capd: 89.5, capdSteps: 101, capdDay: 123.5, outro: 132 };
+  const CHAPTERS = [['Haemodialysis', T.hd], ['Pros & cons', T.pros], ['Ask the doctor', T.talk], ['Tests', T.tests], ['Catheter', T.catheter], ['Heal & train', T.heal], ['APD at night', T.apd], ['Fill', T.fill], ['Dwell', T.dwell], ['Drain', T.drain], ['Cycles 2–4', T.cycles], ['Morning', T.morning], ['CAPD', T.capd], ['CAPD steps', T.capdSteps], ['CAPD day', T.capdDay]];
+  // Which part of the video each step card plays.
+  const RANGE = { hemo: [T.hd, T.catheter], surgery: [T.catheter, T.heal], heal: [T.heal, T.apd], evening: [T.apd, T.capd], fill: [T.fill, T.dwell], dwell: [T.dwell, T.drain], drain: [T.drain, T.cycles] };
 
-  // Clock: 9:45 pm → 6:15 am. Each cycle: fill 12%, dwell 74%, drain 14% of its share of the night.
-  const START = 21 * 60 + 45, NIGHT0 = 22 * 60, CYC = (7 * 60 + 45) / CYCLES;
-  const share = { fill: [0, .12], dwell: [.12, .86], drain: [.86, 1] };
-  const clockAt = (seg, p) => {
-    if (seg.phase === 'evening') return START + 15 * p;
-    if (seg.phase === 'morning') return NIGHT0 + CYC * CYCLES + 30 * p;
-    const [a, b] = share[seg.phase]; return NIGHT0 + CYC * (seg.cycle - 1 + lerp(a, b, p));
-  };
-  const clockText = m => { m = ((Math.round(m) % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mm = m % 60; return `${(h % 12) || 12}:${String(mm).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`; };
+  const show = () => { const r = v.getBoundingClientRect(); if (r.top < 70 || r.bottom > innerHeight) v.closest('.player').scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+  const seek = (at, play) => { v.currentTime = at + 0.05; if (play) { const p = v.play(); if (p) p.catch(() => {}); } show(); };
 
-  const CAP = {
-    hemo: ['Before', 'Tired of hospital visits', 'Many people on haemodialysis travel to a centre about three times a week, for sessions of around four hours. Some ask their doctor about a treatment they can do at home.'],
-    clinic: ['A · Doctor visit', 'The doctor checks if PD is suitable', 'Tests check your health, kidney function, belly and home situation. If PD is suitable, the journey continues. If not, your kidney team explains other options.'],
-    surgery: ['B · Catheter', 'A minor procedure places the catheter', 'A surgical team places a soft, flexible tube in the belly, with anaesthesia so you do not feel the procedure. One end sits inside the belly; a short end comes out through the skin.'],
-    heal: ['C · Heal & train', 'Time to heal, then learn', 'The exit site needs time to heal, often around two weeks; your team decides. A PD nurse then trains you or a helper to use the cycler safely at home.'],
-    evening: ['D · At home', 'Treatment is set up at bedtime', 'The cycler and fresh fluid bags are ready. Your kidney-care team decides the prescription.'],
-    fill: ['Fill', 'Fresh fluid goes in', 'The cycler gently moves warmed dialysis fluid through the catheter into the space inside the belly.'],
-    dwell: ['Dwell', 'Waste moves into the fluid', 'The fluid rests for a set time. Waste and extra water pass from tiny blood vessels, across the belly lining, into the fluid. Blood stays inside the body.'],
-    drain: ['Drain', 'Used fluid comes out', 'The cycler drains the used fluid, now carrying waste and extra water, into the drain bag.'],
-    morning: ['Morning', 'Treatment is complete', 'The night’s cycles are finished. Many people go about their day; some also need a daytime exchange, as prescribed.']
-  };
-
-  // --- Build scrubber, chapters, night timeline ---
-  const track = $('track'), fillInner = $('fillInner');
-  SEG.forEach(s => {
-    const w = `${(s.end - s.start) / TOTAL * 100}%`;
-    const a = document.createElement('b'); a.style.width = w; a.style.background = COLORS[s.phase]; track.append(a);
-    const b = document.createElement('b'); b.style.width = `${(s.end - s.start) / TOTAL * 100}%`; b.style.background = COLORS[s.phase]; fillInner.append(b);
+  const chapters = CHAPTERS.map(([label, at]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = label; b.onclick = () => seek(at, true); $('chapters').append(b); return { b, at }; });
+  const cards = [...document.querySelectorAll('.step')].map(card => {
+    const key = (card.dataset.phase || card.dataset.phases).split(' ')[0];
+    card.onclick = () => seek(RANGE[key][0], true);
+    return { card, r: RANGE[key], bar: card.querySelector('.step-bar i') };
   });
-  const at = (phase, cycle) => SEG.find(x => x.phase === phase && (cycle === undefined || x.cycle === cycle)).start;
-  const chapterDefs = [['Before', at('hemo')], ['Doctor visit', at('clinic')], ['Catheter', at('surgery')], ['Heal & train', at('heal')], ['Evening', at('evening')], ['1 · Fill', at('fill', 1)], ['2 · Dwell', at('dwell', 1)], ['3 · Drain', at('drain', 1)], ['Cycles 2–4', at('fill', 2)], ['Morning', at('morning')]];
-  $('duration').textContent = `${Math.round(TOTAL)} seconds · No audio needed · Captions on`;
-  const chapters = chapterDefs.map(([label, at]) => { const b = document.createElement('button'); b.textContent = label; b.onclick = () => seek(at + .01, true); $('chapters').append(b); return { b, at }; });
+
+  // Night timeline under the steps.
+  const CYCLES = 4, CYC = (7 * 60 + 45) / CYCLES, NIGHT0 = 22 * 60;
   const nightCycles = [];
   for (let c = 1; c <= CYCLES; c++) {
     const el = document.createElement('div'); el.className = 'night-cycle';
-    el.innerHTML = `<b style="width:12%;background:${COLORS.fill}"></b><b style="width:74%;background:${COLORS.dwell}"></b><b style="width:14%;background:${COLORS.drain}"></b><span>Cycle ${c}</span>`;
+    el.innerHTML = `<b style="width:12%;background:#6fd6e8"></b><b style="width:74%;background:#9fd3de"></b><b style="width:14%;background:#f0b44c"></b><span>Cycle ${c}</span>`;
     $('nightCycles').append(el); nightCycles.push(el);
   }
-  document.querySelectorAll('.step').forEach(card => card.onclick = () => { const first = card.dataset.phase || card.dataset.phases.split(' ')[0]; const s = SEG.find(x => x.phase === first && (x.cycle === 1 || !x.cycle)); seek(s.start + .01, true); });
-
-  // --- Inside-the-belly particles ---
-  const NS = 'http://www.w3.org/2000/svg';
-  const mk = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.append(e); return e; };
-  const cells = Array.from({ length: 7 }, (_, i) => mk('ellipse', { rx: 9, ry: 5.5, fill: '#d9534f', opacity: .75 }, $('cells')));
-  const waste = Array.from({ length: 22 }, (_, i) => ({ el: mk('circle', { r: i % 4 === 0 ? 3.4 : 2.6, fill: i % 4 === 0 ? '#3d8fd1' : '#a86a14' }, $('waste')), x: -84 + (i * 53) % 168, y0: -66 + (i * 17) % 26, y1: 34 + (i * 23) % 52, d: (i % 11) * .035 }));
-
-  // --- Journey props ---
-  const check = (parent, x, y, text) => { const g = mk('g', { opacity: 0 }, parent); mk('circle', { cx: x + 9, cy: y - 4, r: 9, fill: '#e3f4f6', stroke: '#007a93', 'stroke-width': 1.5 }, g); mk('path', { d: `M${x + 5} ${y - 4} l3 3 l6 -6`, stroke: '#007a93', 'stroke-width': 2, fill: 'none', 'stroke-linecap': 'round' }, g); const tx = mk('text', { x: x + 26, y }, g); tx.textContent = text; return g; };
-  const clinicItems = ['Blood and kidney function tests', 'Health and belly check', 'Home space, helper and support', 'Risks, options and full cost of care'].map((txt, i) => check($('clinicItems'), 360, 96 + i * 28, txt));
-  const trainItems = ['Hand hygiene and exit-site care', 'Setting up the cycler each night', 'Spotting problems and who to call'].map((txt, i) => check($('trainItems'), 526, 298 + i * 40, txt));
-  const days = Array.from({ length: 21 }, (_, i) => {
-    const c = i % 7, r = Math.floor(i / 7), g = mk('g', {}, $('calendar'));
-    const rect = mk('rect', { x: 96 + c * 47, y: 146 + r * 84, width: 40, height: 70, rx: 9, fill: '#f4f8fa', stroke: '#e1e9ee' }, g);
-    const tx = mk('text', { x: 116 + c * 47, y: 186 + r * 84, 'text-anchor': 'middle', fill: '#8a9aab' }, g); tx.textContent = i + 1;
-    return { rect, tx };
-  });
-
-  const weekDays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((d, i) => {
-    const x = 736 + (i % 4) * 42, y = 144 + Math.floor(i / 4) * 52, g = mk('g', {}, $('hemoWeek'));
-    const r = mk('rect', { x, y, width: 36, height: 42, rx: 8, fill: '#f4f8fa', stroke: '#e1e9ee' }, g);
-    const tx = mk('text', { x: x + 18, y: y + 26, 'text-anchor': 'middle', fill: '#8a9aab' }, g); tx.textContent = d;
-    return { r, tx, session: [0, 2, 4].includes(i) };
-  });
-
-  // --- Render state for time t ---
-  let t = 0, playing = !matchMedia('(prefers-reduced-motion: reduce)').matches, last = 0, raf = 0;
-  const segAt = time => SEG.find(s => time >= s.start && time < s.end) || SEG[SEG.length - 1];
-  const fillsDone = time => SEG.filter(s => s.phase === 'fill').reduce((n, s) => n + clamp((time - s.start) / (s.end - s.start)), 0);
-  const drainsDone = time => SEG.filter(s => s.phase === 'drain').reduce((n, s) => n + clamp((time - s.start) / (s.end - s.start)), 0);
-
-  const render = () => {
-    const seg = segAt(t), p = clamp((t - seg.start) / (seg.end - seg.start)), ph = seg.phase;
-    const sceneOf = phase => ['hemo', 'clinic', 'surgery', 'heal'].includes(phase) ? phase : 'night';
-    const ranges = {}; SEG.forEach(x => { const k = sceneOf(x.phase); ranges[k] = ranges[k] ? [ranges[k][0], x.end] : [x.start, x.end]; });
-    for (const k in ranges) { const [a, b] = ranges[k]; const dist = t < a ? a - t : t > b ? t - b : 0; document.getElementById(k + 'Scene').setAttribute('opacity', clamp(1 - dist / .5)); }
-    // Before · centre haemodialysis
-    if (ph === 'hemo') {
-      $('hemoMin').setAttribute('transform', `rotate(${t * 220} 132 150)`); $('hemoHour').setAttribute('transform', `rotate(${t * 18} 132 150)`);
-      $('hemoPump').setAttribute('transform', `rotate(${t * 120} 620 270)`);
-      const left = Math.max(0, 72 - Math.floor(p * 72)); $('hemoTimer').textContent = `${Math.floor(left / 60)}:${String(left % 60).padStart(2, '0')} left`;
-      const lit = Math.floor(p * 3.6);
-      weekDays.forEach(d => { const k = [0, 2, 4].indexOf(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].indexOf(d.tx.textContent)); const on = d.session && k <= lit; d.r.setAttribute('fill', on ? '#fbe3c0' : '#f4f8fa'); d.r.setAttribute('stroke', on ? '#f0b44c' : '#e1e9ee'); d.tx.setAttribute('fill', on ? '#7a5216' : '#8a9aab'); });
-      $('hemoThought').setAttribute('opacity', clamp((p - .62) / .1));
-      $('hemoHead').setAttribute('transform', `rotate(${Math.sin(t * 1.3) * 2 - 3} 304 240)`);
+  const clockText = m => { m = Math.round(m) % 1440; const h = Math.floor(m / 60); return `${h % 12 || 12}:${String(m % 60).padStart(2, '0')} ${h < 12 ? 'am' : 'pm'}`; };
+  const MOON = '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
+  const SUN = '<circle cx="12" cy="12" r="5" fill="#f0b44c"/><g stroke="#f0b44c" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g>';
+  const night = t => {
+    if (t < T.apd) return { text: t < T.talk ? 'Centre visits' : t < T.catheter ? 'Clinic visit' : t < T.heal ? 'Procedure day' : 'Healing and training', marker: null, cycle: 0 };
+    if (t < T.fill) return { text: '9:45 pm', marker: 0, cycle: 0 };
+    if (t < T.cycles) {
+      const p = t < T.dwell ? 0.12 * (t - T.fill) / (T.dwell - T.fill) : t < T.drain ? 0.12 + 0.74 * (t - T.dwell) / (T.drain - T.dwell) : 0.86 + 0.14 * (t - T.drain) / (T.cycles - T.drain);
+      return { text: clockText(NIGHT0 + p * CYC), marker: p / CYCLES, cycle: 1 };
     }
-    // A · doctor visit
-    if (ph === 'clinic') {
-      $('clinicResult').setAttribute('opacity', clamp((p - .8) / .08));
-      clinicItems.forEach((g, i) => g.setAttribute('opacity', clamp((p - .1 - i * .15) / .08)));
-      $('clinicClockHand').setAttribute('transform', `rotate(${t * 40} 840 120)`);
-      $('clinicDoctor').setAttribute('transform', `rotate(${Math.sin(t * 2.2) * 1.2} 741 300)`);
-    }
-    // B · catheter
-    if (ph === 'surgery') {
-      $('ecg').setAttribute('stroke-dasharray', '.35 .65'); $('ecg').setAttribute('stroke-dashoffset', -(t * .7) % 1);
-      $('surgeryBeam').setAttribute('opacity', .45 + .1 * Math.sin(t * 2));
-      const draw = 1 - ease(clamp((p - .2) / .5));
-      $('cathPath').setAttribute('stroke-dashoffset', draw); $('cathCore').setAttribute('stroke-dashoffset', draw);
-      $('cathCuff').setAttribute('opacity', clamp((p - .7) / .1)); $('cathLabel').setAttribute('opacity', clamp((p - .72) / .1));
-    }
-    // C · healing calendar, then training
-    if (ph === 'heal') {
-      const hp = clamp(p / .55), day = 1 + Math.floor(13 * hp);
-      days.forEach((d, i) => {
-        const healed = i + 1 < day, today = i + 1 === day;
-        d.rect.setAttribute('fill', today ? '#06264b' : healed ? '#d5eef2' : '#f4f8fa');
-        d.rect.setAttribute('stroke', today ? '#06264b' : healed ? '#9fd3de' : '#e1e9ee');
-        d.tx.setAttribute('fill', today ? '#fff' : healed ? '#007a93' : '#8a9aab');
-      });
-      $('healDay').textContent = p < .55 ? `Day ${day}` : 'Healed · training';
-      $('healBar').setAttribute('width', 328 * hp);
-      $('trainCard').setAttribute('opacity', .3 + .7 * clamp((p - .5) / .1));
-      trainItems.forEach((g, i) => g.setAttribute('opacity', clamp((p - .6 - i * .11) / .07)));
-      $('nurseArm').setAttribute('d', `M772 186 C760 196 748 ${200 + Math.sin(t * 3) * 4} 736 ${202 + Math.sin(t * 3) * 6}`);
-    }
-    // Fluid levels
-    const belly = ph === 'fill' ? ease(p) : ph === 'dwell' ? 1 : ph === 'drain' ? 1 - ease(p) : 0;
-    const used = ph === 'dwell' ? ease(p) : ph === 'drain' ? 1 : 0;
-    const fluidColor = used < .5 ? mixHex('6fd6e8', 'dcefe9', used * 2) : mixHex('dcefe9', 'f2d27e', (used - .5) * 2); // aqua → pale → straw, avoiding green
-    const bh = 34 * belly; $('bellyFluid').setAttribute('y', 347 - bh); $('bellyFluid').setAttribute('height', bh); $('bellyFluid').setAttribute('fill', fluidColor);
-    const bag = 1 - fillsDone(t) / CYCLES * .9; $('bagFluid').setAttribute('y', 214 + 30 * (1 - bag)); $('bagFluid').setAttribute('height', 30 * bag);
-    const dr = drainsDone(t) / CYCLES * .92; $('drainFluid').setAttribute('y', 466 - 82 * dr); $('drainFluid').setAttribute('height', 82 * dr);
-    // Flow along tubing
-    const flowing = ph === 'fill' || ph === 'drain';
-    $('patientFlow').setAttribute('opacity', flowing ? 1 : 0);
-    $('patientFlow').setAttribute('stroke', ph === 'drain' ? '#f0b44c' : '#6fd6e8');
-    $('patientFlow').setAttribute('stroke-dashoffset', ph === 'drain' ? t * 60 : -t * 60);
-    $('drainFlow').setAttribute('opacity', ph === 'drain' ? 1 : 0);
-    $('drainFlow').setAttribute('stroke-dashoffset', -t * 50);
-    // Cycler screen
-    $('screen1').textContent = { evening: 'READY', fill: 'FILL', dwell: 'DWELL', drain: 'DRAIN', morning: 'COMPLETE' }[ph];
-    $('screen2').textContent = seg.cycle ? `Cycle ${seg.cycle} of ${CYCLES}` : ph === 'morning' ? `${CYCLES} cycles done` : 'Night therapy';
-    $('led').setAttribute('opacity', flowing ? .4 + .6 * Math.abs(Math.sin(t * 4)) : 1);
-    // Inside the belly
-    const lensFocus = ph === 'dwell' ? 1 : ph === 'fill' || ph === 'drain' ? .55 : .35;
-    $('lensGroup').setAttribute('opacity', .55 + .45 * lensFocus);
-    $('lensLine').setAttribute('opacity', .3 + .7 * lensFocus);
-    $('lensFluid').setAttribute('fill', fluidColor);
-    $('lensFluid').setAttribute('y', 18 + 82 * (1 - belly)); $('lensFluid').setAttribute('height', 82 * belly);
-    $('lensFluidLabel').setAttribute('opacity', belly > .3 ? 1 : 0);
-    cells.forEach((c, i) => { c.setAttribute('cx', ((i * 34 + t * 26) % 238) - 119); c.setAttribute('cy', -54 + (i % 2 ? 6 : -6)); });
-    waste.forEach(w => {
-      let k = ph === 'dwell' ? clamp((p - w.d) / .55) : ph === 'drain' ? 1 : 0;
-      k = ease(k);
-      let y = lerp(w.y0, w.y1, k), op = 1;
-      if (ph === 'drain') { y = w.y1 + 60 * ease(p); op = 1 - p; }
-      if (ph === 'fill' || ph === 'evening') op = .9;
-      if (ph === 'morning') op = 0;
-      w.el.setAttribute('cx', w.x + Math.sin(t * 2 + w.x) * 3); w.el.setAttribute('cy', y); w.el.setAttribute('opacity', op);
-    });
-    // Window: night → dawn
-    const dawn = ph === 'morning' ? ease(p) : 0;
-    $('sky1').setAttribute('stop-color', mixHex('0b1f44', '8fc3ea', dawn)); $('sky2').setAttribute('stop-color', mixHex('29457d', 'ffd7a8', dawn));
-    $('moon').setAttribute('opacity', 1 - dawn); $('stars').setAttribute('opacity', 1 - dawn);
-    $('sun').setAttribute('opacity', dawn); $('sun').setAttribute('cy', 230 - 70 * dawn);
-    $('lampglow').setAttribute('opacity', ph === 'evening' ? 1 : ph === 'morning' ? 1 - dawn : .35);
-    // Captions
-    const [badge, title, text] = CAP[ph];
-    const label = seg.cycle ? `Cycle ${seg.cycle} · ${badge}` : badge;
-    if ($('badgeText').textContent !== label) {
-      $('badgeText').textContent = label; $('badge').style.background = BADGE[ph];
-      $('capTitle').textContent = seg.cycle > 1 ? `${title} — the cycle repeats` : title;
-      $('capText').textContent = seg.cycle > 1 ? `Cycle ${seg.cycle} of ${CYCLES}: the same fill, dwell and drain happens again automatically while you sleep.` : text;
-    }
-    // Controls
-    const pct = t / TOTAL * 100;
-    $('fill').style.width = pct + '%'; fillInner.style.width = (TOTAL ? 100 / (pct / 100 || 1e-6) : 100) + '%';
-    $('head').style.left = pct + '%';
-    $('time').textContent = `${fmt(t)} / ${fmt(TOTAL)}`;
-    $('scrub').setAttribute('aria-valuenow', Math.round(t)); $('scrub').setAttribute('aria-valuemax', Math.round(TOTAL));
-    let active = 0; chapters.forEach((c, i) => { if (t >= c.at) active = i; }); chapters.forEach((c, i) => c.b.setAttribute('aria-current', String(i === active)));
-    document.querySelectorAll('.step').forEach(card => {
-      const list = card.dataset.phases ? card.dataset.phases.split(' ') : [card.dataset.phase];
-      const on = list.includes(ph); card.setAttribute('aria-current', String(on));
-      let prog = p;
-      if (card.dataset.phases && list.length > 1) { const a = SEG.find(x => x.phase === list[0]).start; prog = clamp((t - a) / (TOTAL - a)); }
-      card.querySelector('.step-bar i').style.width = on ? `${prog * 100}%` : '0%';
-    });
-    // Night timeline
-    const journey = ['hemo', 'clinic', 'surgery', 'heal'].includes(ph);
-    const mins = journey ? NIGHT0 : clockAt(seg, p);
-    $('clock').textContent = journey ? { hemo: 'Centre visits', clinic: 'Clinic visit', surgery: 'Procedure day', heal: p < .55 ? `Healing · day ${1 + Math.floor(13 * clamp(p / .55))}` : 'Training' }[ph] : clockText(mins);
-    $('nightMarker').style.opacity = journey ? 0 : 1;
-    $('nightMarker').style.left = `${clamp((mins - NIGHT0) / (CYC * CYCLES)) * 100}%`;
-    nightCycles.forEach((el, i) => { el.classList.toggle('now', seg.cycle === i + 1); el.classList.toggle('done', seg.cycle > i + 1 || ph === 'morning'); });
-    $('clockIcon').innerHTML = ph === 'morning' ? '<circle cx="12" cy="12" r="5" fill="#f0b44c"/><g stroke="#f0b44c" stroke-width="2" stroke-linecap="round"><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g>' : '<path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/>';
+    if (t < T.morning) { const p = clamp((t - T.cycles) / (T.morning - T.cycles)); return { text: clockText(NIGHT0 + CYC * (1 + 3 * p)), marker: (1 + 3 * p) / CYCLES, cycle: 2 + Math.min(2, Math.floor(p * 3)) }; }
+    return { text: t < T.capd ? '6:15 am' : 'CAPD: daytime', marker: t < T.capd ? 1 : null, cycle: 5, sun: true };
   };
 
-  const setPlaying = on => {
-    playing = on;
-    $('play').setAttribute('aria-label', on ? 'Pause' : 'Play');
-    $('playIcon').innerHTML = on ? '<rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/>' : '<path d="M7 4.5v15l13-7.5z"/>';
-    if (on) { if (t >= TOTAL - .01) t = 0; last = performance.now(); loop(last); }
+  const update = () => {
+    const t = v.currentTime || 0;
+    let active = -1; chapters.forEach((c, i) => { if (t >= c.at - 0.1) active = i; });
+    chapters.forEach((c, i) => c.b.setAttribute('aria-current', String(i === active)));
+    cards.forEach(({ card, r, bar }) => { const on = t >= r[0] && t < r[1]; card.setAttribute('aria-current', String(on)); if (bar) bar.style.width = on ? `${clamp((t - r[0]) / (r[1] - r[0])) * 100}%` : '0%'; });
+    const n = night(t);
+    $('clock').textContent = n.text;
+    $('clockIcon').innerHTML = n.sun ? SUN : MOON;
+    $('nightMarker').style.opacity = n.marker === null ? 0 : 1;
+    if (n.marker !== null) $('nightMarker').style.left = `${clamp(n.marker) * 100}%`;
+    nightCycles.forEach((el, i) => { el.classList.toggle('now', n.cycle === i + 1); el.classList.toggle('done', n.cycle > i + 1); });
   };
-  const seek = (time, play) => { t = clamp(time, 0, TOTAL); render(); if (play && !playing) setPlaying(true); };
-  const loop = now => {
-    cancelAnimationFrame(raf);
-    if (!playing) return;
-    t += Math.min((now - last) / 1000, .1); last = now;
-    if (t >= TOTAL) { t = TOTAL; render(); setPlaying(false); return; }
-    render(); raf = requestAnimationFrame(loop);
-  };
-  $('play').onclick = () => setPlaying(!playing);
-  const scrubTo = e => { const r = $('scrub').getBoundingClientRect(); seek((e.clientX - r.left) / r.width * TOTAL); };
-  $('scrub').addEventListener('pointerdown', e => { $('scrub').setPointerCapture(e.pointerId); scrubTo(e); $('scrub').onpointermove = scrubTo; });
-  $('scrub').addEventListener('pointerup', () => { $('scrub').onpointermove = null; });
-  $('scrub').addEventListener('keydown', e => { if (e.key === 'ArrowRight') seek(t + 2); if (e.key === 'ArrowLeft') seek(t - 2); if (e.key === ' ') { e.preventDefault(); setPlaying(!playing); } });
-  window.__seek = seek; // for screenshots
-  render(); setPlaying(playing);
+  ['timeupdate', 'seeked', 'loadedmetadata'].forEach(e => v.addEventListener(e, update));
+  update();
 })();
 </script>
 <script>
